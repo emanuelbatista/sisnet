@@ -1,0 +1,10 @@
+.barra{
+    position: fixed;
+    height: 40px;
+    width: 100%;
+    background-color: white;
+    box-shadow: 1px 0px 2px 0px;
+    box-sizing: border-box;
+    z-index: 10;
+}
+

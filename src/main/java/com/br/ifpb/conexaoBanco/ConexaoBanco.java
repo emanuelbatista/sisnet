@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class ConexaoFactory{
+public class ConexaoBanco{
   
   public static Connection getInstance() throws SQLException, ClassNotFoundException{
       Class.forName("org.postgresql.Driver");

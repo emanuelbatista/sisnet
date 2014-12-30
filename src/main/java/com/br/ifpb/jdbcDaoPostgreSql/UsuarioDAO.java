@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import com.br.ifpb.conexaoBanco.ConexaoFactory;
+import com.br.ifpb.conexaoBanco.ConexaoBanco;
 import com.br.ifpb.execoes.PersistenciaException;
 import com.br.ifpb.valueobject.Usuario;
 import com.br.ifpb.interfaceDao.UsuarioDaoIF;
@@ -22,7 +22,7 @@ public class UsuarioDAO implements UsuarioDaoIF{
     
     @Override
     public void criar(Usuario usuario) throws PersistenciaException {
-        try(Connection connection=ConexaoFactory.getInstance()){         
+        try(Connection connection=ConexaoBanco.getInstance()){         
     	   String sql="INSERT INTO Usuario(nome,apelido,cidade,email,profissao,senha,data_nascimento,status,foto) VALUES (?,?,?,?,?,?,?,?,?)";
     	   PreparedStatement statUsuario=connection.prepareStatement(sql);
     	   statUsuario.setString(1, usuario.getNome());
@@ -63,7 +63,7 @@ public class UsuarioDAO implements UsuarioDaoIF{
     
     @Override
     public void excluir(String email) throws PersistenciaException {
-    	try(Connection connection=ConexaoFactory.getInstance()){
+    	try(Connection connection=ConexaoBanco.getInstance()){
     	   String sql="DELETE FROM Usuario WHERE email=?";
                        try (PreparedStatement stat = connection.prepareStatement(sql)) {
                            stat.setString(1, email);
@@ -78,7 +78,7 @@ public class UsuarioDAO implements UsuarioDaoIF{
     
     @Override
     public void atualizar(Usuario usuario) throws PersistenciaException {
-    	try(Connection connection=ConexaoFactory.getInstance()){
+    	try(Connection connection=ConexaoBanco.getInstance()){
     	   String sql="UPDATE Usuario SET ";
     	   sql+=usuario.getNome()!=null?"nome='"+usuario.getNome()+"',":"";
     	   sql+=usuario.getApelido()!=null?"apelido='"+usuario.getApelido()+"',":"";
@@ -103,7 +103,7 @@ public class UsuarioDAO implements UsuarioDaoIF{
     
     @Override
     public boolean logar(String email, String senha) throws PersistenciaException {
-    	try(Connection connection=ConexaoFactory.getInstance()){
+    	try(Connection connection=ConexaoBanco.getInstance()){
     	  String sql="{?=call logar(?,?)}";
           boolean retorno;
                 try (CallableStatement stat = connection.prepareCall(sql)) {
@@ -125,7 +125,7 @@ public class UsuarioDAO implements UsuarioDaoIF{
     
     @Override
     public Usuario getUsuario(String email) throws PersistenciaException{
-        try(Connection connection=ConexaoFactory.getInstance()){
+        try(Connection connection=ConexaoBanco.getInstance()){
               String sql="SELECT nome,apelido,cidade,email,profissao,senha,data_nascimento,status,foto FROM Usuario WHERE email=?";
               PreparedStatement stat=connection.prepareStatement(sql);
               stat.setString(1, email);
@@ -172,7 +172,7 @@ public class UsuarioDAO implements UsuarioDaoIF{
 
     @Override
     public boolean verficarExistenciaEmail(String email) throws PersistenciaException {
-        try(Connection connection=ConexaoFactory.getInstance()){
+        try(Connection connection=ConexaoBanco.getInstance()){
           String sql="{?=call existenciaEmail(?)}";
           boolean retorno;
             try (CallableStatement stat = connection.prepareCall(sql)) {

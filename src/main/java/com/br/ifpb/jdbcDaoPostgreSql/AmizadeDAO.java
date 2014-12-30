@@ -1,6 +1,6 @@
 package com.br.ifpb.jdbcDaoPostgreSql;
 
-import com.br.ifpb.conexaoBanco.ConexaoFactory;
+import com.br.ifpb.conexaoBanco.ConexaoBanco;
 import com.br.ifpb.execoes.PersistenciaException;
 import com.br.ifpb.interfaceDao.AmizadeDaoIF;
 import java.sql.Connection;
@@ -25,7 +25,7 @@ public class AmizadeDAO implements AmizadeDaoIF {
     @Override
     public void solicitarAmizade(String remetente, String destinatario)
             throws PersistenciaException {
-        try (Connection connection = ConexaoFactory.getInstance()) {
+        try (Connection connection = ConexaoBanco.getInstance()) {
             String sql = "INSERT INTO amizade(usuario_1,pedencia,usuario_2) VALUES (?,?,?)";
             PreparedStatement stat = connection.prepareStatement(sql);
             stat.setString(1, remetente);
@@ -43,7 +43,7 @@ public class AmizadeDAO implements AmizadeDaoIF {
     @Override
     public boolean aceitarSolicitacao(String remetente, String destinatario)
             throws PersistenciaException {
-        try (Connection connection = ConexaoFactory.getInstance()) {
+        try (Connection connection = ConexaoBanco.getInstance()) {
             String sql = "UPDATE amizade SET pedencia=false WHERE usuario_1=? AND usuario_2=?";
             PreparedStatement stat = connection.prepareStatement(sql);
             stat.setString(1, remetente);
@@ -70,7 +70,7 @@ public class AmizadeDAO implements AmizadeDaoIF {
     @Override
     public boolean rejeitarSolicitacao(String remetente, String destinatario)
             throws PersistenciaException {
-        try (Connection connection = ConexaoFactory.getInstance()) {
+        try (Connection connection = ConexaoBanco.getInstance()) {
             String sql = "DELETE FROM Amizade WHERE usuario_1=? AND usuario_2=?";
             PreparedStatement stat = connection.prepareStatement(sql);
             stat.setString(1, remetente);
@@ -96,7 +96,7 @@ public class AmizadeDAO implements AmizadeDaoIF {
     @Override
     public List<Usuario> listaDeSolicitacoes(String email)
             throws PersistenciaException {
-        try (Connection con = ConexaoFactory.getInstance()) {
+        try (Connection con = ConexaoBanco.getInstance()) {
             String sql = "(SELECT * FROM Usuario usuario_1 NATURAL JOIN (SELECT usuario_1 as email FROM Amizade \n"
                     + "WHERE usuario_2=? AND pendencia=TRUE) amigos_1)\n"
                     + "UNION \n"
@@ -134,7 +134,7 @@ public class AmizadeDAO implements AmizadeDaoIF {
      */
     @Override
     public List<Usuario> getAmigos(String email) throws PersistenciaException {
-        try (Connection con = ConexaoFactory.getInstance()) {
+        try (Connection con = ConexaoBanco.getInstance()) {
             String sql = "(SELECT * FROM Usuario usuario_1 NATURAL JOIN (SELECT usuario_1 as email FROM Amizade \n"
                     + "WHERE usuario_2=? AND pendencia=FALSE) amigos_1)\n"
                     + "UNION \n"

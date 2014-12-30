@@ -1,6 +1,6 @@
 package com.br.ifpb.jdbcDaoPostgreSql;
 
-import com.br.ifpb.conexaoBanco.ConexaoFactory;
+import com.br.ifpb.conexaoBanco.ConexaoBanco;
 import com.br.ifpb.execoes.PersistenciaException;
 import com.br.ifpb.interfaceDao.RelacaoDaoIF;
 import java.sql.Connection;
@@ -22,7 +22,7 @@ public class RelacaoDao implements RelacaoDaoIF {
 
     @Override
     public Usuario relacaoNamoro(String email) throws PersistenciaException {
-        try (Connection con = ConexaoFactory.getInstance()) {
+        try (Connection con = ConexaoBanco.getInstance()) {
             String sql = "SELECT * FROM Usuario WHERE email=relacao(?,'Namoro')";
             PreparedStatement stat = con.prepareCall(sql);
             stat.setString(1, email);
@@ -43,7 +43,7 @@ public class RelacaoDao implements RelacaoDaoIF {
 
     @Override
     public List<Usuario> relacaoFamiliar(String email) throws PersistenciaException {
-        try (Connection con = ConexaoFactory.getInstance()) {
+        try (Connection con = ConexaoBanco.getInstance()) {
             String sql = "SELECT * FROM Usuario NATURAL JOIN"
                     + " (SELECT usuario_2 email FROM Relacao "
                     + "WHERE usuario_1=? AND tipo<>'Namoro') relacao_2";

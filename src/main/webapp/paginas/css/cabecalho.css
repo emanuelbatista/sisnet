@@ -1,19 +1,6 @@
-@font-face{
-    font-family: Opificio;
-    src: url('../fontes/Opificio.ttf');
-}
-@font-face{
-    font-family: Harabara;
-    src: url(../fontes/Harabara.otf);
-}
-/* ---  Cabecalho do Perfil ---*/
-body{
-    background-color: #dbdbdb;
-}
 .cabecalho,.navegacao{
     margin: 0% 10% 0% 10%;
 }
-
 .cabecalho{
     background-color: mediumseagreen;
     border-top-left-radius: 0px;
@@ -30,6 +17,11 @@ body{
     width: 140px;
     height: 140px;
 }
+header{
+    margin: 0px;
+    padding: 0px; 
+    margin-top: 40px;
+}
 .nome-perfil{
     text-align: center;
     margin: 2% 0% 0% 4%;
@@ -39,6 +31,7 @@ body{
 }
 
 .navegacao{
+    display: block;
     text-align: center;
     background-color: white;
     position: relative;
@@ -49,26 +42,26 @@ body{
     display: inline-table;
     list-style: none;
     position: relative;
-    padding: 10px 0px;
+    padding: 8px 0px;
     margin: 0px;
     font-size: 17px;
     font-weight: bold;
-    
+
 
 }
 .navegacao li:hover{
-    border-bottom: solid 2px;
+    border-bottom: solid 3px;
     border-color: black;
-    padding-bottom: 8px; 
+    padding-bottom: 5px; 
 }
 
 .navegacao li a{
-    color: black;
-    font-family: Opificio,sans-serif;
+    color: #666666;
+    font-family: 'Roboto',sans-serif;
+    font-style: normal;
     text-decoration: none;
-    padding: 13px 13px;
+    padding: 8px 13px;
 }
 .navegacao li a:hover{
-    color: #048014;
+    color: black;
 }
-
