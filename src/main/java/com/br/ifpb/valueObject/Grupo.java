@@ -1,4 +1,4 @@
-package com.br.ifpb.valueobject;
+package com.br.ifpb.valueObject;
 
 public class Grupo {
   private int id;

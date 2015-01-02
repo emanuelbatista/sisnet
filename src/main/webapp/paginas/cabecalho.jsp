@@ -8,19 +8,19 @@
 <header>
     <div class="row cabecalho">
         <div class="row imagem-perfil">
-            <img src="imagens/emanuel.jpg" alt=""> 
+            <img src="${usuario.foto}" alt=""> 
         </div>
         <div class="row nome-perfil">
-            Emanuel Batista
+            ${usuario.nome}
         </div>
     </div>
     <nav>
         <ul class="navegacao">
             <li id="sobre">
-                <a href="perfil.jsp">Sobre</a>
+                <a href="#">Sobre</a>
             </li>
             <li id="postagens">
-                <a href="#">Postagens</a>
+                <a href="postagem">Postagens</a>
             </li>
             <li id="fotos">
                 <a href="#">Fotos</a>

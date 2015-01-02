@@ -4,17 +4,18 @@
     Author     : Emanuel
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="com.br.ifpb.valueObject.Mensagem"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <link href="dist/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
-        <link href="dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-        <link href="css/postagens.css" rel="stylesheet" type="text/css">
-        <link href="css/barra.css" rel="stylesheet" type="text/css">
-        <link href="css/cabecalho.css" rel="stylesheet" type="text/css">
+        <link href="paginas/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <link href="paginas/css/postagens.css" rel="stylesheet" type="text/css">
+        <link href="paginas/css/barra.css" rel="stylesheet" type="text/css">
+        <link href="paginas/css/cabecalho.css" rel="stylesheet" type="text/css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Perfil</title>
+        <title>SisNet - ${usuario.nome}</title>
     </head>
     <body>
         <div class="container-fluid">
@@ -30,51 +31,40 @@
                             </ul>
                         </div>
                     </section>
+                    <%for(int i=1;i<((List<Mensagem>)request.getAttribute("mensagem")).size();i=i+2){ 
+                      pageContext.setAttribute("i", i);
+                    %>
                     <section class="section">
-                        oii
-                    </section>
-                </div>
-                <div class="noticias-direita">
-                    <section class="section" >
                         <div class="postagem-cabecalho">
-                            <img src="imagens/emanuel.jpg" alt="">
+                            <img src="${usuario.foto}" alt="">
                             <div class="postagem-info">
-                                <div class="postagem-nome-usuario"><a href="#">Emanuel</a></div>
-                                <div class="postagem-data">12/04/2014</div>
+                                <div class="postagem-nome-usuario"><a href="#">${usuario.nome}</a></div>
+                                <div class="postagem-data">${mensagem[i].data}</div>
                             </div>
                         </div>
                         <div class="postagem-corpo">
-                            <p>Texto</p>
+                            <p>${mensagem[i].texto}</p>
                         </div>
                     </section>
+                    <%}%>
+                </div>
+                <div class="noticias-direita">
+                    <%for(int i=0;i<((List<Mensagem>)request.getAttribute("mensagem")).size();i=i+2){
+                      pageContext.setAttribute("i", i);
+                    %>
                     <section class="section">
-                        2sdfsdf<br>
-                        cdcdc<br>
-                        dwsdsd<br>
-                        sdfsdf<br>
-                        cdcdc<br>
-                        dwsdsd<br>
-                        sdfsdf<br>
-                        cdcdc<br>
-                        dwsdsd<br>
-                        sdfsdf<br>
-                        cdcdc<br>
-                        dwsdsd<br>
+                        <div class="postagem-cabecalho">
+                            <img src="${usuario.foto}" alt="">
+                            <div class="postagem-info">
+                                <div class="postagem-nome-usuario"><a href="#">${usuario.nome}</a></div>
+                                <div class="postagem-data">${mensagem[i].data}</div>
+                            </div>
+                        </div>
+                        <div class="postagem-corpo">
+                            <p>${mensagem[i].texto}</p>
+                        </div>
                     </section>
-                    <section class="section">
-                        3sdfsdf<br>
-                        cdcdc<br>
-                        dwsdsd<br>
-                        sdfsdf<br>
-                        cdcdc<br>
-                        dwsdsd<br>
-                        sdfsdf<br>
-                        cdcdc<br>
-                        dwsdsd<br>
-                        sdfsdf<br>
-                        cdcdc<br>
-                        dwsdsd<br>
-                    </section>
+                    <%}%>
                 </div>
             </article>
         </div>

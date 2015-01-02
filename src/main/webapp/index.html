@@ -1,13 +1,57 @@
 <!DOCTYPE html>
+
 <html>
     <head>
-        <title>Start Page</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="paginas/dist/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
-        <link href="paginas/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-        <link href="paginas/css/postagens.css" type="text/css" rel="stylesheet">
-    </head>
+        <title>Sisnet</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="paginas/css/index.css" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="" type="image/x-icon">
+        <!--[if lte IE 8]>
+             <link href="paginas/css/indexExplore.css" rel="stylesheet" type="text/css">
+        <![endif]-->
     <body>
- 
+        <div class="container">
+            <header>
+                <div id="cabecario">
+                    <h1 id="titulo">SisNet</h1>
+                    <nav>
+                         <button onclick="abrirCadastro()" id="logar-se">Cadastro</button>
+                    </nav>              
+                </div>
+            </header>
+            <article>
+                <section>
+                    <div class="campos" id="cadastro_login">
+                        <h3>Login</h3>
+                        <div id="login">
+                        <form action="login" method="post">
+                            <ul>
+                                <li><span class="texto"><label for="email_login">Login</label></span><input id="email_login" type="email" class="campo_texto" required placeholder="Digite o seu email" name="email"></li>
+                                <li><span class="texto"><label for="senha_login">Senha</label></span><input type="password" id="senha_login" class="campo_texto" required placeholder="Digite a sua senha" name="senha"></li>
+                                <li><input type="submit" class="submit" id="logar" value="Entrar" ></li>
+                            </ul>
+                        </form>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div class="campos" id="cadastro_usuario">
+                        <h3>Cadastro do Usuario</h3>
+                        <form action="cadastro" method="post">
+                            <ul>
+                                <li><span class="texto"><label for="nome">Nome</label></span><input type="text" required  placeholder="Digite seu nome" class="campo_texto" id="nome" name="nome"><br></li>
+                                <li><span class="texto"><label for="email">E-mail</label></span><input type="email" id="email" required placeholder="Digite seu e-mail" class="campo_texto" name="email"><br></li>
+                                <li><span class="texto"><label for="senha">Senha</label></span><input id="senha" type="password" required placeholder="Digite sua senha" class="campo_texto" name="senha"><br></li>
+                                <li><span class="texto"><label for="data_nascimento">Data de Nascimento</label></span><input type="date" class="campo_texto" id="data_nascimento" name="data_nascimento"><br></li>
+                                <li><input type="submit" id="botao_cadastrar" class="submit" name="cadastro" value="Cadastrar"></li>
+                            </ul>
+                        </form>
+                    </div>
+                </section>
+           </article>     
+        </div>
+        <script src="paginas/javascript/inedex.js"></script>
     </body>
 </html>
+

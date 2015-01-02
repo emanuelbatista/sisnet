@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import com.br.ifpb.valueobject.Usuario;
+import com.br.ifpb.valueObject.Usuario;
 import java.sql.ResultSet;
 
 /**

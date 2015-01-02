@@ -7,7 +7,7 @@ package com.br.ifpb.interfaceDao;
 
 import com.br.ifpb.execoes.PersistenciaException;
 import java.util.List;
-import com.br.ifpb.valueobject.Usuario;
+import com.br.ifpb.valueObject.Usuario;
 
 /**
  *

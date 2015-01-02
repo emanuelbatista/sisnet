@@ -1,12 +1,13 @@
-package com.br.ifpb.valueobject;
+package com.br.ifpb.valueObject;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class Mensagem {
+public class Mensagem implements Serializable{
   private int id;
   private String texto;
   private Timestamp data;
-  private Usuario usuario;
+  private String usuario;
   
  public int getId() {
  	return id;
@@ -20,16 +21,16 @@ public class Mensagem {
  public void setTexto(String texto) {
  	this.texto = texto;
  }
- public Timestamp getTimestamp() {
+ public Timestamp getData() {
  	return data;
  }
- public void setTimestamp(Timestamp data) {
+ public void setData(Timestamp data) {
  	this.data = data;
  }
- public Usuario getUsuario() {
+ public String getUsuario() {
  	return usuario;
  }
- public void setUsuario(Usuario usuario) {
+ public void setUsuario(String usuario) {
  	this.usuario = usuario;
  }
   

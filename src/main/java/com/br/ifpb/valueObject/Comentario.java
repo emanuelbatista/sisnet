@@ -1,4 +1,4 @@
-package com.br.ifpb.valueobject;
+package com.br.ifpb.valueObject;
 
 import java.sql.Timestamp;
 

@@ -1,7 +1,7 @@
 package com.br.ifpb.interfaceDao;
 
 import com.br.ifpb.execoes.PersistenciaException;
-import com.br.ifpb.valueobject.Usuario;
+import com.br.ifpb.valueObject.Usuario;
 
 public interface UsuarioDaoIF {
 
