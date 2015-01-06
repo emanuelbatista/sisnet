@@ -163,4 +163,24 @@ public class AmizadeDAO implements AmizadeDaoIF {
         }
 
     }
+
+    @Override
+    public boolean verificarAmizade(String remetente, String destinatario) throws PersistenciaException {
+        try (Connection con = ConexaoBanco.getInstance()) {
+           String sql="SELECT * FROM Amizade WHERE usuario_1=? AND usuario_2=? AND pendencia=FALSE OR"
+                   +" usuario_1=? AND usuario_2=? AND pendencia=FALSE";
+           PreparedStatement stat=con.prepareCall(sql);
+           stat.setString(1, remetente);
+           stat.setString(2, destinatario);
+           stat.setString(3, destinatario);
+           stat.setString(4, remetente);
+           ResultSet rs=stat.executeQuery();
+           return rs.next();
+        } catch (SQLException ex) {
+            throw new PersistenciaException(ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AmizadeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
 }

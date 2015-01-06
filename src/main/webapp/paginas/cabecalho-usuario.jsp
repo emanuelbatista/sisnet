@@ -1,19 +1,22 @@
 <%-- 
     Document   : cabecalho
-    Created on : 06/01/2015, 12:11:20
+    Created on : 30/12/2014, 07:40:15
     Author     : Emanuel
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <header>
     <div class="row cabecalho">
-         <div class="info-basica">
+        <div class="info-basica">
             <div class="imagem-perfil">
-                <img src="${usuario1.foto}" alt=""> 
+                <img src="${usuario.foto}" alt=""> 
             </div>
             <div class="nome-perfil">
-                ${usuario1.nome}
+                ${usuario.nome}
             </div>
+        </div>
+        <div class="atualizar">
+            <a href="atualizar?email=${usuario.email}">Atualizar Informações</a>
         </div>
     </div>
     <nav>

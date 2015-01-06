@@ -1,3 +1,16 @@
+#titulo{
+    font-family: Opificio,sans-serif;
+    left: 9px;
+    font-size: 50px;
+    position: absolute;
+    top: -10px;
+    text-shadow:black 1px 2px 3px;
+    color: #09c150;
+    display: inline;
+    z-index: 1;
+    clear: both;
+}
+
 .barra{
     position: fixed;
     height: 40px;
@@ -6,5 +19,76 @@
     box-shadow: 1px 0px 2px 0px;
     box-sizing: border-box;
     z-index: 10;
+    margin: 0px;
+    padding: 0px;
 }
 
+@font-face{
+    font-family: Opificio;
+    src: url('../fontes/Opificio.ttf');
+}
+
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    src: url(../fontes/Roboto.woff2) format('woff2');
+
+}
+.barra-menu{
+    display: inline;
+    position: relative;
+    float: right;
+    margin: 8px 10% 5px 0px;
+
+}
+
+.barra-menu ul{
+    display: inline;
+    position: relative;
+    margin: 0px;
+    list-style: none;
+    padding: 4px 6px 7px 6px;
+}
+
+.barra-menu li{
+    display: inline;
+    margin: 0px;
+    padding: inherit;
+    font-weight: bold;
+
+}
+
+.barra-menu a{
+    margin: inherit;
+    padding: inherit;
+    text-decoration: none;
+    border-radius: 3px;
+    color: black;
+}
+
+.barra-menu a:hover{
+    background-color: #81cd8b;
+}
+
+.barra-menu li img{
+    position: relative;
+    border-radius: 2px;
+    top:0px;
+    width: 24px;
+    height: 24px;
+}
+
+.barra-menu li .barra-nome{
+    display: inline;
+    margin-left: 5px;
+    font-weight: bold;
+}
+
+hr{
+   display: inherit;
+   background-color: #c2c2c2;
+   padding: 1px 1px;
+   position: relative;
+   top: 2px;
+}

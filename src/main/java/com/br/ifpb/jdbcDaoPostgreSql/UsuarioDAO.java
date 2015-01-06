@@ -131,7 +131,7 @@ public class UsuarioDAO implements UsuarioDaoIF {
             PreparedStatement stat = connection.prepareStatement(sql);
             stat.setString(1, email);
             ResultSet set = stat.executeQuery();
-            set.next();
+            if(set.next()){
             Usuario usuario = new Usuario();
             usuario.setNome(set.getString("nome"));
             usuario.setApelido(set.getString("apelido"));
@@ -163,6 +163,7 @@ public class UsuarioDAO implements UsuarioDaoIF {
             set.close();
             stat.close();
             return usuario;
+            }else return null;
         } catch (SQLException e) {
             throw new PersistenciaException(e);
         } catch (ClassNotFoundException ex) {

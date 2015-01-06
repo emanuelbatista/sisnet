@@ -47,7 +47,7 @@ public class Login extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setMaxInactiveInterval(60*30);
                 session.setAttribute("usuario", us);
-                response.sendRedirect("postagens");
+                response.sendRedirect("postagens?email="+email);
             }
         } catch (PersistenciaException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);

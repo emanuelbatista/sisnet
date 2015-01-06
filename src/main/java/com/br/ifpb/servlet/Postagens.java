@@ -5,10 +5,13 @@
  */
 package com.br.ifpb.servlet;
 
+import com.br.ifpb.businessObject.GerenciarAmizade;
 import com.br.ifpb.businessObject.GerenciarMensagem;
+import com.br.ifpb.businessObject.GerenciarUsuario;
 import com.br.ifpb.execoes.PersistenciaException;
 import com.br.ifpb.valueObject.Usuario;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -35,7 +38,54 @@ public class Postagens extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String emailParametro = request.getParameter("email");
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 
+        if (usuario == null || emailParametro == null) {
+            response.sendRedirect("index.html");
+        } else if (usuario.getEmail().equals(emailParametro)) {
+            GerenciarMensagem mensagem = new GerenciarMensagem();
+            String emailUsuario = ((Usuario) request.getSession().getAttribute("usuario")).getEmail();
+            try {
+                request.setAttribute("mensagem", mensagem.minhasMensagens(emailUsuario));
+            } catch (PersistenciaException ex) {
+                Logger.getLogger(Postagens.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            getServletContext().getRequestDispatcher("/paginas/postagens-usuario.jsp").forward(request, response);
+        } else {
+            GerenciarUsuario gerUsuario = new GerenciarUsuario();
+            Usuario usuario1 = null;
+            try {
+                usuario1 = gerUsuario.getUsuario(emailParametro);
+            } catch (PersistenciaException ex) {
+                Logger.getLogger(Postagens.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            PrintWriter out = response.getWriter();
+            if (usuario1 != null) {
+                GerenciarAmizade amizade = new GerenciarAmizade();
+                boolean isAmizade = false;
+                try {
+                    isAmizade = amizade.verificarAmizade(usuario.getEmail(), emailParametro);
+                } catch (PersistenciaException ex) {
+                    Logger.getLogger(Postagens.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                if (isAmizade) {
+                    GerenciarMensagem mensagem = new GerenciarMensagem();
+                    request.setAttribute("usuario1", usuario1);
+                    try {
+                        request.setAttribute("mensagem", mensagem.minhasMensagens(usuario1.getEmail()));
+                    } catch (PersistenciaException ex) {
+                        Logger.getLogger(Postagens.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    getServletContext().getRequestDispatcher("/paginas/postagens.jsp").forward(request, response);
+                }else{
+                    out.print("erro1");
+                }
+            }else{
+                out.print("erro0");
+            }
+
+        }
     }
 
     /**
@@ -49,25 +99,7 @@ public class Postagens extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                String emailParametro=request.getParameter("email");
-        Usuario usuario=(Usuario)request.getSession().getAttribute("usuario");
-        
-        if(usuario==null){
-            response.getWriter().print("oii");
-        }
-//        else if(usuario.getEmail().equals(emailParametro)){
-//            
-//        }
-        else{ 
-            GerenciarMensagem mesagem=new GerenciarMensagem();
-            String emailUsuario=((Usuario)request.getSession().getAttribute("usuario")).getEmail();
-            try {
-                request.setAttribute("mensagem", mesagem.minhasMensagens(emailUsuario));
-            } catch (PersistenciaException ex) {
-                Logger.getLogger(Postagens.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            getServletContext().getRequestDispatcher("/paginas/postagens.jsp").forward(request, response);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -81,7 +113,7 @@ public class Postagens extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
     }
 
     /**

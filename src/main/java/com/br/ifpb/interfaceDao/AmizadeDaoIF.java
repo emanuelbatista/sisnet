@@ -33,4 +33,6 @@ public interface AmizadeDaoIF {
  
   public List<Usuario> getAmigos(String email) throws PersistenciaException;
   
+  public boolean verificarAmizade(String remetente,String destinatario) throws PersistenciaException;
+  
 }

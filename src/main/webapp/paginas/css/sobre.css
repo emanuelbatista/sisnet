@@ -1,0 +1,39 @@
+@font-face{
+    font-family: Opificio;
+    src: url('../fontes/Opificio.ttf');
+}
+@font-face{
+    font-family: Harabara;
+    src: url(../fontes/Harabara.otf);
+}
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    src: url(../fontes/Roboto.woff2) format('woff2');
+
+}
+::-webkit-input-placeholder{ 
+    color: green;
+}
+:-moz-placeholder{
+    color: green;
+}
+::-moz-placeholder{
+    color: green;   
+}
+:-ms-input-placeholder{
+    color: green;
+}
+/* ---  Cabecalho do Perfil ---*/
+body{
+    background-color: #dbdbdb;
+    font-family: 'Roboto',sans-serif;
+    margin: 0px;
+    padding: 0px;
+}
+.container-fluid{
+    margin: 0px;
+    padding: 0px;
+}
+

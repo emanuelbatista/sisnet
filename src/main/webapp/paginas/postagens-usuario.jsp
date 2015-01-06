@@ -1,6 +1,6 @@
 <%-- 
-    Document   : postagens
-    Created on : 06/01/2015, 12:10:02
+    Document   : perfil
+    Created on : 23/12/2014, 12:36:13
     Author     : Emanuel
 --%>
 
@@ -11,16 +11,16 @@
 <html>
     <head>
         <link href="paginas/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-        <link href="paginas/css/postagens.css" rel="stylesheet" type="text/css">
+        <link href="paginas/css/postagens-usuario.css" rel="stylesheet" type="text/css">
         <link href="paginas/css/barra.css" rel="stylesheet" type="text/css">
-        <link href="paginas/css/cabecalho.css" rel="stylesheet" type="text/css">
+        <link href="paginas/css/cabecalho-usuario.css" rel="stylesheet" type="text/css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>SisNet - ${usuario1.nome}</title>
+        <title>SisNet - ${usuario.nome}</title>
     </head>
     <body>
         <div class="container-fluid">
             <jsp:include page="barra.jsp"/>
-            <jsp:include page="cabecalho.jsp"/>
+            <jsp:include page="cabecalho-usuario.jsp"/>
             <article class="article">
                 <div class="noticias-esquerda">
                     <section class="section">
@@ -36,9 +36,9 @@
                     %>
                     <section class="section">
                         <div class="postagem-cabecalho">
-                            <img src="${usuario1.foto}" alt="">
+                            <img src="${usuario.foto}" alt="">
                             <div class="postagem-info">
-                                <div class="postagem-nome-usuario"><a href="#">${usuario1.nome}</a></div>
+                                <div class="postagem-nome-usuario"><a href="#">${usuario.nome}</a></div>
                                 <div class="postagem-data">${mensagem[i].data}</div>
                             </div>
                         </div>
@@ -54,9 +54,9 @@
                     %>
                     <section class="section">
                         <div class="postagem-cabecalho">
-                            <img src="${usuario1.foto}" alt="">
+                            <img src="${usuario.foto}" alt="">
                             <div class="postagem-info">
-                                <div class="postagem-nome-usuario"><a href="#">${usuario1.nome}</a></div>
+                                <div class="postagem-nome-usuario"><a href="#">${usuario.nome}</a></div>
                                 <div class="postagem-data">${mensagem[i].data}</div>
                             </div>
                         </div>
@@ -70,4 +70,3 @@
         </div>
     </body>
 </html>
-
