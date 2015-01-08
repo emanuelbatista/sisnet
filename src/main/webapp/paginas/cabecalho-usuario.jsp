@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="atualizar">
-            <a href="atualizar?email=${usuario.email}">Atualizar Informações</a>
+            <a href="atualizar">Configurações</a>
         </div>
     </div>
     <nav>

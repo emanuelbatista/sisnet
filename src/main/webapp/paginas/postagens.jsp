@@ -7,6 +7,7 @@
 <%@page import="java.util.List"%>
 <%@page import="com.br.ifpb.valueObject.Mensagem"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -31,40 +32,36 @@
                             </ul>
                         </div>
                     </section>
-                    <%for (int i = 1; i < ((List<Mensagem>) request.getAttribute("mensagem")).size(); i = i + 2) {
-                            pageContext.setAttribute("i", i);
-                    %>
+                    <c:forEach var="i" begin="1" items="${mensagem}" step="2">
                     <section class="section">
                         <div class="postagem-cabecalho">
                             <img src="${usuario1.foto}" alt="">
                             <div class="postagem-info">
                                 <div class="postagem-nome-usuario"><a href="#">${usuario1.nome}</a></div>
-                                <div class="postagem-data">${mensagem[i].data}</div>
+                                <div class="postagem-data">${i.data}</div>
                             </div>
                         </div>
                         <div class="postagem-corpo">
-                            <p>${mensagem[i].texto}</p>
+                            <p>${i.texto}</p>
                         </div>
                     </section>
-                    <%}%>
+                    </c:forEach>
                 </div>
                 <div class="noticias-direita">
-                    <%for (int i = 0; i < ((List<Mensagem>) request.getAttribute("mensagem")).size(); i = i + 2) {
-                            pageContext.setAttribute("i", i);
-                    %>
+                    <c:forEach var="i" items="${mensagem}" step="2">
                     <section class="section">
                         <div class="postagem-cabecalho">
                             <img src="${usuario1.foto}" alt="">
                             <div class="postagem-info">
                                 <div class="postagem-nome-usuario"><a href="#">${usuario1.nome}</a></div>
-                                <div class="postagem-data">${mensagem[i].data}</div>
+                                <div class="postagem-data">${i.data}</div>
                             </div>
                         </div>
                         <div class="postagem-corpo">
-                            <p>${mensagem[i].texto}</p>
+                            <p>${i.texto}</p>
                         </div>
                     </section>
-                    <%}%>
+                    </c:forEach>
                 </div>
             </article>
         </div>

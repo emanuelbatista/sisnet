@@ -44,7 +44,7 @@ body{
 }
 #postagens{
     border-bottom: solid 3px;
-    border-color: black;
+    border-color: #999999;
     padding-bottom: 5px;
 }
 #postagens>a{

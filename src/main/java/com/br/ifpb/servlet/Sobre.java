@@ -5,16 +5,7 @@
  */
 package com.br.ifpb.servlet;
 
-import com.br.ifpb.businessObject.GerenciarAmizade;
-import com.br.ifpb.businessObject.GerenciarMensagem;
-import com.br.ifpb.businessObject.GerenciarUsuario;
-import com.br.ifpb.execoes.PersistenciaException;
-import com.br.ifpb.logica.Logica;
-import com.br.ifpb.valueObject.Usuario;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,8 +16,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Emanuel
  */
-@WebServlet(name = "Postagens", urlPatterns = {"/postagens"})
-public class Postagens extends HttpServlet {
+@WebServlet(name = "Sobre", urlPatterns = {"/sobre"})
+public class Sobre extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,9 +30,11 @@ public class Postagens extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
+        
     }
 
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -53,11 +46,7 @@ public class Postagens extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Logica postagens = new com.br.ifpb.logica.LogicaPostagens();
-        String path = postagens.execute(request, response);
-        if (path != null) {
-            getServletContext().getRequestDispatcher(path).forward(request, response);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -71,7 +60,7 @@ public class Postagens extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        processRequest(request, response);
     }
 
     /**
@@ -82,6 +71,6 @@ public class Postagens extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }
+    }// </editor-fold>
 
 }

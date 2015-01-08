@@ -24,6 +24,14 @@
                     Página Inicial
                 </a>
             </li>
+            <li>
+                <hr>
+            </li>
+            <li>
+                <a href="#">
+                    Sair
+                </a>
+            </li>
         </ul>
     </div>
 </div>

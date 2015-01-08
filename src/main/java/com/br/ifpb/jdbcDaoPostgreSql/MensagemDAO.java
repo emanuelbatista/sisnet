@@ -27,7 +27,7 @@ public class MensagemDAO implements MensagemDaoIF {
     @Override
     public List<Mensagem> minhasMensagens(String email) throws PersistenciaException {
         try (Connection con = ConexaoBanco.getInstance()) {
-            String sql = "SELECT * FROM Mensagem WHERE usuario=? ORDER BY data ASC";
+            String sql = "SELECT * FROM Mensagem WHERE usuario=? ORDER BY data DESC";
             PreparedStatement stat = con.prepareCall(sql);
             stat.setString(1, email);
             ResultSet rs = stat.executeQuery();

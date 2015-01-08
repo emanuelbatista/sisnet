@@ -7,13 +7,16 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <header>
     <div class="row cabecalho">
-         <div class="info-basica">
+        <div class="info-basica">
             <div class="imagem-perfil">
                 <img src="${usuario1.foto}" alt=""> 
             </div>
             <div class="nome-perfil">
                 ${usuario1.nome}
             </div>
+        </div>
+        <div class="desfazer-amizade">
+            <a href="#">Desfazer Amizade</a>
         </div>
     </div>
     <nav>

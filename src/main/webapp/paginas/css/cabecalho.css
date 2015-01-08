@@ -33,6 +33,25 @@ header{
     width: 200px;
     margin-left: 3%;
 }
+.desfazer-amizade{
+    position: relative;
+    display: inline;
+    float: right;
+    margin-right: 2%;
+    padding: 4px 3px;
+    border-radius: 3px;
+}
+.desfazer-amizade a{
+    border-radius: 3px;
+    background-color: white;
+    padding: 4px 4px;
+    margin: 0px;
+    color: #000;
+    text-decoration: none;
+}
+.desfazer-amizade a:hover{
+    border: solid 1px #000;
+}
 .navegacao{
     display: block;
     text-align: center;
@@ -40,7 +59,6 @@ header{
     position: relative;
     padding: 0px 0% 0px 0%;
 }
-
 .navegacao li{
     display: inline-table;
     list-style: none;
@@ -57,7 +75,6 @@ header{
     border-color: black;
     padding-bottom: 5px; 
 }
-
 .navegacao li a{
     color: #666666;
     font-family: 'Roboto',sans-serif;

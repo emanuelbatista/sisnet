@@ -36,4 +36,65 @@ body{
     margin: 0px;
     padding: 0px;
 }
+.article{
+    margin: 0% 10% 0% 10%;
+    padding: 0px;
+}
+.noticias-direita{
+    float: right;
+    width: 49%;
+    margin-left: 1%;
+}
+.noticias-esquerda{
+    float: left;
+    width: 49%;
+    margin-right: 1%;
+}
+.section{
+    background-color: white;
+    display: block;
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    padding-top: 10px;
+    border-radius: 3px;
+    border: solid 1px #cccccc;
+    border-bottom: solid 2px #cccccc;
+    border-top: solid mediumseagreen 5px;
+    margin: 20px auto;
+}
+.postagem-titulo{
+    margin: 0px;
+}
+.postagem-titulo h3{
+    padding: 0px;
+    margin: 0px;
+}
+.postagem-corpo{
+    margin-top: 30px;
+    font-size: medium;
+}
+#dados-pessoal{
+    border-top: solid limegreen 5px; 
+}
+#locais-trabalho{
+    border-top: solid yellowgreen 5px; 
+}
+#locais-estudou{
+    border-top: solid forestgreen 5px; 
+}
+#sobre{
+    border-bottom: solid 3px;
+    border-color: #666666;
+    padding-bottom: 5px;
+}
+#sobre>a{
+    color: black;
+}
+@media all and (max-width:900px){
+    .noticias-esquerda,.noticias-direita{
+        width: 100%;
+        margin-bottom: -20px;
+    }
+}
 
