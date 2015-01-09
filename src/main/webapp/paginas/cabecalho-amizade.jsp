@@ -1,31 +1,26 @@
-<%-- 
-    Document   : cabecalho
-    Created on : 30/12/2014, 07:40:15
-    Author     : Emanuel
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <header>
     <div class="row cabecalho">
         <div class="info-basica">
             <div class="imagem-perfil">
-                <img src="${usuario.foto}" alt=""> 
+                <img src="${usuario1.foto}" alt=""> 
             </div>
             <div class="nome-perfil">
-                ${usuario.nome}
+                ${usuario1.nome}
             </div>
         </div>
-        <div class="atualizar">
-            <a href="atualizar">Configurações</a>
+        <div class="desfazer-amizade">
+            <a href="#">Desfazer Amizade</a>
         </div>
     </div>
     <nav>
         <ul class="navegacao">
             <li id="sobre">
-                <a href="sobre?email=${usuario.email}">Sobre</a>
+                <a href="sobre?email=${usuario1.email}">Sobre</a>
             </li>
             <li id="postagens">
-                <a href="postagens?email=${usuario.email}">Postagens</a>
+                <a href="postagens?email=${usuario1.email}">Postagens</a>
             </li>
             <li id="fotos">
                 <a href="#">Fotos</a>

@@ -12,16 +12,16 @@
 <html>
     <head>
         <link href="paginas/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-        <link href="paginas/css/postagens.css" rel="stylesheet" type="text/css">
+        <link href="paginas/css/postagens-amizade.css" rel="stylesheet" type="text/css">
         <link href="paginas/css/barra.css" rel="stylesheet" type="text/css">
-        <link href="paginas/css/cabecalho.css" rel="stylesheet" type="text/css">
+        <link href="paginas/css/cabecalho-amizade.css" rel="stylesheet" type="text/css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SisNet - ${usuario1.nome}</title>
     </head>
     <body>
         <div class="container-fluid">
             <jsp:include page="barra.jsp"/>
-            <jsp:include page="cabecalho.jsp"/>
+            <jsp:include page="cabecalho-amizade.jsp"/>
             <article class="article">
                 <div class="noticias-esquerda">
                     <section class="section">

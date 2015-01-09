@@ -5,6 +5,8 @@
  */
 package com.br.ifpb.servlet;
 
+import com.br.ifpb.logica.Logica;
+import com.br.ifpb.logica.LogicaSobre;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,7 +32,11 @@ public class Sobre extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        Logica sobre =new LogicaSobre();
+        String path=sobre.execute(request, response);
+        if(path!=null){
+            getServletContext().getRequestDispatcher(path).forward(request, response);
+        }
         
     }
 

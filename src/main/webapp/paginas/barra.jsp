@@ -11,7 +11,7 @@
     <div class="barra-menu">
         <ul>
             <li>
-                <a href="perfil">
+                <a href="sobre?email=${usuario.email}">
                     <img src="${usuario.foto}" alt="">
                     <div class="barra-nome">${usuario.nome}</div>
                 </a>
@@ -28,7 +28,7 @@
                 <hr>
             </li>
             <li>
-                <a href="#">
+                <a href="sair">
                     Sair
                 </a>
             </li>

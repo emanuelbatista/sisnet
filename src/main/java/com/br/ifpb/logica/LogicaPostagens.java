@@ -87,7 +87,7 @@ public class LogicaPostagens implements Logica {
         } catch (PersistenciaException ex) {
             Logger.getLogger(com.br.ifpb.servlet.Postagens.class.getName()).log(Level.SEVERE, null, ex);
         }
-         return "/paginas/postagens.jsp";
+         return "/paginas/postagens-amizade.jsp";
     }
 
 }

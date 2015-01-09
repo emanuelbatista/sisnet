@@ -1,42 +1,56 @@
-<%-- 
-    Document   : sobre
-    Created on : 06/01/2015, 08:10:46
-    Author     : Emanuel
---%>
 
+<%@page import="java.time.format.DateTimeFormatter"%>
+<%@page import="com.br.ifpb.valueObject.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <link href="dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-        <link href="css/barra.css" rel="stylesheet" type="text/css">
-        <link href="css/cabecalho.css" rel="stylesheet" type="text/css">
-        <link href="css/sobre.css" rel="stylesheet" type="text/css">
+        <link href="paginas/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <link href="paginas/css/barra.css" rel="stylesheet" type="text/css">
+        <link href="paginas/css/cabecalho-amizade.css" rel="stylesheet" type="text/css">
+        <link href="paginas/css/sobre.css" rel="stylesheet" type="text/css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>SisNet - Emanuel</title>
+        <title>SisNet - ${usuario1.nome}</title>
     </head>
     <body>
         <div class="container-fluid">
             <jsp:include page="barra.jsp"></jsp:include>
             <jsp:include page="cabecalho.jsp"></jsp:include>
-            <article class="article">
-                <div class="noticias-esquerda">
-                    <section class="section" id="dados-pessoal">
-                        <div class="postagem-titulo">
-                            <h3>Dados Pessoais</h3>
-                        </div>
-                        <div class="postagem-corpo">
-                            <p><b>Nome: </b>Emanuel
-                                <br>
-                                <b>Apelido: </b>Manelzin
-                                <br>
-                                <b>Data de Nascimento: </b>26/04/1995
-                                <br>
-                                <b>Cidade: </b>Aparecida
-                                <br>
-                                <b>E-mail: </b>emanuel@gmail.com
-                                <br>
-                                <b>Profissão: </b>Programador
+                <article class="article">
+                    <div class="noticias-esquerda">
+                        <section class="section" id="dados-pessoal">
+                            <div class="postagem-titulo">
+                                <h3>Dados Pessoais</h3>
+                            </div>
+                            <div class="postagem-corpo">
+                                <p>
+                                <c:if test="${usuario1.nome!=null}">
+                                    <b>Nome: </b>${usuario1.nome}
+                                    <br>
+                                </c:if>
+                                <c:if test="${usuario1.apelido!=null}">
+                                    <b>Apelido: </b>${usuario1.apelido}
+                                    <br>
+                                </c:if>
+                                <c:if test="${usuario1.data_nascimento!=null}">
+                                    <b>Data de Nascimento: </b>
+                                    <%DateTimeFormatter formatar = DateTimeFormatter.ofPattern("dd/MM/yyyy");%>
+                                    <%=((Usuario) request.getAttribute("usuario1")).getData_nascimento().toLocalDate().format(formatar)%>
+                                    <br>
+                                </c:if>
+                                <c:if test="${usuario1.cidade!=null}">
+                                    <b>Cidade: </b>${usuario1.cidade}
+                                    <br>
+                                </c:if>
+                                <c:if test="${usuario1.email!=null}">
+                                    <b>E-mail: </b>${usuario1.email}
+                                    <br>
+                                </c:if>
+                                <c:if test="${usuario1.profissao!=null}">
+                                    <b>Profissão: </b>${usuario1.profissao}
+                                    <br>
+                                </c:if>
                             </p>
                         </div>
                     </section>
@@ -46,20 +60,34 @@
                         </div>
                         <div class="postagem-corpo">
                             <ul>
-                                <li>Recursive</li>
+                            <c:if test="${usuario1.locais_estudou!=null}">
+                                <c:forEach var="i" items="${usuario1.locais_estudou}">
+                                    <li>${i}</li>
+                                    </c:forEach>
+                            </c:if>
                             </ul>
+                            <c:if test="${usuario1.locais_estudou==null}">
+                                Nenhum
+                            </c:if>
                         </div>
                     </section>
                 </div>
-                 <div class="noticias-direita">
-                     <section class="section" id="locais-trabalho">
+                <div class="noticias-direita">
+                    <section class="section" id="locais-trabalho">
                         <div class="postagem-titulo">
                             <h3>Locais onde Trabalhou</h3>
                         </div>
                         <div class="postagem-corpo">
                             <ul>
-                                <li>Recursive</li>
+                                <c:if test="${usuario1.locais_trabalhou!=null}">
+                                <c:forEach var="i" items="${usuario1.locais_trabalhou}">
+                                    <li>${i}</li>
+                                    </c:forEach> 
+                                </c:if>
                             </ul>
+                            <c:if test="${usuario1.locais_trabalhou==null}">
+                                Nenhum
+                            </c:if>
                         </div>
                     </section>
                 </div>

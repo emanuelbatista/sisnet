@@ -16,19 +16,13 @@
             </div>
         </div>
         <div class="desfazer-amizade">
-            <a href="#">Desfazer Amizade</a>
+            <a href="#">Convidar Amizade</a>
         </div>
     </div>
     <nav>
         <ul class="navegacao">
             <li id="sobre">
-                <a href="#">Sobre</a>
-            </li>
-            <li id="postagens">
-                <a href="postagem">Postagens</a>
-            </li>
-            <li id="fotos">
-                <a href="#">Fotos</a>
+                <a href="sobre?email=${usuario1.email}">Sobre</a>
             </li>
         </ul>
     </nav>

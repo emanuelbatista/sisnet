@@ -150,7 +150,11 @@ public class UsuarioDAO implements UsuarioDaoIF {
             while (set.next()) {
                 locais_estudou.add(set.getString("local"));
             }
+            
+            if(locais_estudou.size()>0){
             usuario.setLocais_estudou(locais_estudou);
+            }else usuario.setLocais_estudou(null);
+            
             sql = "SELECT local FROM locais_trabalhou WHERE usuario=?";
             stat = connection.prepareStatement(sql);
             stat.setString(1, email);
@@ -159,7 +163,9 @@ public class UsuarioDAO implements UsuarioDaoIF {
             while (set.next()) {
                 locais_trabalhou.add(set.getString("local"));
             }
+            if(locais_trabalhou.size()>0){
             usuario.setLocais_trabalhou(locais_trabalhou);
+            }else usuario.setLocais_trabalhou(null);
             set.close();
             stat.close();
             return usuario;
