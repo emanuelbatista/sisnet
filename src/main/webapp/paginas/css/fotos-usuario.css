@@ -1,0 +1,65 @@
+@font-face{
+    font-family: Opificio;
+    src: url('../fontes/Opificio.ttf');
+}
+@font-face{
+    font-family: Harabara;
+    src: url(../fontes/Harabara.otf);
+}
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    src: url(../fontes/Roboto.woff2) format('woff2');
+
+}
+::-webkit-input-placeholder{ 
+    color: green;
+}
+:-moz-placeholder{
+    color: green;
+}
+::-moz-placeholder{
+    color: green;   
+}
+:-ms-input-placeholder{
+    color: green;
+}
+/* ---  Cabecalho do Perfil ---*/
+body{
+    background-color: #dbdbdb;
+    font-family: 'Roboto',sans-serif;
+    margin: 0px;
+    padding: 0px;
+}
+.container-fluid{
+    margin: 0px;
+    padding: 0px;
+}
+.article{
+    margin: 15px 10% 0% 10%;
+    padding: 10px;
+    background-color: white;
+    border-radius: 5px;
+/*    border: solid 2px red;*/
+}
+section{
+    position: relative;
+    display: inline-block;
+    margin: 10px;
+}
+.imagens{
+   
+}
+section,.imagens{
+    width: 189px;
+    height: 189px;
+}
+#fotos{
+    border-bottom: solid 3px;
+    border-color: #999999;
+    padding-bottom: 5px;
+}
+#fotos>a{
+    color: black;
+}
