@@ -1,0 +1,52 @@
+@font-face{
+    font-family: Opificio;
+    src: url('../fontes/Opificio.ttf');
+}
+@font-face{
+    font-family: Harabara;
+    src: url(../fontes/Harabara.otf);
+}
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    src: url(../fontes/Roboto.woff2) format('woff2');
+
+}
+
+body{
+    background-color: #dbdbdb;
+    font-family: 'Roboto',sans-serif;
+    margin: 0px;
+    padding: 0px;
+}
+.container-fluid{
+    margin: 0px;
+    padding: 0px;
+}
+.info-usuario{
+    float: left;
+    position: relative;
+    padding: 30px 0px 0px 10px;
+    top:40px;
+    width: 20%;
+    height: 100%;
+}
+.cabecalho-info{
+    margin: auto;
+}
+.cabecalho-info img{
+    border-radius: 50px;
+    width: 50px;
+    height: 50px;
+}
+.cabecalho-info-nome{
+    display: inline;
+    margin: 0px 0px 0px 3px;
+    font-family: 'Roboto',sans-serif;
+    font-weight: bold;
+    font-size: medium;
+}
+.grupos{
+    position: relative;
+}

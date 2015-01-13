@@ -24,15 +24,7 @@
             <jsp:include page="cabecalho-amizade.jsp"/>
             <article class="article">
                 <div class="noticias-esquerda">
-                    <section class="section">
-                        <div class="postar">
-                            <ul>
-                                <li><textarea class="novidades" placeholder="Compartilhe suas novidades aqui..."></textarea></li>
-                                <li><input class="btn btn-success" type="submit" value="Compartilhar"></li>
-                            </ul>
-                        </div>
-                    </section>
-                    <c:forEach var="i" begin="1" items="${mensagem}" step="2">
+                    <c:forEach var="i" items="${mensagem}" step="2">
                     <section class="section">
                         <div class="postagem-cabecalho">
                             <img src="${usuario1.foto}" alt="">
@@ -48,7 +40,7 @@
                     </c:forEach>
                 </div>
                 <div class="noticias-direita">
-                    <c:forEach var="i" items="${mensagem}" step="2">
+                    <c:forEach var="i" begin="1" items="${mensagem}" step="2">
                     <section class="section">
                         <div class="postagem-cabecalho">
                             <img src="${usuario1.foto}" alt="">

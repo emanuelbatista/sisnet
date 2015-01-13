@@ -5,10 +5,30 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<link href="css/barra.css" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+   function menu(){
+       var menu=document.getElementById("barra-menu");
+       if(menu.style==="" || menu.style.display==="none"){
+           menu.style.display="inline";
+       }else{
+           menu.style.display="none";
+       }
+   }
+   function tela(){
+       var menu=document.getElementById("barra-menu");
+       if(window.innerWidth>900){
+           menu.style.display="inline";
+       }else{
+           menu.style.display="none";
+       }
+   }
+   window.addEventListener('resize',tela);
+   window.addEventListener('load',tela);
+</script>
 <div class="barra">
     <h1 id="titulo">SisNet</h1>
-    <div class="barra-menu">
+    <button class="botao-menu" id="menu" onclick="menu()">menu</button>
+    <div class="barra-menu" id="barra-menu"  style="display: inline">
         <ul>
             <li>
                 <a href="sobre?email=${usuario.email}">

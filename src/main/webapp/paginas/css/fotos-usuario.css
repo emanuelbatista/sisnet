@@ -41,19 +41,41 @@ body{
     padding: 10px;
     background-color: white;
     border-radius: 5px;
-/*    border: solid 2px red;*/
+    /*    border: solid 2px red;*/
+}
+.fotos{
+    position: relative;
+    margin: auto;
+    padding: 0px;
 }
 section{
     position: relative;
     display: inline-block;
     margin: 10px;
 }
-.imagens{
-   
+section:hover,.imagens:hover{
+    transform: scale( 1.04, 1.04);
+    transition: 0.4s;
+    opacity: 1;
+
 }
 section,.imagens{
-    width: 189px;
-    height: 189px;
+    width: 187px;
+    height: 187px;
+    opacity: 0.95;
+}
+.publica-foto input[type="file"]{
+    opacity: 0;
+    font-size:90px;
+}
+.caixa-foto{
+    background-color: blue;
+    background-image: url(../imagens/aynara.jpg);
+    background-size: 187px;
+    position: relative;
+    width: 187px;
+    height: 187px;
+    overflow: hidden;
 }
 #fotos{
     border-bottom: solid 3px;
