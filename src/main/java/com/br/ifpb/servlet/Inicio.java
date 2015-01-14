@@ -5,25 +5,21 @@
  */
 package com.br.ifpb.servlet;
 
-import com.br.ifpb.businessObject.GerenciarUsuario;
-import com.br.ifpb.execoes.PersistenciaException;
-import com.br.ifpb.valueObject.Usuario;
+import com.br.ifpb.logica.Logica;
+import com.br.ifpb.logica.LogicaInicio;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Emanuel
  */
-@WebServlet(name = "Login", urlPatterns = {"/login"})
-public class Login extends HttpServlet {
+@WebServlet(name = "Inicio", urlPatterns = {"/inicio"})
+public class Inicio extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,21 +32,10 @@ public class Login extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String email = request.getParameter("email");
-        String senha = request.getParameter("senha");
-        GerenciarUsuario usuario = new GerenciarUsuario();
-        try {
-            if (!usuario.logar(email, senha)) {
- 
-            } else {
-                Usuario us = usuario.getUsuario(email);
-                HttpSession session = request.getSession();
-                session.setMaxInactiveInterval(60*30);
-                session.setAttribute("usuario", us);
-                response.sendRedirect("sobre?email="+us.getEmail());
-            }
-        } catch (PersistenciaException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        Logica inicio=new LogicaInicio();
+        String path=inicio.execute(request, response);
+        if(path!=null){
+            getServletContext().getRequestDispatcher(path).forward(request, response);
         }
     }
 

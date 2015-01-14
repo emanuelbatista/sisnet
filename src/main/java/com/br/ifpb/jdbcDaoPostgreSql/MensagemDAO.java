@@ -54,11 +54,11 @@ public class MensagemDAO implements MensagemDaoIF {
         try (Connection con = ConexaoBanco.getInstance()) {
             String sql = "SELECT id,texto,data,usuario FROM Mensagem M,\n"
                     + "( (SELECT email FROM Usuario usuario_1 NATURAL JOIN (SELECT usuario_1 as email FROM Amizade\n"
-                    + "WHERE usuario_2=AND pendencia=FALSE) amigos_1)\n"
+                    + "WHERE usuario_2=? AND pendencia=FALSE) amigos_1)\n"
                     + "UNION\n"
                     + "(SELECT email FROM Usuario usuario_2 NATURAL JOIN (SELECT usuario_2 as email FROM Amizade\n"
                     + " WHERE usuario_1=? AND pendencia=FALSE) amigos_2)) A\n"
-                    + " WHERE M.usuario=A.email ORDER BY data ASC ";
+                    + " WHERE M.usuario=A.email ORDER BY data DESC ";
             PreparedStatement stat = con.prepareCall(sql);
             stat.setString(1, email);
             stat.setString(2, email);

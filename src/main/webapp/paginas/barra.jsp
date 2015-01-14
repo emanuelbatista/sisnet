@@ -40,7 +40,7 @@
                 <hr>
             </li>
             <li>
-                <a href="#">
+                <a href="inicio">
                     Página Inicial
                 </a>
             </li>

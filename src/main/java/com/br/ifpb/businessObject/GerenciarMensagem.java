@@ -19,4 +19,10 @@ public class GerenciarMensagem {
         return mensagemDao.minhasMensagens(email);
     }
     
+    public List<Mensagem> mensagensAmigos(String email) throws PersistenciaException{
+        DaoFactoryIF daoFactory=DaoFactory.createFactory();
+        MensagemDaoIF mensagemDao=daoFactory.criarMensagemDao();
+        return mensagemDao.mensagensAmigos(email);
+    }
+    
 }
