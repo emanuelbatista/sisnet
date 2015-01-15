@@ -28,15 +28,14 @@ body{
     float: left;
     background-color: white;
     position: relative;
-    text-align: justify;
     border-radius: 5px;
-    padding: 20px 20px 20px 20px;
+    padding: 20px 20px 20px 30px;
     margin: 20px 0% 0px 1%;
     top:40px;
     border: solid 1px #cccccc;
     border-bottom: solid 2px #cccccc;
     border-top: solid yellowgreen 5px;
-    width: 30%;
+    width: 20%;
 }
 .cabecalho-info{
     margin: auto;
@@ -74,8 +73,8 @@ article{
     position: relative;
     top: 40px;
     padding: 0px;
-    width: 65%;
-    margin: 0px 1% 0px 1%;
+    width: 75%;
+    margin: 0px 2% 0px 1%;
 }
 .section{
     background-color: white;
@@ -135,5 +134,12 @@ article{
     .noticias-esquerda,.noticias-direita{
         width: 100%;
         margin-bottom: -20px;
+    }
+    .info-usuario{
+        width: 30%;
+        padding: 20px 20px 20px 5%;
+    }
+    article{
+        width: 65%;
     }
 }

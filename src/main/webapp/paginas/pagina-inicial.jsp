@@ -1,8 +1,3 @@
-<%-- 
-    Document   : pagina-inicial
-    Created on : 13/01/2015, 08:16:21
-    Author     : Emanuel
---%>
 
 <%@page import="com.br.ifpb.valueObject.Usuario"%>
 <%@page import="com.br.ifpb.valueObject.Mensagem"%>
