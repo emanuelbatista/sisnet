@@ -35,7 +35,7 @@ header{
     margin-left: 3%;
 }
 
-.atualizar{
+.configuracoes{
     position: relative;
     display: inline;
     float: right;
@@ -43,7 +43,7 @@ header{
     padding: 4px 3px;
     border-radius: 3px;
 }
-.atualizar a{
+.configuracoes a{
     border-radius: 3px;
     background-color: white;
     padding: 4px 4px;
@@ -51,7 +51,7 @@ header{
     color: #000;
     text-decoration: none;
 }
-.atualizar a:hover{
+.configuracoes a:hover{
     border: solid 1px #000;
 }
 
@@ -89,4 +89,20 @@ header{
 }
 .navegacao li a:hover{
     color: black;
+}
+@media all and (max-width: 900px){
+    .info-basica{
+        margin: auto;
+    }
+    .configuracoes{
+        float: none;
+        margin-left: -50px;
+        max-width: 100px;
+        left: 50%;
+    }
+    .nome-perfil{
+        margin-top: 2%;
+        margin-bottom: 6%;
+    }
+    
 }

@@ -46,7 +46,15 @@
                    Usuario usuario=null;
                  %>
                 <div class="noticias-esquerda">
-                    <c:forEach var="i" items="${mensagens}" step="2">
+                     <section class="section">
+                        <div class="postar">
+                            <ul>
+                                <li><textarea class="novidades" placeholder="Compartilhe suas novidades aqui..."></textarea></li>
+                                <li><input class="btn btn-success" type="submit" value="Compartilhar"></li>
+                            </ul>
+                        </div>
+                    </section>
+                    <c:forEach var="i" begin="1" items="${mensagens}" step="2">
                        <%
                         usuario = gerenciarUsuario.getUsuario(((Mensagem)pageContext.getAttribute("i")).getUsuario());
                         pageContext.setAttribute("usuario1", usuario);
@@ -66,7 +74,7 @@
                     </c:forEach>
                 </div>
                 <div class="noticias-direita">
-                    <c:forEach var="i" begin="1" items="${mensagens}" step="2">
+                    <c:forEach var="i" items="${mensagens}" step="2">
                         <%
                         usuario = gerenciarUsuario.getUsuario(((Mensagem)pageContext.getAttribute("i")).getUsuario());
                         pageContext.setAttribute("usuario1", usuario);

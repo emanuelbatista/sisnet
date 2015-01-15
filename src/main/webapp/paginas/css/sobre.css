@@ -13,18 +13,6 @@
     src: url(../fontes/Roboto.woff2) format('woff2');
 
 }
-::-webkit-input-placeholder{ 
-    color: green;
-}
-:-moz-placeholder{
-    color: green;
-}
-::-moz-placeholder{
-    color: green;   
-}
-:-ms-input-placeholder{
-    color: green;
-}
 /* ---  Cabecalho do Perfil ---*/
 body{
     background-color: #dbdbdb;

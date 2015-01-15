@@ -85,3 +85,18 @@ header{
 .navegacao li a:hover{
     color: black;
 }
+@media all and (max-width: 900px){
+    .info-basica{
+        margin: auto;
+    }
+    .desfazer-amizade{
+        float: none;
+        margin-left: -60px;
+        max-width: 100px;
+        left: 50%;
+    }
+    .nome-perfil{
+        margin-top: 2%;
+        margin-bottom: 6%;
+    }
+}

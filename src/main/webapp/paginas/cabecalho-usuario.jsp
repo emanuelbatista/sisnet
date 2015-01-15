@@ -15,7 +15,7 @@
                 ${usuario.nome}
             </div>
         </div>
-        <div class="atualizar">
+        <div class="configuracoes">
             <a href="atualizar">Configurações</a>
         </div>
     </div>

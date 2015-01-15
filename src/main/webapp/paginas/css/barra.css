@@ -1,3 +1,55 @@
+::-webkit-input-placeholder{ 
+    color: green;
+}
+:-moz-placeholder{
+    color: green;
+}
+::-moz-placeholder{
+    color: green;   
+}
+:-ms-input-placeholder{
+    color: green;
+}
+::-webkit-scrollbar {
+width: 10px; 
+/*<!-- largura da barra de rolagem -->*/
+height: 3px;
+}
+::-webkit-scrollbar-track-piece {
+background: #aebcbf; 
+/*<!-- Cor do fundo da barra de rolagem -->*/
+}
+::-webkit-scrollbar-thumb:vertical {
+height: 3px;
+background: seagreen; 
+/*<!-- Cor da barra de rolagem -->*/
+border-radius: 5px; 
+/*<!-- Arredondamento da barra de rolagem -->*/
+}
+::-webkit-scrollbar-thumb:horizontal {
+width: 3px; 
+/*<!-- Largura da barra de rolagem na horizontal-->*/
+background-color: #FFA500; 
+/*<!-- cor da barra de rolagem na horizontal-->*/
+}
+
+@font-face{
+    font-family: Opificio;
+    src: url('../fontes/Opificio.ttf');
+}
+
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    src: url(../fontes/Roboto.woff2) format('woff2');
+
+}
+@font-face{
+    font-family: 'entypo';
+    src: url(../fontes/entypo.eot);
+}
+
 #titulo{
     font-family: Opificio,sans-serif;
     left: 9px;
@@ -23,24 +75,6 @@
     padding: 0px;
     top: 0px;
 }
-
-@font-face{
-    font-family: Opificio;
-    src: url('../fontes/Opificio.ttf');
-}
-
-@font-face {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
-    src: url(../fontes/Roboto.woff2) format('woff2');
-
-}
-@font-face{
-    font-family: 'entypo';
-    src: url(../fontes/entypo.eot);
-}
-
 .barra-menu{
     display: inline;
     position: relative;
