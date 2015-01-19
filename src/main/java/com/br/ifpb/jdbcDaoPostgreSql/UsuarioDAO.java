@@ -133,6 +133,7 @@ public class UsuarioDAO implements UsuarioDaoIF {
             ResultSet set = stat.executeQuery();
             if(set.next()){
             Usuario usuario = new Usuario();
+            usuario.setId(set.getInt("id"));
             usuario.setNome(set.getString("nome"));
             usuario.setApelido(set.getString("apelido"));
             usuario.setCidade(set.getString("cidade"));

@@ -5,6 +5,7 @@ import com.br.ifpb.daoFactory.DaoFactoryIF;
 import com.br.ifpb.execoes.PersistenciaException;
 import com.br.ifpb.interfaceDao.MensagemDaoIF;
 import com.br.ifpb.valueObject.Mensagem;
+import com.br.ifpb.valueObject.Usuario;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -26,13 +27,13 @@ public class GerenciarMensagem {
         return mensagemDao.mensagensAmigos(id);
     }
     
-    public boolean publicarMensagem(String texto, Timestamp data, int id) throws PersistenciaException{
+    public boolean publicarMensagem(String texto, Timestamp data, Usuario usuario) throws PersistenciaException{
         DaoFactoryIF daoFactory=DaoFactory.createFactory();
         MensagemDaoIF mensagemDao=daoFactory.criarMensagemDao();
         Mensagem mensagem=new Mensagem();
         mensagem.setTexto(texto);
         mensagem.setData(data);
-        mensagem.setUsuario(id);
+        mensagem.setUsuario(usuario);
         return mensagemDao.publicarMensagem(mensagem);
     }
     

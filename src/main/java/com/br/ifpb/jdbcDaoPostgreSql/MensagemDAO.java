@@ -37,7 +37,8 @@ public class MensagemDAO implements MensagemDaoIF {
                 mensagem.setId(rs.getInt("id"));
                 mensagem.setTexto(rs.getString("texto"));
                 mensagem.setData(rs.getTimestamp("data"));
-                mensagem.setUsuario(rs.getInt("usuario"));
+                UsuarioDAO usuario=new UsuarioDAO();
+                mensagem.setUsuario(usuario.getUsuario(rs.getInt("usuario")));
                 lista.add(mensagem);
             }
             return lista;
@@ -73,7 +74,8 @@ public class MensagemDAO implements MensagemDaoIF {
                 mensagem.setId(rs.getInt("id"));
                 mensagem.setData(rs.getTimestamp("data"));
                 mensagem.setTexto(rs.getString("texto"));
-                mensagem.setUsuario(rs.getInt("usuario"));
+                UsuarioDAO usuario=new UsuarioDAO();
+                mensagem.setUsuario(usuario.getUsuario(rs.getInt("usuario")));
                 lista.add(mensagem);
             }
             return lista;
@@ -92,9 +94,8 @@ public class MensagemDAO implements MensagemDaoIF {
             PreparedStatement stat = con.prepareStatement(sql);
             stat.setString(1, mensagem.getTexto());
             stat.setTimestamp(2, mensagem.getData());
-            stat.setInt(3, mensagem.getUsuario());
+            stat.setInt(3, mensagem.getUsuario().getId());
             stat.executeUpdate();
-
             return true;
 
         } catch (SQLException ex) {

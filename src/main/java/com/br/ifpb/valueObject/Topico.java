@@ -6,7 +6,7 @@ public class Topico {
   private int id;
   private String texto;
   private Timestamp data;
-  private int usuario;
+  private Usuario usuario;
   private Grupo grupo;
   
  public int getId() {
@@ -27,10 +27,10 @@ public class Topico {
  public void setTimestamp(Timestamp data) {
  	this.data = data;
  }
- public int getUsuario() {
+ public Usuario getUsuario() {
  	return usuario;
  }
- public void setUsuario(int usuario) {
+ public void setUsuario(Usuario usuario) {
  	this.usuario = usuario;
  }
  public Grupo getGrupo() {

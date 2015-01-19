@@ -4,7 +4,7 @@ public class Grupo {
   private int id;
   private String nome;
   private String descricao;
-  private int fundador;
+  private Usuario fundador;
   
  public int getId() {
  	return id;
@@ -24,10 +24,10 @@ public class Grupo {
  public void setDescricao(String descricao) {
  	this.descricao = descricao;
  }
- public int getFundador() {
+ public Usuario getFundador() {
  	return fundador;
  }
- public void setFundador(int fundador) {
+ public void setFundador(Usuario fundador) {
  	this.fundador = fundador;
  }
  

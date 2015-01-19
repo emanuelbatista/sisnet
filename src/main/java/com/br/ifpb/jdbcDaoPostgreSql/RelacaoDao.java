@@ -3,6 +3,7 @@ package com.br.ifpb.jdbcDaoPostgreSql;
 import com.br.ifpb.conexaoBanco.ConexaoBanco;
 import com.br.ifpb.execoes.PersistenciaException;
 import com.br.ifpb.interfaceDao.RelacaoDaoIF;
+import com.br.ifpb.valueObject.Relacao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -35,7 +36,7 @@ public class RelacaoDao implements RelacaoDaoIF {
             usuario.setEmail(rs.getString("email"));
             return usuario;
         } catch (SQLException ex) {
-            Logger.getLogger(RelacaoDao.class.getName()).log(Level.SEVERE, null, ex);
+            throw new PersistenciaException(ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(RelacaoDao.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -43,21 +44,23 @@ public class RelacaoDao implements RelacaoDaoIF {
     }
 
     @Override
-    public List<Usuario> relacao(int id) throws PersistenciaException {
+    public List<Relacao> getRelacao(int idUsuario) throws PersistenciaException {
         try (Connection con = ConexaoBanco.getInstance()) {
-            String sql = "SELECT nome,foto,id FROM Usuario NATURAL JOIN"
-                    + " (SELECT usuario_2 id FROM Relacao "
-                    + "WHERE usuario_1=? AND pendencia=FALSE) relacao_2";
+            String sql = "SELECT * FROM Relacao "
+                    + "WHERE usuario_1=? AND pendencia=FALSE";
             PreparedStatement stat = con.prepareStatement(sql);
-            stat.setInt(1, id);
+            stat.setInt(1, idUsuario);
             ResultSet rs=stat.executeQuery();
-            List<Usuario> lista=new ArrayList<>();
+            List<Relacao> lista=new ArrayList<>();
             while(rs.next()){
-                Usuario usuario=new Usuario();
-                usuario.setId(rs.getInt("id"));
-                usuario.setFoto(rs.getString("foto"));
-                usuario.setNome(rs.getString("nome"));
-                lista.add(usuario);
+                Relacao relacao=new Relacao();
+                relacao.setId(rs.getInt("id"));
+                UsuarioDAO usuario=new UsuarioDAO();
+                relacao.setUsuario_1(usuario.getUsuario(rs.getInt("usuario_1")));
+                relacao.setUsuario_2(usuario.getUsuario(rs.getInt("usuario_2")));
+                relacao.setTipo(rs.getString("tipo"));
+                relacao.setPendencia(rs.getBoolean("pendencia"));
+                lista.add(relacao);
             }
             if(lista.size()>0){
                 return lista;

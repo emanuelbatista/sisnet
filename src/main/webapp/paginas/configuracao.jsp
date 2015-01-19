@@ -112,22 +112,15 @@
                         <h3>Relacionamento</h3>
                         <b>Relacionamentos: </b>
                         <ul class="relcionamentos">
-                            <c:forEach var="i" items="${usuarioRelacao}">
-                            <%
-                             Usuario usuario1=((Usuario)pageContext.getAttribute("i"));
-                             GerenciarRelacao gerenciarRelacao=new GerenciarRelacao();
-                             Usuario usuario=((Usuario)request.getSession().getAttribute("usuario"));
-                             String tipoRelacao=gerenciarRelacao.tipoRelacao(usuario.getId(), usuario1.getId());
-                             pageContext.setAttribute("tipoRelacao", tipoRelacao);
-                            %>
+                            <c:forEach var="i" items="${relacao}">
                             <li>
                                 <div class="info-relacionamento">
                                     <div class="imagem">
-                                        <img src="${i.foto}" alt="">
+                                        <img src="${i.usuario_2.foto}" alt="">
                                     </div>
                                     <div class="info-basica">
-                                        <div class="nome">${i.nome}</div>
-                                        <div class="tipo">${tipoRelacao}</div>
+                                        <div class="nome">${i.usuario_2.nome}</div>
+                                        <div class="tipo">${i.tipo}</div>
                                     </div>
                                 </div>
                                 <div class="remove-relacionamento">

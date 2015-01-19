@@ -7,7 +7,7 @@ public class Mensagem implements Serializable{
   private int id;
   private String texto;
   private Timestamp data;
-  private int usuario;
+  private Usuario usuario;
   
  public int getId() {
  	return id;
@@ -27,10 +27,10 @@ public class Mensagem implements Serializable{
  public void setData(Timestamp data) {
  	this.data = data;
  }
- public int getUsuario() {
+ public Usuario getUsuario() {
  	return usuario;
  }
- public void setUsuario(int usuario) {
+ public void setUsuario(Usuario usuario) {
  	this.usuario = usuario;
  }
   

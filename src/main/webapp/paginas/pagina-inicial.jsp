@@ -44,9 +44,6 @@
                 </div> 
             </header>
             <article>
-                 <%GerenciarUsuario gerenciarUsuario=new  GerenciarUsuario();
-                   Usuario usuario=null;
-                 %>
                  <%
                       Timestamp data;
                       LocalDateTime dateTime;
@@ -65,15 +62,11 @@
                         </div>
                     </section>
                     <c:forEach var="i" begin="1" items="${mensagens}" step="2">
-                       <%
-                        usuario = gerenciarUsuario.getUsuario(((Mensagem)pageContext.getAttribute("i")).getUsuario());
-                        pageContext.setAttribute("usuario1", usuario);
-                        %>
                     <section class="section">
                         <div class="postagem-cabecalho">
-                            <img src="${usuario1.foto}" alt="">
+                            <img src="${i.usuario.foto}" alt="">
                             <div class="postagem-info">
-                                <div class="postagem-nome-usuario"><a href="sobre?email=${usuario1.email}">${usuario1.nome}</a></div>
+                                <div class="postagem-nome-usuario"><a href="sobre?id=${i.usuario.id}">${i.usuario.nome}</a></div>
                                 <div class="postagem-data">
                                  <%
                                     data=((Mensagem)pageContext.getAttribute("i")).getData();
@@ -92,15 +85,11 @@
                 </div>
                 <div class="noticias-direita">
                     <c:forEach var="i" items="${mensagens}" step="2">
-                        <%
-                        usuario = gerenciarUsuario.getUsuario(((Mensagem)pageContext.getAttribute("i")).getUsuario());
-                        pageContext.setAttribute("usuario1", usuario);
-                        %>
                     <section class="section">
                         <div class="postagem-cabecalho">
-                            <img src="${usuario1.foto}" alt="">
+                            <img src="${i.usuario.foto}" alt="">
                             <div class="postagem-info">
-                                <div class="postagem-nome-usuario"><a href="sobre?email=${usuario1.email}">${usuario1.nome}</a></div>
+                                <div class="postagem-nome-usuario"><a href="sobre?id=${i.usuario.id}">${i.usuario.nome}</a></div>
                                 <div class="postagem-data">
                                   <%
                                     data=((Mensagem)pageContext.getAttribute("i")).getData();

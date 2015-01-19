@@ -45,7 +45,7 @@ public class PublicarMensagem extends HttpServlet {
             Timestamp data=Timestamp.valueOf(LocalDateTime.now());
             GerenciarMensagem gerenciarMensagem=new GerenciarMensagem();
             try {
-                gerenciarMensagem.publicarMensagem(mensagem, data, usuario.getId());
+                gerenciarMensagem.publicarMensagem(mensagem, data, usuario);
             } catch (PersistenciaException ex) {
                 Logger.getLogger(PublicarMensagem.class.getName()).log(Level.SEVERE, null, ex);
             }

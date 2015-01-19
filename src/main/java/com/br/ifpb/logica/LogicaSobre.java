@@ -24,7 +24,7 @@ public class LogicaSobre implements Logica{
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Integer idParametro =Integer.valueOf(request.getParameter("id"));
+        Integer idParametro = Integer.valueOf(request.getParameter("id"));
         Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
         
         if (usuario == null || idParametro == null) {

@@ -9,7 +9,7 @@ import com.br.ifpb.daoFactory.DaoFactory;
 import com.br.ifpb.daoFactory.DaoFactoryIF;
 import com.br.ifpb.execoes.PersistenciaException;
 import com.br.ifpb.interfaceDao.RelacaoDaoIF;
-import com.br.ifpb.valueObject.Usuario;
+import com.br.ifpb.valueObject.Relacao;
 import java.util.List;
 
 /**
@@ -17,10 +17,10 @@ import java.util.List;
  * @author Emanuel
  */
 public class GerenciarRelacao {
-    public List<Usuario> relacao(int id) throws PersistenciaException{
+    public List<Relacao> getRelacao(int id) throws PersistenciaException{
         DaoFactoryIF daoFactory=DaoFactory.createFactory();
         RelacaoDaoIF relacaoDao=daoFactory.criarRelacaoDao();
-        return relacaoDao.relacao(id);
+        return relacaoDao.getRelacao(id);
     }
     
      public String tipoRelacao(int remetente,int destinatario) throws PersistenciaException{

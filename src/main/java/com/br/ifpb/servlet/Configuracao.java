@@ -7,6 +7,7 @@ package com.br.ifpb.servlet;
 
 import com.br.ifpb.businessObject.GerenciarRelacao;
 import com.br.ifpb.execoes.PersistenciaException;
+import com.br.ifpb.valueObject.Relacao;
 import com.br.ifpb.valueObject.Usuario;
 import java.io.IOException;
 import java.util.List;
@@ -41,13 +42,13 @@ public class Configuracao extends HttpServlet {
             response.sendRedirect("");
         } else {
             GerenciarRelacao gerenciarRelacao = new GerenciarRelacao();
-            List<Usuario> listaUsuario = null;
+            List<Relacao> listaUsuario = null;
             try {
-                listaUsuario = gerenciarRelacao.relacao(usuario.getId());
+                listaUsuario = gerenciarRelacao.getRelacao(usuario.getId());
             } catch (PersistenciaException ex) {
                 Logger.getLogger(Configuracao.class.getName()).log(Level.SEVERE, null, ex);
             }
-            request.setAttribute("usuarioRelacao", listaUsuario);
+            request.setAttribute("relacao", listaUsuario);
             getServletContext().getRequestDispatcher("/paginas/configuracao.jsp").forward(request, response);
         }
     }
