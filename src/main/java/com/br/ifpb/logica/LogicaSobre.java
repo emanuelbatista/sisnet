@@ -24,25 +24,25 @@ public class LogicaSobre implements Logica{
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String emailParametro = request.getParameter("email");
+        Integer idParametro =Integer.valueOf(request.getParameter("id"));
         Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
         
-        if (usuario == null || emailParametro == null) {
+        if (usuario == null || idParametro == null) {
             response.sendRedirect("");
             return null;
-        } else if (usuario.getEmail().equals(emailParametro)) {
+        } else if (usuario.getId()==idParametro) {
             return "/paginas/sobre-usuario.jsp";
         } else {
-            return sobre(request, response, emailParametro, usuario);
+            return sobre(request, response, idParametro, usuario);
         }
     }
     
     public String sobre(HttpServletRequest request, HttpServletResponse response,
-            String emailParametro,Usuario usuario)throws IOException,ServletException{
+            int idParametro,Usuario usuario)throws IOException,ServletException{
          GerenciarUsuario gerUsuario = new GerenciarUsuario();
         Usuario usuario1 = null;
         try {
-            usuario1 = gerUsuario.getUsuario(emailParametro);
+            usuario1 = gerUsuario.getUsuario(idParametro);
         } catch (PersistenciaException ex) {
             Logger.getLogger(com.br.ifpb.servlet.Postagens.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -51,7 +51,7 @@ public class LogicaSobre implements Logica{
             GerenciarAmizade amizade = new GerenciarAmizade();
             boolean isAmizade = false;
             try {
-                isAmizade = amizade.verificarAmizade(usuario.getEmail(), emailParametro);
+                isAmizade = amizade.verificarAmizade(usuario.getId(), idParametro);
             } catch (PersistenciaException ex) {
                 Logger.getLogger(com.br.ifpb.servlet.Postagens.class.getName()).log(Level.SEVERE, null, ex);
             }

@@ -33,7 +33,7 @@ public class LogicaInicio implements Logica{
              GerenciarMensagem mensagem=new GerenciarMensagem();
              List<Mensagem> mensagens=null;
              try {
-                 mensagens=mensagem.mensagensAmigos(usuario.getEmail());
+                 mensagens=mensagem.mensagensAmigos(usuario.getId());
              } catch (PersistenciaException ex) {
                  Logger.getLogger(LogicaInicio.class.getName()).log(Level.SEVERE, null, ex);
              }

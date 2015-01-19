@@ -22,10 +22,10 @@
     <nav>
         <ul class="navegacao">
             <li id="sobre">
-                <a href="sobre?email=${usuario.email}">Sobre</a>
+                <a href="sobre?id=${usuario.id}">Sobre</a>
             </li>
             <li id="postagens">
-                <a href="postagens?email=${usuario.email}">Postagens</a>
+                <a href="postagens?id=${usuario.id}">Postagens</a>
             </li>
             <li id="fotos">
                 <a href="#">Fotos</a>

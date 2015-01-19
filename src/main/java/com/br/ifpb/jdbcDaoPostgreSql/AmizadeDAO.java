@@ -23,14 +23,14 @@ import com.br.ifpb.valueObject.Usuario;
 public class AmizadeDAO implements AmizadeDaoIF {
 
     @Override
-    public void solicitarAmizade(String remetente, String destinatario)
+    public void solicitarAmizade(int remetente, int destinatario)
             throws PersistenciaException {
         try (Connection connection = ConexaoBanco.getInstance()) {
             String sql = "INSERT INTO amizade(usuario_1,pedencia,usuario_2) VALUES (?,?,?)";
             PreparedStatement stat = connection.prepareStatement(sql);
-            stat.setString(1, remetente);
+            stat.setInt(1, remetente);
             stat.setBoolean(2, true);
-            stat.setString(3, destinatario);
+            stat.setInt(3, destinatario);
             stat.executeUpdate();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -41,13 +41,13 @@ public class AmizadeDAO implements AmizadeDaoIF {
     }
 
     @Override
-    public boolean aceitarSolicitacao(String remetente, String destinatario)
+    public boolean aceitarSolicitacao(int remetente, int destinatario)
             throws PersistenciaException {
         try (Connection connection = ConexaoBanco.getInstance()) {
             String sql = "UPDATE amizade SET pedencia=false WHERE usuario_1=? AND usuario_2=?";
             PreparedStatement stat = connection.prepareStatement(sql);
-            stat.setString(1, remetente);
-            stat.setString(2, destinatario);
+            stat.setInt(1, remetente);
+            stat.setInt(2, destinatario);
             stat.executeUpdate();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -68,13 +68,13 @@ public class AmizadeDAO implements AmizadeDaoIF {
      * @throws PersistenciaException
      */
     @Override
-    public boolean rejeitarSolicitacao(String remetente, String destinatario)
+    public boolean rejeitarSolicitacao(int remetente, int destinatario)
             throws PersistenciaException {
         try (Connection connection = ConexaoBanco.getInstance()) {
             String sql = "DELETE FROM Amizade WHERE usuario_1=? AND usuario_2=?";
             PreparedStatement stat = connection.prepareStatement(sql);
-            stat.setString(1, remetente);
-            stat.setString(2, destinatario);
+            stat.setInt(1, remetente);
+            stat.setInt(2, destinatario);
             stat.executeUpdate();
             return true;
         } catch (ClassNotFoundException e) {
@@ -89,29 +89,29 @@ public class AmizadeDAO implements AmizadeDaoIF {
     /**
      * Responsável por <b>listar</b> todos as solicitações de amizades
      *
-     * @param email
+     * @param id
      * @return List de Usuario
      * @throws PersistenciaException
      */
     @Override
-    public List<Usuario> listaDeSolicitacoes(String email)
+    public List<Usuario> listaDeSolicitacoes(int id)
             throws PersistenciaException {
         try (Connection con = ConexaoBanco.getInstance()) {
-            String sql = "(SELECT * FROM Usuario usuario_1 NATURAL JOIN (SELECT usuario_1 as email FROM Amizade \n"
+            String sql = "(SELECT * FROM Usuario usuario_1 NATURAL JOIN (SELECT usuario_1 as id FROM Amizade \n"
                     + "WHERE usuario_2=? AND pendencia=TRUE) amigos_1)\n"
                     + "UNION \n"
-                    + "(SELECT * FROM Usuario usuario_2 NATURAL JOIN (SELECT usuario_2 as email FROM Amizade\n"
+                    + "(SELECT * FROM Usuario usuario_2 NATURAL JOIN (SELECT usuario_2 as id FROM Amizade\n"
                     + "WHERE usuario_1=? AND pendencia=TRUE) amigos_2)";
             PreparedStatement stat = con.prepareStatement(sql);
-            stat.setString(1, email);
-            stat.setString(2, email);
+            stat.setInt(1, id);
+            stat.setInt(2, id);
             ResultSet rs = stat.executeQuery();
             List<Usuario> lista = new ArrayList<>();
             while (rs.next()) {
                 Usuario usuario = new Usuario();
                 usuario.setNome(rs.getString("nome"));
                 usuario.setApelido(rs.getString("apelido"));
-                usuario.setEmail(rs.getString("email"));
+                usuario.setId(rs.getInt("id"));
                 usuario.setFoto(rs.getString("foto"));
                 lista.add(usuario);
             }
@@ -128,26 +128,26 @@ public class AmizadeDAO implements AmizadeDaoIF {
     /**
      * Responsável por <b>listar</b> todos os amigos
      *
-     * @param email
+     * @param id
      * @return Lista de Usuario
      * @throws PersistenciaException
      */
     @Override
-    public List<Usuario> getAmigos(String email) throws PersistenciaException {
+    public List<Usuario> getAmigos(int id) throws PersistenciaException {
         try (Connection con = ConexaoBanco.getInstance()) {
-            String sql = "(SELECT * FROM Usuario usuario_1 NATURAL JOIN (SELECT usuario_1 as email FROM Amizade \n"
+            String sql = "(SELECT * FROM Usuario usuario_1 NATURAL JOIN (SELECT usuario_1 as id FROM Amizade \n"
                     + "WHERE usuario_2=? AND pendencia=FALSE) amigos_1)\n"
                     + "UNION \n"
-                    + "(SELECT * FROM Usuario usuario_2 NATURAL JOIN (SELECT usuario_2 as email FROM Amizade\n"
+                    + "(SELECT * FROM Usuario usuario_2 NATURAL JOIN (SELECT usuario_2 as id FROM Amizade\n"
                     + "WHERE usuario_1=? AND pendencia=FALSE) amigos_2)";
             PreparedStatement stat = con.prepareCall(sql);
-            stat.setString(1, email);
-            stat.setString(2, email);
+            stat.setInt(1, id);
+            stat.setInt(2, id);
             ResultSet res = stat.executeQuery();
             List<Usuario> lista = new ArrayList();
             while (res.next()) {
                 Usuario usuario = new Usuario();
-                usuario.setEmail(res.getString("email"));
+                usuario.setId(res.getInt("id"));
                 usuario.setNome(res.getString("nome"));
                 usuario.setFoto(res.getString("foto"));
                 usuario.setApelido(res.getString("apelido"));
@@ -165,15 +165,15 @@ public class AmizadeDAO implements AmizadeDaoIF {
     }
 
     @Override
-    public boolean verificarAmizade(String remetente, String destinatario) throws PersistenciaException {
+    public boolean verificarAmizade(int remetente, int destinatario) throws PersistenciaException {
         try (Connection con = ConexaoBanco.getInstance()) {
            String sql="SELECT * FROM Amizade WHERE usuario_1=? AND usuario_2=? AND pendencia=FALSE OR"
                    +" usuario_1=? AND usuario_2=? AND pendencia=FALSE";
            PreparedStatement stat=con.prepareCall(sql);
-           stat.setString(1, remetente);
-           stat.setString(2, destinatario);
-           stat.setString(3, destinatario);
-           stat.setString(4, remetente);
+           stat.setInt(1, remetente);
+           stat.setInt(2, destinatario);
+           stat.setInt(3, destinatario);
+           stat.setInt(4, remetente);
            ResultSet rs=stat.executeQuery();
            return rs.next();
         } catch (SQLException ex) {

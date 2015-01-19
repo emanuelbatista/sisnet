@@ -10,8 +10,10 @@ import java.util.List;
  */
 public interface MensagemDaoIF {
 
-    public List<Mensagem> minhasMensagens(String email) throws PersistenciaException;
+    public List<Mensagem> minhasMensagens(int id) throws PersistenciaException;
 
-    public List<Mensagem> mensagensAmigos(String email) throws PersistenciaException;
+    public List<Mensagem> mensagensAmigos(int id) throws PersistenciaException;
+    
+    public boolean publicarMensagem(Mensagem mensagem) throws PersistenciaException;
     
 }

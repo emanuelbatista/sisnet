@@ -31,7 +31,7 @@
     <div class="barra-menu" id="barra-menu"  style="display: inline">
         <ul>
             <li>
-                <a href="sobre?email=${usuario.email}">
+                <a href="sobre?id=${usuario.id}">
                     <img src="${usuario.foto}" alt="">
                     <div class="barra-nome">${usuario.nome}</div>
                 </a>

@@ -16,15 +16,15 @@ import com.br.ifpb.valueObject.Usuario;
 public interface RelacaoDaoIF {
   /**
    * Responsável por <b>retornar</b> o namorado(a) do usuario passado por parametro
-   * @param email
+   * @param id
    * @return Usuario que é namorado(a)
    * @throws PersistenciaException 
    */
-  public Usuario relacaoNamoro(String email) throws PersistenciaException;
+  public Usuario relacaoNamoro(int id) throws PersistenciaException;
   
-  public List<Usuario> relacaoFamiliar(String email) throws PersistenciaException;
+  public List<Usuario> relacao(int id) throws PersistenciaException;
   
-  public String tipoRelacao(String remetente,String destinatario) throws PersistenciaException;
+  public String tipoRelacao(int remetente,int destinatario) throws PersistenciaException;
   
-  public List<Usuario> solicitacaoRelacao(String email) throws PersistenciaException;
+  public List<Usuario> solicitacaoRelacao(int id) throws PersistenciaException;
 }

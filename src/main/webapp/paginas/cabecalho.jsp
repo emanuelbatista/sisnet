@@ -22,7 +22,7 @@
     <nav>
         <ul class="navegacao">
             <li id="sobre">
-                <a href="sobre?email=${usuario1.email}">Sobre</a>
+                <a href="sobre?id=${usuario.id}">Sobre</a>
             </li>
         </ul>
     </nav>

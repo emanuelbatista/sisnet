@@ -63,11 +63,11 @@ public class UsuarioDAO implements UsuarioDaoIF {
     }
 
     @Override
-    public void excluir(String email) throws PersistenciaException {
+    public void excluir(int id) throws PersistenciaException {
         try (Connection connection = ConexaoBanco.getInstance()) {
-            String sql = "DELETE FROM Usuario WHERE email=?";
+            String sql = "DELETE FROM Usuario WHERE id=?";
             try (PreparedStatement stat = connection.prepareStatement(sql)) {
-                stat.setString(1, email);
+                stat.setInt(1, id);
                 stat.executeUpdate();
             }
         } catch (SQLException e) {
@@ -91,7 +91,7 @@ public class UsuarioDAO implements UsuarioDaoIF {
             sql += usuario.getStatus() != null ? "status='" + usuario.getStatus() + "'," : "";
             sql += usuario.getFoto() != null ? "foto='" + usuario.getFoto() + "'," : "";
             sql = sql.substring(0, sql.length() - 2);
-            sql += " WHERE email='" + usuario.getEmail() + "'";
+            sql += " WHERE id='" + usuario.getEmail() + "'";
             try (Statement stat = connection.createStatement()) {
                 stat.executeUpdate(sql);
             }
@@ -125,11 +125,11 @@ public class UsuarioDAO implements UsuarioDaoIF {
     }
 
     @Override
-    public Usuario getUsuario(String email) throws PersistenciaException {
+    public Usuario getUsuario(int id) throws PersistenciaException {
         try (Connection connection = ConexaoBanco.getInstance()) {
-            String sql = "SELECT nome,apelido,cidade,email,profissao,senha,data_nascimento,status,foto FROM Usuario WHERE email=?";
+            String sql = "SELECT id,nome,apelido,cidade,email,profissao,senha,data_nascimento,status,foto FROM Usuario WHERE id=?";
             PreparedStatement stat = connection.prepareStatement(sql);
-            stat.setString(1, email);
+            stat.setInt(1, id);
             ResultSet set = stat.executeQuery();
             if(set.next()){
             Usuario usuario = new Usuario();
@@ -144,7 +144,7 @@ public class UsuarioDAO implements UsuarioDaoIF {
             usuario.setFoto(set.getString("foto"));
             sql = "SELECT local FROM locais_estudou WHERE usuario=?";
             stat = connection.prepareStatement(sql);
-            stat.setString(1, email);
+            stat.setInt(1, id);
             set = stat.executeQuery();
             List<String> locais_estudou = new ArrayList<>();
             while (set.next()) {
@@ -157,7 +157,7 @@ public class UsuarioDAO implements UsuarioDaoIF {
             
             sql = "SELECT local FROM locais_trabalhou WHERE usuario=?";
             stat = connection.prepareStatement(sql);
-            stat.setString(1, email);
+            stat.setInt(1, id);
             set = stat.executeQuery();
             List<String> locais_trabalhou = new ArrayList<>();
             while (set.next()) {
@@ -196,6 +196,61 @@ public class UsuarioDAO implements UsuarioDaoIF {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
+    }
+
+    @Override
+    public Usuario getUsuario(String email) throws PersistenciaException {
+        try (Connection connection = ConexaoBanco.getInstance()) {
+            String sql = "SELECT * FROM Usuario WHERE email=?";
+            PreparedStatement stat = connection.prepareStatement(sql);
+            stat.setString(1, email);
+            ResultSet set = stat.executeQuery();
+            if(set.next()){
+            Usuario usuario = new Usuario();
+            usuario.setNome(set.getString("nome"));
+            usuario.setId(set.getInt("id"));
+            usuario.setApelido(set.getString("apelido"));
+            usuario.setCidade(set.getString("cidade"));
+            usuario.setEmail(set.getString("email"));
+            usuario.setProfissao(set.getString("profissao"));
+            usuario.setSenha(set.getString("senha"));
+            usuario.setData_nascimento(set.getDate("data_nascimento"));
+            usuario.setStatus(set.getString("status"));
+            usuario.setFoto(set.getString("foto"));
+            sql = "SELECT local FROM locais_estudou WHERE usuario=?";
+            stat = connection.prepareStatement(sql);
+            stat.setInt(1, usuario.getId());
+            set = stat.executeQuery();
+            List<String> locais_estudou = new ArrayList<>();
+            while (set.next()) {
+                locais_estudou.add(set.getString("local"));
+            }
+            
+            if(locais_estudou.size()>0){
+            usuario.setLocais_estudou(locais_estudou);
+            }else usuario.setLocais_estudou(null);
+            
+            sql = "SELECT local FROM locais_trabalhou WHERE usuario=?";
+            stat = connection.prepareStatement(sql);
+            stat.setInt(1, usuario.getId());
+            set = stat.executeQuery();
+            List<String> locais_trabalhou = new ArrayList<>();
+            while (set.next()) {
+                locais_trabalhou.add(set.getString("local"));
+            }
+            if(locais_trabalhou.size()>0){
+            usuario.setLocais_trabalhou(locais_trabalhou);
+            }else usuario.setLocais_trabalhou(null);
+            set.close();
+            stat.close();
+            return usuario;
+            }else return null;
+        } catch (SQLException e) {
+            throw new PersistenciaException(e);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
 }

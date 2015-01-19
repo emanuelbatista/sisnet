@@ -16,7 +16,7 @@ import com.br.ifpb.interfaceDao.AmizadeDaoIF;
  */
 public class GerenciarAmizade {
 
-    public boolean verificarAmizade(String remetente, String destinatario) throws PersistenciaException {
+    public boolean verificarAmizade(int remetente, int destinatario) throws PersistenciaException {
         DaoFactoryIF daoFactory = DaoFactory.createFactory();
         AmizadeDaoIF amizadeDao = daoFactory.criarAmizadeDao();
         return amizadeDao.verificarAmizade(remetente, destinatario);

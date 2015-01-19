@@ -6,7 +6,7 @@ public class Comentario {
   private int id;
   private String texto;
   private Timestamp data;
-  private Usuario usuario;
+  private int usuario;
   private Topico topico;
   
  public int getId() {
@@ -27,10 +27,10 @@ public class Comentario {
  public void setTimestamp(Timestamp data) {
  	this.data = data;
  }
- public Usuario getUsuario() {
+ public int getUsuario() {
  	return usuario;
  }
- public void setUsuario(Usuario usuario) {
+ public void setUsuario(int usuario) {
  	this.usuario = usuario;
  }
  public Topico getTopico() {

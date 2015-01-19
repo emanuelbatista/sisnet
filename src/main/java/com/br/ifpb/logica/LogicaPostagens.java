@@ -26,37 +26,37 @@ public class LogicaPostagens implements Logica {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String emailParametro = request.getParameter("email");
+        Integer idParametro = Integer.valueOf(request.getParameter("id"));
         Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 
-        if (usuario == null || emailParametro == null) {
+        if (usuario == null || idParametro == null) {
             response.sendRedirect("");
             return null;
-        } else if (usuario.getEmail().equals(emailParametro)) {
+        } else if (usuario.getId()==idParametro) {
             return postagensUsuario(request, response);
         } else {
-            return postagens(request, response, emailParametro, usuario);
+            return postagens(request, response, idParametro, usuario);
         }
     }
 
     private String postagensUsuario(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         GerenciarMensagem mensagem = new GerenciarMensagem();
-        String emailUsuario = ((Usuario) request.getSession().getAttribute("usuario")).getEmail();
+        int id = ((Usuario) request.getSession().getAttribute("usuario")).getId();
         try {
-            request.setAttribute("mensagem", mensagem.minhasMensagens(emailUsuario));
+            request.setAttribute("mensagem", mensagem.minhasMensagens(id));
         } catch (PersistenciaException ex) {
             Logger.getLogger(com.br.ifpb.servlet.Postagens.class.getName()).log(Level.SEVERE, null, ex);
         }
         return "/paginas/postagens-usuario.jsp";
     }
 
-    private String postagens(HttpServletRequest request, HttpServletResponse response, String emailParametro,
+    private String postagens(HttpServletRequest request, HttpServletResponse response, int idParametro,
             Usuario usuario)throws ServletException, IOException {
         GerenciarUsuario gerUsuario = new GerenciarUsuario();
         Usuario usuario1 = null;
         try {
-            usuario1 = gerUsuario.getUsuario(emailParametro);
+            usuario1 = gerUsuario.getUsuario(idParametro);
         } catch (PersistenciaException ex) {
             Logger.getLogger(com.br.ifpb.servlet.Postagens.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -64,7 +64,7 @@ public class LogicaPostagens implements Logica {
             GerenciarAmizade amizade = new GerenciarAmizade();
             boolean isAmizade = false;
             try {
-                isAmizade = amizade.verificarAmizade(usuario.getEmail(), emailParametro);
+                isAmizade = amizade.verificarAmizade(usuario.getId(), idParametro);
             } catch (PersistenciaException ex) {
                 Logger.getLogger(com.br.ifpb.servlet.Postagens.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -83,7 +83,7 @@ public class LogicaPostagens implements Logica {
         GerenciarMensagem mensagem = new GerenciarMensagem();
         request.setAttribute("usuario1", usuario1);
         try {
-            request.setAttribute("mensagem", mensagem.minhasMensagens(usuario1.getEmail()));
+            request.setAttribute("mensagem", mensagem.minhasMensagens(usuario1.getId()));
         } catch (PersistenciaException ex) {
             Logger.getLogger(com.br.ifpb.servlet.Postagens.class.getName()).log(Level.SEVERE, null, ex);
         }

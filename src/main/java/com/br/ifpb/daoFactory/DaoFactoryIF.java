@@ -3,6 +3,7 @@ package com.br.ifpb.daoFactory;
 import com.br.ifpb.execoes.PersistenciaException;
 import com.br.ifpb.interfaceDao.AmizadeDaoIF;
 import com.br.ifpb.interfaceDao.MensagemDaoIF;
+import com.br.ifpb.interfaceDao.RelacaoDaoIF;
 import com.br.ifpb.interfaceDao.UsuarioDaoIF;
 
 public interface DaoFactoryIF {
@@ -12,4 +13,6 @@ public interface DaoFactoryIF {
     public MensagemDaoIF criarMensagemDao() throws PersistenciaException;
     
     public AmizadeDaoIF criarAmizadeDao() throws PersistenciaException;
+    
+    public RelacaoDaoIF criarRelacaoDao() throws PersistenciaException;
 }

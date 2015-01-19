@@ -3,10 +3,12 @@ package com.br.ifpb.daoFactory;
 import com.br.ifpb.execoes.PersistenciaException;
 import com.br.ifpb.interfaceDao.AmizadeDaoIF;
 import com.br.ifpb.interfaceDao.MensagemDaoIF;
+import com.br.ifpb.interfaceDao.RelacaoDaoIF;
 import com.br.ifpb.jdbcDaoPostgreSql.UsuarioDAO;
 import com.br.ifpb.interfaceDao.UsuarioDaoIF;
 import com.br.ifpb.jdbcDaoPostgreSql.AmizadeDAO;
 import com.br.ifpb.jdbcDaoPostgreSql.MensagemDAO;
+import com.br.ifpb.jdbcDaoPostgreSql.RelacaoDao;
 
 public class DaoFactoryBD implements DaoFactoryIF {
 
@@ -24,5 +26,12 @@ public class DaoFactoryBD implements DaoFactoryIF {
     public AmizadeDaoIF criarAmizadeDao() throws PersistenciaException {
        return new AmizadeDAO();
     }
+
+    @Override
+    public RelacaoDaoIF criarRelacaoDao() throws PersistenciaException {
+       return new RelacaoDao();
+    }
+    
+    
 
 }

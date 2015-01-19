@@ -17,10 +17,10 @@
     <nav>
         <ul class="navegacao">
             <li id="sobre">
-                <a href="sobre?email=${usuario1.email}">Sobre</a>
+                <a href="sobre?id=${usuario1.id}">Sobre</a>
             </li>
             <li id="postagens">
-                <a href="postagens?email=${usuario1.email}">Postagens</a>
+                <a href="postagens?id=${usuario1.id}">Postagens</a>
             </li>
             <li id="fotos">
                 <a href="#">Fotos</a>

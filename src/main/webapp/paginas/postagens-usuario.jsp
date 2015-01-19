@@ -1,10 +1,5 @@
-<%-- 
-    Document   : perfil
-    Created on : 23/12/2014, 12:36:13
-    Author     : Emanuel
---%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="f" uri="/WEB-INF/bibliotecas.tld"%>
 <%@page import="java.util.List"%>
 <%@page import="com.br.ifpb.valueObject.Mensagem"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -38,7 +33,9 @@
                             <img src="${usuario.foto}" alt="">
                             <div class="postagem-info">
                                 <div class="postagem-nome-usuario"><a href="#">${usuario.nome}</a></div>
-                                <div class="postagem-data">${i.data}</div>
+                                <div class="postagem-data">
+                                ${f:formatarData(i.data)}
+                                </div>
                             </div>
                         </div>
                         <div class="postagem-corpo">
@@ -54,7 +51,9 @@
                             <img src="${usuario.foto}" alt="">
                             <div class="postagem-info">
                                 <div class="postagem-nome-usuario"><a href="#">${usuario.nome}</a></div>
-                                <div class="postagem-data">${i.data}</div>
+                                <div class="postagem-data">
+                                    ${f:formatarData(i.data)}
+                                </div>
                             </div>
                         </div>
                         <div class="postagem-corpo">

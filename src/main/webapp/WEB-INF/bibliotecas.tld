@@ -4,10 +4,10 @@
   <short-name>bibliotecas</short-name>
   <uri>/WEB-INF/bibliotecas.tld</uri>
   <function>
-      <name>formataData</name>
+      <name>formatarData</name>
       <function-class>com.br.ifpb.funcao.DataFormatada</function-class>
       <function-signature>
-          String formatarData(Date)
+          java.lang.String formatarData(java.sql.Timestamp)
       </function-signature>
   </function>
     

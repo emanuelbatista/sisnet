@@ -16,7 +16,7 @@ public interface AmizadeDaoIF {
    * @param destinatario
    * @throws PersistenciaException 
    */
-  public void solicitarAmizade(String remetente,String destinatario) throws PersistenciaException;
+  public void solicitarAmizade(int remetente,int destinatario) throws PersistenciaException;
   
   /**
    * Responsável por <b>aceitar</b> uma solicitação de amizade
@@ -25,14 +25,14 @@ public interface AmizadeDaoIF {
    * @return boolean
    * @throws PersistenciaException 
    */
-  public boolean aceitarSolicitacao(String remetente,String destinatario) throws PersistenciaException;
+  public boolean aceitarSolicitacao(int remetente,int destinatario) throws PersistenciaException;
   
-  public boolean rejeitarSolicitacao(String remetente,String destinatario) throws PersistenciaException;
+  public boolean rejeitarSolicitacao(int remetente,int destinatario) throws PersistenciaException;
   
-  public List<Usuario> listaDeSolicitacoes(String email) throws PersistenciaException;
+  public List<Usuario> listaDeSolicitacoes(int id) throws PersistenciaException;
  
-  public List<Usuario> getAmigos(String email) throws PersistenciaException;
+  public List<Usuario> getAmigos(int id) throws PersistenciaException;
   
-  public boolean verificarAmizade(String remetente,String destinatario) throws PersistenciaException;
+  public boolean verificarAmizade(int remetente,int destinatario) throws PersistenciaException;
   
 }

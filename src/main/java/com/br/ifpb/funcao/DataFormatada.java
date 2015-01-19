@@ -5,22 +5,19 @@
  */
 package com.br.ifpb.funcao;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  *
  * @author Emanuel
  */
 public class DataFormatada {
-    public static String formatarData(int dia,int mes,int ano){
-        String date="";
-        if(dia<10){
-            date+="0";
-        }
-        date+=dia+"/";
-        if(mes<10){
-            date+="0";
-        }
-        date+=mes+"/";
-        date+=ano;
-        return date;
+    public static String formatarData(Timestamp data){
+        LocalDateTime localDateTime=data.toLocalDateTime();
+        DateTimeFormatter dateTimeFormatter=DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter dateTimeFormatter1=DateTimeFormatter.ofPattern("HH:mm");
+        return localDateTime.format(dateTimeFormatter) +" ás "+localDateTime.format(dateTimeFormatter1);
     }
 }

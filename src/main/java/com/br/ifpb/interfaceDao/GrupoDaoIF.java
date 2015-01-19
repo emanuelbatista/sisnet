@@ -9,15 +9,15 @@ import com.br.ifpb.valueObject.Usuario;
 public interface GrupoDaoIF {
   public void criar(Grupo grupo) throws PersistenciaException;
   
-  public List<Usuario> listaDeParticipantes(String idGrupo) throws PersistenciaException ;
+  public List<Usuario> listaDeParticipantes(int idGrupo) throws PersistenciaException ;
   
-  public Usuario fundador(String idGrupo) throws PersistenciaException;
+  public Usuario fundador(int idGrupo) throws PersistenciaException;
   
   public void atualizar(Grupo grupo) throws PersistenciaException;
   
-  public void excluir(String idGrupo) throws PersistenciaException;
+  public void excluir(int idGrupo) throws PersistenciaException;
   
-  public List<Grupo> listarGrupos(String login) throws PersistenciaException;
+  public List<Grupo> listarGrupos(int login) throws PersistenciaException;
   
   
   

@@ -34,11 +34,11 @@ public class GerenciarUsuario {
         usuarioDao.criar(usuario);
     }
 
-    public void excluirConta(String email) throws PersistenciaException {
+    public void excluirConta(int id) throws PersistenciaException {
 
         DaoFactoryIF fabrica = DaoFactory.createFactory();
         UsuarioDaoIF usuarioDao = fabrica.criarUsuarioDao();
-        usuarioDao.excluir(email);
+        usuarioDao.excluir(id);
     }
 
     public void atualizarConta(String nome, String apelido, String cidade, String email, String profissao,
@@ -67,15 +67,21 @@ public class GerenciarUsuario {
         return usuarioDao.logar(email, senha);
     }
 
-    public Usuario getUsuario(String email) throws PersistenciaException {
+    public Usuario getUsuario(int id) throws PersistenciaException {
         DaoFactoryIF fabrica = DaoFactory.createFactory();
         UsuarioDaoIF usuario = fabrica.criarUsuarioDao();
-        return usuario.getUsuario(email);
+        return usuario.getUsuario(id);
     }
 
     public boolean verificarExistenciaEmail(String email) throws PersistenciaException {
         DaoFactoryIF fabrica = DaoFactory.createFactory();
         UsuarioDaoIF usuario = fabrica.criarUsuarioDao();
         return usuario.verficarExistenciaEmail(email);
+    }
+    
+     public Usuario getUsuario(String email) throws PersistenciaException {
+        DaoFactoryIF fabrica = DaoFactory.createFactory();
+        UsuarioDaoIF usuario = fabrica.criarUsuarioDao();
+        return usuario.getUsuario(email);
     }
 }
