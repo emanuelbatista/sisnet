@@ -19,7 +19,7 @@
             <li id="sobre">
                 <a href="sobre?id=${usuario1.id}">Sobre</a>
             </li>
-            <li id="postagens">
+            <li id="topicos">
                 <a href="postagens?id=${usuario1.id}">Postagens</a>
             </li>
             <li id="fotos">

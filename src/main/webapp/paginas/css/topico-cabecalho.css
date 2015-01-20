@@ -1,0 +1,92 @@
+
+
+.cabecalho,.navegacao{
+    margin: 0% 10% 0% 10%;
+}
+.cabecalho{
+    background-color: mediumseagreen;
+    border-top-left-radius: 0px;
+    padding-bottom: 20px;
+    clear: right;
+}
+header{
+    margin: 0px;
+    padding: 0px; 
+    margin-top: 40px;
+}
+.nome-perfil{
+    text-align: center;
+    margin: 10% 0% 0% 4%;
+    color: white;
+    font-size: 180%;
+    clear: right;
+}
+.info-basica{
+    width: 200px;
+    margin-left: 3%;
+}
+.fundador{
+    margin: 10% 0% 0% 4%;
+    text-align: center;
+    color: white;
+}
+.fundador img{
+    width: 40px;
+    border-radius: 50px;
+    height: 40px;
+}
+.fundador a{
+    color: white;
+}
+.navegacao{
+    display: block;
+    text-align: center;
+    background-color: white;
+    position: relative;
+    padding: 0px 0% 0px 0%;
+}
+.navegacao li{
+    display: inline-table;
+    list-style: none;
+    position: relative;
+    padding: 8px 0px;
+    margin: 0px;
+    font-size: 17px;
+    font-weight: bold;
+
+
+}
+.navegacao li:hover{
+    border-bottom: solid 3px;
+    border-color: black;
+    padding-bottom: 5px; 
+}
+.navegacao li a{
+    color: #666666;
+    font-family: 'Roboto',sans-serif;
+    font-style: normal;
+    text-decoration: none;
+    padding: 8px 13px;
+}
+.navegacao li a:hover{
+    color: black;
+}
+.configuracoes{
+    position: relative;
+    display: inline;
+    float: right;
+    margin-right: 2%;
+    padding: 4px 3px;
+    border-radius: 3px;
+}
+.configuracoes a{
+    border-radius: 3px;
+    background-color: white;
+    padding: 4px 4px;
+    margin: 0px;
+    color: #000;
+    text-decoration: none;
+}
+.configuracoes a:hover{
+    border: solid 1px #000;
+}

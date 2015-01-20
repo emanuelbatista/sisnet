@@ -7,6 +7,9 @@ import com.br.ifpb.valueObject.Grupo;
 import com.br.ifpb.valueObject.Usuario;
 
 public interface GrupoDaoIF {
+    
+  public Grupo getGrupo(int id) throws PersistenciaException;
+  
   public void criar(Grupo grupo) throws PersistenciaException;
   
   public List<Usuario> listaDeParticipantes(int idGrupo) throws PersistenciaException ;
@@ -17,7 +20,7 @@ public interface GrupoDaoIF {
   
   public void excluir(int idGrupo) throws PersistenciaException;
   
-  public List<Grupo> listarGrupos(int login) throws PersistenciaException;
+  public List<Grupo> listarGrupos(int id) throws PersistenciaException;
   
   
   

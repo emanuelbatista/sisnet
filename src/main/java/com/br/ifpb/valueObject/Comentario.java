@@ -21,10 +21,10 @@ public class Comentario {
  public void setTexto(String texto) {
  	this.texto = texto;
  }
- public Timestamp getTimestamp() {
+ public Timestamp getData() {
  	return data;
  }
- public void setTimestamp(Timestamp data) {
+ public void setData(Timestamp data) {
  	this.data = data;
  }
  public Usuario getUsuario() {

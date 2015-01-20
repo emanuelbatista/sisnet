@@ -42,12 +42,12 @@ body{
 .article{
     padding: 0px;
 }
-#postagens{
+#topicos{
     border-bottom: solid 3px;
     border-color: #999999;
     padding-bottom: 5px;
 }
-#postagens>a{
+#topicos>a{
     color: black;
 }
 .postar{

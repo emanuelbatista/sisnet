@@ -20,26 +20,32 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Emanuel
  */
-public class LogicaSobre implements Logica{
+public class LogicaSobre implements Logica {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Integer idParametro = Integer.valueOf(request.getParameter("id"));
+        Integer idParametro;
+        try {
+            idParametro = Integer.valueOf(request.getParameter("id"));
+        } catch (NumberFormatException e) {
+             response.sendRedirect("");
+             return null;
+        }
         Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
-        
+
         if (usuario == null || idParametro == null) {
             response.sendRedirect("");
             return null;
-        } else if (usuario.getId()==idParametro) {
+        } else if (usuario.getId() == idParametro) {
             return "/paginas/sobre-usuario.jsp";
         } else {
             return sobre(request, response, idParametro, usuario);
         }
     }
-    
+
     public String sobre(HttpServletRequest request, HttpServletResponse response,
-            int idParametro,Usuario usuario)throws IOException,ServletException{
-         GerenciarUsuario gerUsuario = new GerenciarUsuario();
+            int idParametro, Usuario usuario) throws IOException, ServletException {
+        GerenciarUsuario gerUsuario = new GerenciarUsuario();
         Usuario usuario1 = null;
         try {
             usuario1 = gerUsuario.getUsuario(idParametro);
@@ -65,5 +71,5 @@ public class LogicaSobre implements Logica{
             return null;
         }
     }
-    
+
 }

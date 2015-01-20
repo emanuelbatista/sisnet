@@ -1,5 +1,5 @@
-<!DOCTYPE html>
 
+<!DOCTYPE html>
 <html>
     <head>
         <title>Sisnet</title>
@@ -40,7 +40,8 @@
                         <h3>Cadastro do Usuario</h3>
                         <form action="cadastro" method="post">
                             <ul>
-                                <li><span class="texto"><label for="nome">Nome</label></span><input type="text" required  placeholder="Digite seu nome" class="campo_texto" id="nome" name="nome"><br></li>
+                                <li><span class="texto"><label for="nome">Nome</label></span><input type="text" required  maxlength="20" placeholder="Digite seu nome" class="campo_texto" id="nome" name="nome"><br></li>
+                                <li><span class="texto"><label for="sobrenome">Sobrenome</label></span><input type="text" placeholder="Digite seu sobrenome" class="campo_texto" id="sobrenome" name="sobrenome"><br></li>
                                 <li><span class="texto"><label for="email">E-mail</label></span><input type="email" id="email" required placeholder="Digite seu e-mail" class="campo_texto" name="email"><br></li>
                                 <li><span class="texto"><label for="senha">Senha</label></span><input id="senha" type="password" required placeholder="Digite sua senha" class="campo_texto" name="senha"><br></li>
                                 <li><span class="texto"><label for="data_nascimento">Data de Nascimento</label></span><input type="date" class="campo_texto" id="data_nascimento" name="data_nascimento"><br></li>

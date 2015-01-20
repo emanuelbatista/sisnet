@@ -13,7 +13,19 @@
     src: url(../fontes/Roboto.woff2) format('woff2');
 
 }
-
+::-webkit-input-placeholder{ 
+    color: green;
+}
+:-moz-placeholder{
+    color: green;
+}
+::-moz-placeholder{
+    color: green;   
+}
+:-ms-input-placeholder{
+    color: green;
+}
+/* ---  Cabecalho do Perfil ---*/
 body{
     background-color: #dbdbdb;
     font-family: 'Roboto',sans-serif;
@@ -24,69 +36,21 @@ body{
     margin: 0px;
     padding: 0px;
 }
-.info-usuario{
-    float: left;
-    background-color: white;
-    position: relative;
-    border-radius: 5px;
-    padding: 20px 20px 20px 30px;
-    margin: 20px 0% 0px 1%;
-    top:40px;
-    border: solid 1px #cccccc;
-    border-bottom: solid 2px #cccccc;
-    border-top: solid yellowgreen 5px;
-    width: 20%;
+
+
+.article{
+    margin: 0% 10% 0% 10%;
 }
-.cabecalho-info{
-    margin: auto;
-}
-.cabecalho-info img{
-    border-radius: 50px;
-    width: 50px;
-    height: 50px;
-}
-.cabecalho-info-nome{
-    display: inline;
-    margin: 0px 0px 0px 3px;
-    font-family: 'Roboto',sans-serif;
-    font-weight: bold;
-    font-size: medium;
-}
-.opcao{
-    margin: 20px 0px 0px 0px;
-    position: relative;
-}
-.opcao h6{
-    font-family: 'Roboto',sans-serif;
-    font-weight: 600;
-}
-.opcao ul{
-    list-style: none;
-    margin: 0px;
+.article{
     padding: 0px;
 }
-.opcao ul a{
-    color: #09c150;
+#topicos{
+    border-bottom: solid 3px;
+    border-color: #999999;
+    padding-bottom: 5px;
 }
-article{
-    float: right;
-    position: relative;
-    top: 40px;
-    padding: 0px;
-    width: 75%;
-    margin: 0px 2% 0px 1%;
-}
-.section{
-    background-color: white;
-    display: block;
-    position: relative;
-    width: 100%;
-    padding: 20px;
-    border-radius: 3px;
-    border: solid 1px #cccccc;
-    border-bottom: solid 2px #cccccc;
-    border-top: solid mediumseagreen 5px;
-    margin: 20px auto;
+#topicos>a{
+    color: black;
 }
 .postar{
     display:block;
@@ -124,6 +88,28 @@ article{
     float: right;
 
 }
+.table{
+    display: table;
+}
+.row1{
+    display: table-row;
+}
+.cell{
+    display: inline-table;
+}
+
+.section{
+    background-color: white;
+    display: block;
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    border-radius: 3px;
+    /*    border: solid 1px #cccccc;
+        border-bottom: solid 2px #cccccc;*/
+    border-top: solid mediumseagreen 5px;
+    margin: 20px auto;
+}
 .noticias-direita{
     float: right;
     width: 49%;
@@ -134,6 +120,7 @@ article{
     width: 49%;
     margin-right: 1%;
 }
+
 .postagem-cabecalho>img{
     display: inline;
     width: 50px;
@@ -166,19 +153,53 @@ article{
 .postagem-corpo{
     margin-top: 30px;
 }
-@media all and (max-width:900px){
-    .noticias-esquerda,.noticias-direita{
-        width: 100%;
-        margin-bottom: -20px;
-    }
-    .info-usuario{
-        width: 30%;
-        padding: 20px 20px 20px 5%;
-    }
-    article{
-        width: 65%;
-    }
-    .opcao h6,.opcao ul{
-        font-size: 70%;
-    }
+
+.comentarios{
+    margin: 0px;
+    overflow: hidden;
+}
+.comentarios ul{
+    list-style: none;
+    padding: 0px;
+}
+.comentarios li{
+    overflow: hidden;
+    margin: 2px 0px;
+    padding: 3px 0px;
+    border-top: solid 1px #cccccc;
+    border-bottom: solid 1px #cccccc;
+}
+.caixa-comentario img{
+    width: 35px;
+    float: left;
+    height: 35px;
+    border-radius: 50px;
+}
+.caixa-comentario a{
+    margin: 0px 5px;
+    font-weight: 700;
+    color: black;
+}
+.data{
+    color: #999999;
+    font-size: small;
+    text-indent: 5px;
+}
+.texto-comentario{
+}
+.botoes input{
+    display: block;
+}
+.botoes textarea{
+    position: relative;
+    border-radius: 3px;
+    border: solid 1px black;
+    width: 100%;
+}
+.botoes input[type="submit"]{
+    float: right;
+    background-color: #09c150;
+    border: none;
+    color: black;
+    border-radius: 3px;
 }
