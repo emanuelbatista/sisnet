@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="configuracoes">
-            <a href="atualizar">Configurações</a>
+            <a href="configuracao">Configurações</a>
         </div>
     </div>
     <nav>

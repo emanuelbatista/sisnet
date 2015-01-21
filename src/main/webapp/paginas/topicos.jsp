@@ -12,14 +12,13 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="paginas/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
         <link href="paginas/css/topicos-usuario.css" rel="stylesheet" type="text/css">
-        <link href="paginas/css/topico-cabecalho-usuario.css" rel="stylesheet" type="text/css">
         <link href="paginas/css/barra.css" rel="stylesheet" type="text/css">
-        <link href="paginas/css/topico-cabecalho.css" rel="stylesheet" type="text/css">
+        <link href="paginas/css/grupo-cabecalho.css" rel="stylesheet" type="text/css">
         <title>SisNet - ${grupo.nome}</title>
     </head>
     <body>
         <jsp:include page="barra.jsp"/>
-        <jsp:include page="topicos-cabecalho.jsp"/>
+        <jsp:include page="grupo-cabecalho.jsp"/>
         <%
             GerenciarComentario gerenciarComentario = new GerenciarComentario();
             List<Comentario> comentarios;

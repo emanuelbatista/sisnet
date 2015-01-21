@@ -23,8 +23,8 @@
             <li id="topicos">
                 <a href="topicos?id=${grupo.id}">Topicos</a>
             </li>
-            <li id="sobre">
-                <a href="participantes?id=${usuario1.id}">Participantes</a>
+            <li id="participantes">
+                <a href="participantes?id=${grupo.id}">Participantes</a>
             </li>
         </ul>
     </nav>

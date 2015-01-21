@@ -14,10 +14,10 @@
             <article>
                 <section>
                     <h2>Solitações de Amizade</h2>
-                    <div class="soliciatacao">
+                    <div class="participantes">
                         <ul>
                             <li>
-                                <div class="caixa-solicitacao">
+                                <div class="caixa-participantes">
                                     <img src="imagens/emanuel.jpg" alt="">
                                     <a href="#">Emanuel</a>
                                     <br>
@@ -26,7 +26,7 @@
                                 </div>
                             </li>
                              <li>
-                                <div class="caixa-solicitacao">
+                                <div class="caixa-participantes">
                                     <img src="imagens/emanuel.jpg" alt="">
                                     <a href="#">Emanuelssdsdsdsdsdsd</a>
                                     <br>
@@ -35,7 +35,7 @@
                                 </div>
                             </li>
                             <li>
-                                <div class="caixa-solicitacao">
+                                <div class="caixa-participantes">
                                     <img src="imagens/emanuel.jpg" alt="">
                                     <a href="#">Emanuel</a>
                                     <br>
@@ -44,7 +44,7 @@
                                 </div>
                             </li>
                             <li>
-                                <div class="caixa-solicitacao">
+                                <div class="caixa-participantes">
                                     <img src="imagens/emanuel.jpg" alt="">
                                     <a href="#">Emanuel</a>
                                     <br>
@@ -53,7 +53,7 @@
                                 </div>
                             </li>
                             <li>
-                                <div class="caixa-solicitacao">
+                                <div class="caixa-participantes">
                                     <img src="imagens/emanuel.jpg" alt="">
                                     <a href="#">Emanuel</a>
                                     <br>

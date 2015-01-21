@@ -11,21 +11,34 @@ import com.br.ifpb.execoes.PersistenciaException;
 import com.br.ifpb.interfaceDao.GrupoDaoIF;
 import com.br.ifpb.valueObject.Grupo;
 import com.br.ifpb.valueObject.Usuario;
+import java.util.List;
 
 /**
  *
  * @author Emanuel
  */
 public class GerenciarGrupo {
-    public Usuario fundador(int idGrupo) throws PersistenciaException{
-        DaoFactoryIF daoFactory=DaoFactory.createFactory();
-        GrupoDaoIF grupoDao=daoFactory.criarGrupoDao();
+
+    public Usuario fundador(int idGrupo) throws PersistenciaException {
+        DaoFactoryIF daoFactory = DaoFactory.createFactory();
+        GrupoDaoIF grupoDao = daoFactory.criarGrupoDao();
         return grupoDao.fundador(idGrupo);
     }
-    
-    public Grupo getGrupo(int id) throws PersistenciaException{
-        DaoFactoryIF daoFactory=DaoFactory.createFactory();
-        GrupoDaoIF grupoDao=daoFactory.criarGrupoDao();
+
+    public Grupo getGrupo(int id) throws PersistenciaException {
+        DaoFactoryIF daoFactory = DaoFactory.createFactory();
+        GrupoDaoIF grupoDao = daoFactory.criarGrupoDao();
         return grupoDao.getGrupo(id);
+    }
+
+    public boolean participaGrupo(int idUsuario) throws PersistenciaException {
+        DaoFactoryIF daoFactory = DaoFactory.createFactory();
+        GrupoDaoIF grupoDao = daoFactory.criarGrupoDao();
+        return grupoDao.participaGrupo(idUsuario);
+    }
+    public List<Usuario> listaDeParticipantes(int idGrupo) throws PersistenciaException{
+         DaoFactoryIF daoFactory = DaoFactory.createFactory();
+        GrupoDaoIF grupoDao = daoFactory.criarGrupoDao();
+        return grupoDao.listaDeParticipantes(idGrupo);
     }
 }

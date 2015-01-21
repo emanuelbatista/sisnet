@@ -6,9 +6,7 @@
 package com.br.ifpb.servlet;
 
 import com.br.ifpb.businessObject.GerenciarGrupo;
-import com.br.ifpb.businessObject.GerenciarTopico;
 import com.br.ifpb.execoes.PersistenciaException;
-import com.br.ifpb.valueObject.Topico;
 import com.br.ifpb.valueObject.Usuario;
 import java.io.IOException;
 import java.util.List;
@@ -24,8 +22,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Emanuel
  */
-@WebServlet(name = "Topicos", urlPatterns = {"/topicos"})
-public class Topicos extends HttpServlet {
+@WebServlet(name = "Participantes", urlPatterns = {"/participantes"})
+public class Participantes extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,32 +36,29 @@ public class Topicos extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        Integer idGrupo = Integer.valueOf(request.getParameter("id"));
-        Usuario usuario = ((Usuario) request.getSession().getAttribute("usuario"));
-
-        if (usuario == null || idGrupo == null) {
+        Integer id = Integer.valueOf(request.getParameter("id"));
+        Usuario usuario=((Usuario)request.getSession().getAttribute("usuario"));
+        if(id==null || usuario==null){
             response.sendRedirect("");
-        } else {
+        }else{
             GerenciarGrupo gerenciarGrupo = new GerenciarGrupo();
             com.br.ifpb.valueObject.Grupo grupo = null;
             try {
-                grupo = gerenciarGrupo.getGrupo(idGrupo);
+                grupo = gerenciarGrupo.getGrupo(id);
             } catch (PersistenciaException ex) {
-                Logger.getLogger(Topicos.class.getName()).log(Level.SEVERE, null, ex);
+                
             }
             if (grupo == null) {
 
             } else {
                 request.setAttribute("grupo", grupo);
-                GerenciarTopico gerenciarTopico = new GerenciarTopico();
-                List<Topico> topicos = null;
+                List<Usuario> participantes=null;
                 try {
-                    topicos = gerenciarTopico.topicoGrupo(grupo.getId());
+                    participantes=gerenciarGrupo.listaDeParticipantes(id);
                 } catch (PersistenciaException ex) {
-                    Logger.getLogger(Topicos.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Participantes.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                request.setAttribute("topicos", topicos);
+                request.setAttribute("participantes", participantes);
                 boolean participaGrupo=false;
                 try {
                     participaGrupo=gerenciarGrupo.participaGrupo(usuario.getId());
@@ -71,13 +66,12 @@ public class Topicos extends HttpServlet {
                     Logger.getLogger(Topicos.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 if (participaGrupo) {
-                    getServletContext().getRequestDispatcher("/paginas/topicos-usuario.jsp").forward(request, response);
+                    getServletContext().getRequestDispatcher("/paginas/participantes-usuario.jsp").forward(request, response);
                 } else {
-                    getServletContext().getRequestDispatcher("/paginas/topicos.jsp").forward(request, response);
+                    getServletContext().getRequestDispatcher("/paginas/participantes.jsp").forward(request, response);
                 }
             }
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
