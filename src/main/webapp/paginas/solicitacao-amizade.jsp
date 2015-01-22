@@ -1,11 +1,12 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-        <link href="css/barra.css" rel="stylesheet" type="text/css">
-        <link href="css/solicitacao-amizade.css" rel="stylesheet" type="text/css">
+        <link href="paginas/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <link href="paginas/css/barra.css" rel="stylesheet" type="text/css">
+        <link href="paginas/css/solicitacao-amizade.css" rel="stylesheet" type="text/css">
         <title>Sisnet - ${usuario.nome}</title>
     </head>
     <body>
@@ -16,51 +17,17 @@
                     <h2>Solitações de Amizade</h2>
                     <div class="participantes">
                         <ul>
+                            <c:forEach var="i" items="${solicitacoes}">
                             <li>
                                 <div class="caixa-participantes">
-                                    <img src="imagens/emanuel.jpg" alt="">
-                                    <a href="#">Emanuel</a>
+                                    <img src="${i.foto}" alt="">
+                                    <a class="usuario" href="sobre?id=${i.id}">${i.nome}</a>
                                     <br>
-                                    <input type="submit" value="Aceitar">
-                                    <input type="submit" value="Cancelar">
+                                    <a href="" class="btn btn-success botoes">Aceitar</a>
+                                    <a href="" class="btn btn-success botoes">Cancelar</a>
                                 </div>
                             </li>
-                             <li>
-                                <div class="caixa-participantes">
-                                    <img src="imagens/emanuel.jpg" alt="">
-                                    <a href="#">Emanuelssdsdsdsdsdsd</a>
-                                    <br>
-                                    <input type="submit" value="Aceitar">
-                                    <input type="submit" value="Cancelar">
-                                </div>
-                            </li>
-                            <li>
-                                <div class="caixa-participantes">
-                                    <img src="imagens/emanuel.jpg" alt="">
-                                    <a href="#">Emanuel</a>
-                                    <br>
-                                    <input type="submit" value="Aceitar">
-                                    <input type="submit" value="Cancelar">
-                                </div>
-                            </li>
-                            <li>
-                                <div class="caixa-participantes">
-                                    <img src="imagens/emanuel.jpg" alt="">
-                                    <a href="#">Emanuel</a>
-                                    <br>
-                                    <input type="submit" value="Aceitar">
-                                    <input type="submit" value="Cancelar">
-                                </div>
-                            </li>
-                            <li>
-                                <div class="caixa-participantes">
-                                    <img src="imagens/emanuel.jpg" alt="">
-                                    <a href="#">Emanuel</a>
-                                    <br>
-                                    <input type="submit" value="Aceitar">
-                                    <input type="submit" value="Cancelar">
-                                </div>
-                            </li>
+                            </c:forEach>
                         </ul>
                     </div>
                 </section>

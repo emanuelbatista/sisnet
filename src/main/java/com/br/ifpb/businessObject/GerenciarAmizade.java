@@ -9,6 +9,8 @@ import com.br.ifpb.daoFactory.DaoFactory;
 import com.br.ifpb.daoFactory.DaoFactoryIF;
 import com.br.ifpb.execoes.PersistenciaException;
 import com.br.ifpb.interfaceDao.AmizadeDaoIF;
+import com.br.ifpb.valueObject.Usuario;
+import java.util.List;
 
 /**
  *
@@ -20,5 +22,11 @@ public class GerenciarAmizade {
         DaoFactoryIF daoFactory = DaoFactory.createFactory();
         AmizadeDaoIF amizadeDao = daoFactory.criarAmizadeDao();
         return amizadeDao.verificarAmizade(remetente, destinatario);
+    }
+
+    public List<Usuario> listaDeSolicitacoes(int id) throws PersistenciaException {
+        DaoFactoryIF daoFactory = DaoFactory.createFactory();
+        AmizadeDaoIF amizadeDao = daoFactory.criarAmizadeDao();
+        return amizadeDao.listaDeSolicitacoes(id);
     }
 }

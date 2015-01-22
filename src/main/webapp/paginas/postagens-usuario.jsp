@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="f" uri="/WEB-INF/bibliotecas.tld"%>
+<%@taglib prefix="f" uri="bibliotecas"%>
 <%@page import="java.util.List"%>
 <%@page import="com.br.ifpb.valueObject.Mensagem"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

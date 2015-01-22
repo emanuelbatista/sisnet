@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.br.ifpb.jdbcDaoPostgreSql;
 
 import com.br.ifpb.conexaoBanco.ConexaoBanco;
@@ -92,8 +87,29 @@ public class GrupoDAO implements GrupoDaoIF {
     }
 
     @Override
-    public List<Grupo> listarGrupos(int id) throws PersistenciaException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Grupo> listarGrupos(int idUsuario) throws PersistenciaException {
+        try(Connection con=ConexaoBanco.getInstance()){
+            String sql="SELECT G.nome,G.id,G.descricao FROM Grupo G JOIN participa_grupo P ON G.id=P.id_grupo WHERE G.id=?";
+            PreparedStatement stat=con.prepareStatement(sql);
+            stat.setInt(1, idUsuario);
+            ResultSet rs=stat.executeQuery();
+            List<Grupo> lista=new ArrayList<>();
+            while(rs.next()){
+                Grupo grupo=new Grupo();
+                grupo.setDescricao(rs.getString("descricao"));
+                grupo.setId(rs.getInt("id"));
+                grupo.setNome(rs.getString("nome"));
+                lista.add(grupo);
+            }
+            if(lista.size()>0){
+                return lista;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GrupoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(GrupoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     @Override

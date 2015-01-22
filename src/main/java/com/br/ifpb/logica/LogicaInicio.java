@@ -5,8 +5,10 @@
  */
 package com.br.ifpb.logica;
 
+import com.br.ifpb.businessObject.GerenciarGrupo;
 import com.br.ifpb.businessObject.GerenciarMensagem;
 import com.br.ifpb.execoes.PersistenciaException;
+import com.br.ifpb.valueObject.Grupo;
 import com.br.ifpb.valueObject.Mensagem;
 import com.br.ifpb.valueObject.Usuario;
 import java.io.IOException;
@@ -37,6 +39,14 @@ public class LogicaInicio implements Logica{
              } catch (PersistenciaException ex) {
                  Logger.getLogger(LogicaInicio.class.getName()).log(Level.SEVERE, null, ex);
              }
+             GerenciarGrupo gerenciarGrupo=new GerenciarGrupo();
+             List<Grupo> grupos=null;
+             try {
+                 grupos=gerenciarGrupo.listarGrupos(usuario.getId());
+             } catch (PersistenciaException ex) {
+                 Logger.getLogger(LogicaInicio.class.getName()).log(Level.SEVERE, null, ex);
+             }
+             request.setAttribute("grupos", grupos);
              request.setAttribute("mensagens", mensagens);
              return "/paginas/pagina-inicial.jsp";
              

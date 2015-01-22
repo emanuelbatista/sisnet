@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="f" uri="/WEB-INF/bibliotecas.tld"%>
+<%@taglib prefix="f" uri="bibliotecas"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -25,7 +25,7 @@
                         <h6>SOLICITAÇÕES</h6>
                         <ul>
                             <li>
-                                <a href="#">
+                                <a href="solicitacao-amizade">
                                     Amizades
                                 </a>
                             </li>
@@ -34,16 +34,13 @@
                     <div class="opcao">
                         <h6>GRUPOS</h6>
                         <ul>
+                            <c:forEach var="i" items="${grupos}">
                             <li>
-                                <a href="#">
-                                    Meu Grupo
+                                <a href="topicos?id=${i.id}">
+                                    ${i.nome}
                                 </a>
                             </li>
-                            <li>
-                                <a href="#">
-                                    Meu Grupo
-                                </a>
-                            </li>
+                            </c:forEach>
                         </ul>
                     </div>
 

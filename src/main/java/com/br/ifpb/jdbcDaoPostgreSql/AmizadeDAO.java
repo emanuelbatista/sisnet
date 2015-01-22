@@ -110,7 +110,6 @@ public class AmizadeDAO implements AmizadeDaoIF {
             while (rs.next()) {
                 Usuario usuario = new Usuario();
                 usuario.setNome(rs.getString("nome"));
-                usuario.setApelido(rs.getString("apelido"));
                 usuario.setId(rs.getInt("id"));
                 usuario.setFoto(rs.getString("foto"));
                 lista.add(usuario);
@@ -120,9 +119,8 @@ public class AmizadeDAO implements AmizadeDaoIF {
             throw new PersistenciaException(ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AmizadeDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
+        } 
             return null;
-        }
     }
 
     /**
@@ -158,9 +156,8 @@ public class AmizadeDAO implements AmizadeDaoIF {
             throw new PersistenciaException(ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AmizadeDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
+        } 
             return null;
-        }
 
     }
 

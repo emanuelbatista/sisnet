@@ -20,10 +20,9 @@ public interface GrupoDaoIF {
   
   public void excluir(int idGrupo) throws PersistenciaException;
   
-  public List<Grupo> listarGrupos(int id) throws PersistenciaException;
+  public List<Grupo> listarGrupos(int idUsuario) throws PersistenciaException;
   
   public boolean participaGrupo(int idUsuario) throws PersistenciaException;
-  
   
   
 }
