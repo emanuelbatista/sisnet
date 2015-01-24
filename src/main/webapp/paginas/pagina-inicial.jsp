@@ -21,28 +21,30 @@
                             ${usuario.nome}
                         </div>
                     </div>
-                    <div class="opcao">
-                        <h6>SOLICITAÇÕES</h6>
-                        <ul>
-                            <li>
-                                <a href="solicitacao-amizade">
-                                    Amizades
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="opcao">
-                        <h6>GRUPOS</h6>
-                        <ul>
-                            <c:forEach var="i" items="${grupos}">
-                            <li>
-                                <a href="topicos?id=${i.id}">
-                                    ${i.nome}
-                                </a>
-                            </li>
-                            </c:forEach>
-                        </ul>
-                    </div>
+                    <nav>
+                        <div class="opcao">
+                            <h6>SOLICITAÇÕES</h6>
+                            <ul>
+                                <li>
+                                    <a href="solicitacao-amizade">
+                                        Amizades
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="opcao">
+                            <h6>GRUPOS</h6>
+                            <ul>
+                                <c:forEach var="i" items="${grupos}">
+                                    <li>
+                                        <a href="topicos?id=${i.id}">
+                                            ${i.nome}
+                                        </a>
+                                    </li>
+                                </c:forEach>
+                            </ul>
+                        </div>
+                    </nav>
 
                 </div> 
             </header>

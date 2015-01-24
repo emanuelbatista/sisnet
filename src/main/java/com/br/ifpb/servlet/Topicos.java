@@ -38,12 +38,18 @@ public class Topicos extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        Integer idGrupo = null;
+        try {
+            idGrupo = Integer.valueOf(request.getParameter("id"));
+        } catch (NumberFormatException ex) {
 
-        Integer idGrupo = Integer.valueOf(request.getParameter("id"));
+        }
         Usuario usuario = ((Usuario) request.getSession().getAttribute("usuario"));
 
-        if (usuario == null || idGrupo == null) {
+        if (usuario == null) {
             response.sendRedirect("");
+        } else if (idGrupo == null) {
+             getServletContext().getRequestDispatcher("/paginas/servico-invalido.html").forward(request, response);
         } else {
             GerenciarGrupo gerenciarGrupo = new GerenciarGrupo();
             com.br.ifpb.valueObject.Grupo grupo = null;
@@ -64,9 +70,9 @@ public class Topicos extends HttpServlet {
                     Logger.getLogger(Topicos.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 request.setAttribute("topicos", topicos);
-                boolean participaGrupo=false;
+                boolean participaGrupo = false;
                 try {
-                    participaGrupo=gerenciarGrupo.participaGrupo(usuario.getId());
+                    participaGrupo = gerenciarGrupo.participaGrupo(usuario.getId());
                 } catch (PersistenciaException ex) {
                     Logger.getLogger(Topicos.class.getName()).log(Level.SEVERE, null, ex);
                 }

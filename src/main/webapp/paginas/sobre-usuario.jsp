@@ -26,7 +26,7 @@
                             <div class="postagem-corpo">
                                 <p>
                                 <c:if test="${usuario.nome!=null}">
-                                    <b>Nome: </b>${usuario.nome}
+                                    <b>Nome: </b>${usuario.nome} ${usuario.sobrenome}
                                     <br>
                                 </c:if>
                                 <c:if test="${usuario.apelido!=null}">

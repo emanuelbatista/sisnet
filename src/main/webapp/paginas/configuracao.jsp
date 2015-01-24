@@ -29,7 +29,7 @@
                 }
             }
         </script>
-        <title>JSP Page</title>
+        <title>SisNet - ${usuario.nome}</title>
     </head>
     <body>
         <div class="container-fluid">
@@ -55,6 +55,9 @@
                         <form action="" method="post">
                             <b>Nome: </b>
                             <input type="text" required value="${usuario.nome}" class="campo-texto" name="nome" placeholder="Digite seu Nome">
+                            <br>
+                            <b>Sobrenome: </b>
+                            <input type="text" required value="${usuario.sobrenome}" class="campo-texto" name="nome" placeholder="Digite seu Sobrenome">
                             <br>
                             <b>Apelido: </b>
                             <input type="text" value="${usuario.apelido}" class="campo-texto" name="nome" placeholder="Digite seu Apelido">

@@ -3,13 +3,21 @@
     Created on : 20/01/2015, 09:17:43
     Author     : Emanuel
 --%>
-
+<%@taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <header>
     <div class="row cabecalho">
         <div class="info-basica">
             <div class="nome-perfil">
                 ${grupo.nome}
+            </div>
+             <div class="descricao">
+                <c:if test="${grupo.descricao!=null}">
+                    <b>Descricao: </b>${grupo.descricao}
+                </c:if>
+                <c:if test="${grupo.descricao==null}">
+                    <b>Descricao: </b>Sem descrição
+                </c:if>
             </div>
             <div class="fundador">
                 <b>Fundador: </b>

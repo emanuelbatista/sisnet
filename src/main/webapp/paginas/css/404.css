@@ -1,0 +1,53 @@
+
+@font-face{
+    font-family: Opificio;
+    src: url('../fontes/Opificio.ttf');
+}
+body{
+    margin: 0px;
+    padding: 0px;
+    background-color: #dbdbdb;
+}
+.barra{
+    position: fixed;
+    height: 40px;
+    width: 100%;
+    background-color: white;
+    box-shadow: 1px 0px 2px 0px;
+    box-sizing: border-box;
+    z-index: 10;
+    margin: 0px;
+    padding: 0px;
+    top: 0px;
+}
+
+#titulo{
+    transform: rotate(60deg);
+    font-family: Opificio,sans-serif;
+    left: 9px;
+    font-size: 50px;
+    position: absolute;
+    top: 10px;
+    text-shadow:black 1px 2px 3px;
+    color: #09c150;
+    display: inline;
+    z-index: 1;
+    clear: both;
+}
+
+.texto{
+    font-family: Opificio,sans-serif;
+    font-size: 100px;
+    position: absolute;
+    color: #09c150;
+    top: 50%;
+    left: 50%;
+    margin-top: -5%;
+    margin-left: -32%;
+}
+
+@media all and (max-width: 900px){
+    .texto{
+         font-size: 50px;
+    }
+}

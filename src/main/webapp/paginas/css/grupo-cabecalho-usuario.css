@@ -21,6 +21,13 @@ header{
     font-size: 180%;
     clear: right;
 }
+.descricao{
+    text-align: center;
+    margin: 10% 0% 0% 4%;
+    color: white;
+    font-size: 100%;
+    clear: right;
+}
 .info-basica{
     width: 200px;
     margin-left: 3%;

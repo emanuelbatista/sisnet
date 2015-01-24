@@ -89,7 +89,7 @@ public class GrupoDAO implements GrupoDaoIF {
     @Override
     public List<Grupo> listarGrupos(int idUsuario) throws PersistenciaException {
         try(Connection con=ConexaoBanco.getInstance()){
-            String sql="SELECT G.nome,G.id,G.descricao FROM Grupo G JOIN participa_grupo P ON G.id=P.id_grupo WHERE G.id=?";
+            String sql="SELECT G.nome,G.id,G.descricao FROM Grupo G JOIN participa_grupo P ON G.id=P.id_grupo WHERE P.usuario=?";
             PreparedStatement stat=con.prepareStatement(sql);
             stat.setInt(1, idUsuario);
             ResultSet rs=stat.executeQuery();

@@ -14,7 +14,7 @@
         <link href="paginas/css/grupo-cabecalho-usuario.css" rel="stylesheet" type="text/css">
         <link href="paginas/css/participantes-usuario.css" rel="stylesheet" type="text/css">
         <link href="paginas/css/barra.css" rel="stylesheet" type="text/css">
-        <title>JSP Page</title>
+        <title>SisNet - ${grupo.nome}</title>
     </head>
     <body>
         <jsp:include page="barra.jsp"/>

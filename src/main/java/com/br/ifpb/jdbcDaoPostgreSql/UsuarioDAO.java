@@ -127,7 +127,7 @@ public class UsuarioDAO implements UsuarioDaoIF {
     @Override
     public Usuario getUsuario(int id) throws PersistenciaException {
         try (Connection connection = ConexaoBanco.getInstance()) {
-            String sql = "SELECT id,nome,apelido,cidade,email,profissao,senha,data_nascimento,status,foto FROM Usuario WHERE id=?";
+            String sql = "SELECT id,nome,sobrenome,apelido,cidade,email,profissao,senha,data_nascimento,status,foto FROM Usuario WHERE id=?";
             PreparedStatement stat = connection.prepareStatement(sql);
             stat.setInt(1, id);
             ResultSet set = stat.executeQuery();
@@ -143,6 +143,7 @@ public class UsuarioDAO implements UsuarioDaoIF {
             usuario.setData_nascimento(set.getDate("data_nascimento"));
             usuario.setStatus(set.getString("status"));
             usuario.setFoto(set.getString("foto"));
+            usuario.setSobrenome(set.getString("sobrenome"));
             sql = "SELECT local FROM locais_estudou WHERE usuario=?";
             stat = connection.prepareStatement(sql);
             stat.setInt(1, id);

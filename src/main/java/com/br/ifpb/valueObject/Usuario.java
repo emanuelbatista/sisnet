@@ -7,6 +7,7 @@ public class Usuario {
 
     private int id;
     private String nome;
+    private String sobrenome;
     private String apelido;
     private String cidade;
     private String email;
@@ -114,4 +115,13 @@ public class Usuario {
         this.id = id;
     }
 
+    public String getSobrenome() {
+        return sobrenome;
+    }
+
+    public void setSobrenome(String sobrenome) {
+        this.sobrenome = sobrenome;
+    }
+
+    
 }
