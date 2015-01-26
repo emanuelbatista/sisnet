@@ -19,20 +19,12 @@
             <jsp:include page="cabecalho-usuario.jsp"/>
             <article class="article">
                 <div class="noticias-esquerda">
-                    <section class="section">
-                        <div class="postar">
-                            <ul>
-                                <li><textarea class="novidades" placeholder="Compartilhe suas novidades aqui..."></textarea></li>
-                                <li><input class="btn btn-success" type="submit" value="Compartilhar"></li>
-                            </ul>
-                        </div>
-                    </section>
-                    <c:forEach var="i" begin="1" items="${mensagem}" step="2">
+                    <c:forEach var="i" begin="0" items="${mensagem}" step="2">
                     <section class="section">
                         <div class="postagem-cabecalho">
                             <img src="${usuario.foto}" alt="">
                             <div class="postagem-info">
-                                <div class="postagem-nome-usuario"><a href="#">${usuario.nome}</a></div>
+                                <div class="postagem-nome-usuario"><a href="sobre?id=${usuario.id}">${usuario.nome}</a></div>
                                 <div class="postagem-data">
                                 ${f:formatarData(i.data)}
                                 </div>
@@ -45,12 +37,12 @@
                     </c:forEach>
                 </div>
                 <div class="noticias-direita">
-                    <c:forEach var="i" items="${mensagem}" step="2"> 
+                    <c:forEach var="i" begin="1" items="${mensagem}" step="2"> 
                     <section class="section">
                         <div class="postagem-cabecalho">
                             <img src="${usuario.foto}" alt="">
                             <div class="postagem-info">
-                                <div class="postagem-nome-usuario"><a href="#">${usuario.nome}</a></div>
+                                <div class="postagem-nome-usuario"><a href="sobre?id=${usuario.id}">${usuario.nome}</a></div>
                                 <div class="postagem-data">
                                     ${f:formatarData(i.data)}
                                 </div>

@@ -10,4 +10,11 @@
           java.lang.String formatarData(java.sql.Timestamp)
       </function-signature>
   </function>
+  <function>
+      <name>formatarDataDois</name>
+      <function-class>com.br.ifpb.funcao.DataFormatada</function-class>
+      <function-signature>
+          java.lang.String formatarData(java.sql.Date);
+      </function-signature>
+  </function>
 </taglib>

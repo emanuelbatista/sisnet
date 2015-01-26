@@ -7,7 +7,7 @@ public interface UsuarioDaoIF {
 
   public void excluir(int id) throws PersistenciaException;
   
-  public void atualizar(Usuario usuario) throws PersistenciaException;
+  public void atualizarInformacoes(Usuario usuario) throws PersistenciaException;
   
   public boolean logar(String email, String senha) throws PersistenciaException;
   

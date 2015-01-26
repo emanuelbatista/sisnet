@@ -1,8 +1,9 @@
 
-<%@page import="java.time.format.DateTimeFormatter"%>
+<%@page import="java.time.format.DateTimeFormatter"%> 
 <%@page import="com.br.ifpb.valueObject.Usuario"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%> 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="f" uri="bibliotecas"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -35,8 +36,7 @@
                                 </c:if>
                                 <c:if test="${usuario.data_nascimento!=null}">
                                     <b>Data de Nascimento: </b>
-                                    <%DateTimeFormatter formatar = DateTimeFormatter.ofPattern("dd/MM/yyyy");%>
-                                    <%=((Usuario) request.getSession().getAttribute("usuario")).getData_nascimento().toLocalDate().format(formatar)%>
+                                    ${f:formatarDataDois(usuario.data_nascimento)}
                                     <br>
                                 </c:if>
                                 <c:if test="${usuario.cidade!=null}">

@@ -41,9 +41,10 @@ public class GerenciarUsuario {
         usuarioDao.excluir(id);
     }
 
-    public void atualizarConta(String nome, String apelido, String cidade, String email, String profissao,
-            String senha, Date data_nascimento, String status, String foto, List<String> locais_estudou, List<String> locais_trabalhou) throws PersistenciaException {
+    public void atualizarConta(int id,String nome,String sobrenome, String apelido, String cidade, String email, String profissao,
+            String senha, Date data_nascimento, String status) throws PersistenciaException {
         Usuario usuario = new Usuario();
+        usuario.setId(id);
         usuario.setNome(nome);
         usuario.setApelido(apelido);
         usuario.setCidade(cidade);
@@ -52,13 +53,11 @@ public class GerenciarUsuario {
         usuario.setSenha(senha);
         usuario.setData_nascimento(data_nascimento);
         usuario.setStatus(status);
-        usuario.setFoto(foto);
-        usuario.setLocais_estudou(locais_estudou);
-        usuario.setLocais_trabalhou(locais_trabalhou);
+        usuario.setSobrenome(sobrenome);
 
         DaoFactoryIF fabrica = DaoFactory.createFactory();
         UsuarioDaoIF usuarioDao = fabrica.criarUsuarioDao();
-        usuarioDao.atualizar(usuario);
+        usuarioDao.atualizarInformacoes(usuario);
     }
 
     public boolean logar(String email, String senha) throws PersistenciaException {

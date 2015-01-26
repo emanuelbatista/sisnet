@@ -193,13 +193,13 @@ body{
 .botoes textarea{
     position: relative;
     border-radius: 3px;
-    border: solid 1px black;
+    border: #dbdbdb solid 1px;
     width: 100%;
 }
 .botoes input[type="submit"]{
     float: right;
     background-color: #09c150;
     border: none;
-    color: black;
+    color: white;
     border-radius: 3px;
 }

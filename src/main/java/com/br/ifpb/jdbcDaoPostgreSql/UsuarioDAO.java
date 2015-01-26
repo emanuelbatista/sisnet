@@ -5,7 +5,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import com.br.ifpb.conexaoBanco.ConexaoBanco;
@@ -24,7 +23,7 @@ public class UsuarioDAO implements UsuarioDaoIF {
     @Override
     public void criar(Usuario usuario) throws PersistenciaException {
         try (Connection connection = ConexaoBanco.getInstance()) {
-            String sql = "INSERT INTO Usuario(nome,apelido,cidade,email,profissao,senha,data_nascimento,status,foto) VALUES (?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO Usuario(nome,apelido,cidade,email,profissao,senha,data_nascimento,status,foto,sobrenome) VALUES (?,?,?,?,?,?,?,?,?)";
             PreparedStatement statUsuario = connection.prepareStatement(sql);
             statUsuario.setString(1, usuario.getNome());
             statUsuario.setString(2, usuario.getApelido());
@@ -35,6 +34,7 @@ public class UsuarioDAO implements UsuarioDaoIF {
             statUsuario.setDate(7, usuario.getData_nascimento());
             statUsuario.setString(8, usuario.getStatus());
             statUsuario.setString(9, usuario.getFoto());
+            statUsuario.setString(10, usuario.getSobrenome());
             statUsuario.executeUpdate();
             if (usuario.getLocais_estudou() != null) {
                 sql = "INSERT INTO locais_estudou(usuario,local) VALUES (?,?)";
@@ -78,23 +78,22 @@ public class UsuarioDAO implements UsuarioDaoIF {
     }
 
     @Override
-    public void atualizar(Usuario usuario) throws PersistenciaException {
+    public void atualizarInformacoes(Usuario usuario) throws PersistenciaException {
         try (Connection connection = ConexaoBanco.getInstance()) {
-            String sql = "UPDATE Usuario SET ";
-            sql += usuario.getNome() != null ? "nome='" + usuario.getNome() + "'," : "";
-            sql += usuario.getApelido() != null ? "apelido='" + usuario.getApelido() + "'," : "";
-            sql += usuario.getCidade() != null ? "cidade='" + usuario.getCidade() + "'," : "";
-            sql += usuario.getEmail() != null ? "email='" + usuario.getEmail() + "'," : "";
-            sql += usuario.getProfissao() != null ? "profissao='" + usuario.getProfissao() + "'," : "";
-            sql += usuario.getSenha() != null ? "senha='" + usuario.getSenha() + "'," : "";
-            sql += usuario.getData_nascimento() != null ? "data_nascimento='" + usuario.getData_nascimento() + "'," : "";
-            sql += usuario.getStatus() != null ? "status='" + usuario.getStatus() + "'," : "";
-            sql += usuario.getFoto() != null ? "foto='" + usuario.getFoto() + "'," : "";
-            sql = sql.substring(0, sql.length() - 2);
-            sql += " WHERE id='" + usuario.getEmail() + "'";
-            try (Statement stat = connection.createStatement()) {
-                stat.executeUpdate(sql);
-            }
+            String sql = "UPDATE Usuario SET nome=?,sobrenome=?,apelido=?,data_nascimento=?,"
+                    + "cidade=?,email=?,profissao=?,status=?,senha=? WHERE id=?";
+            PreparedStatement stat = connection.prepareStatement(sql);
+            stat.setString(1, usuario.getNome());
+            stat.setString(2, usuario.getSobrenome());
+            stat.setString(3, usuario.getApelido());
+            stat.setDate(4, usuario.getData_nascimento());
+            stat.setString(5, usuario.getCidade());
+            stat.setString(6, usuario.getEmail());
+            stat.setString(7, usuario.getProfissao());
+            stat.setString(8, usuario.getStatus());
+            stat.setString(9, usuario.getSenha());
+            stat.setInt(10, usuario.getId());
+            stat.executeUpdate();
         } catch (SQLException e) {
             throw new PersistenciaException(e);
         } catch (ClassNotFoundException ex) {
@@ -219,6 +218,7 @@ public class UsuarioDAO implements UsuarioDaoIF {
             usuario.setData_nascimento(set.getDate("data_nascimento"));
             usuario.setStatus(set.getString("status"));
             usuario.setFoto(set.getString("foto"));
+            usuario.setSobrenome(set.getString("sobrenome"));
             sql = "SELECT local FROM locais_estudou WHERE usuario=?";
             stat = connection.prepareStatement(sql);
             stat.setInt(1, usuario.getId());
