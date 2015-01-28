@@ -49,7 +49,7 @@ public class Topicos extends HttpServlet {
         if (usuario == null) {
             response.sendRedirect("");
         } else if (idGrupo == null) {
-             getServletContext().getRequestDispatcher("/paginas/servico-invalido.html").forward(request, response);
+             getServletContext().getRequestDispatcher("/servico-invalido.html").forward(request, response);
         } else {
             GerenciarGrupo gerenciarGrupo = new GerenciarGrupo();
             com.br.ifpb.valueObject.Grupo grupo = null;
@@ -77,9 +77,9 @@ public class Topicos extends HttpServlet {
                     Logger.getLogger(Topicos.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 if (participaGrupo) {
-                    getServletContext().getRequestDispatcher("/paginas/topicos-usuario.jsp").forward(request, response);
+                    getServletContext().getRequestDispatcher("/topicos-usuario.jsp").forward(request, response);
                 } else {
-                    getServletContext().getRequestDispatcher("/paginas/topicos.jsp").forward(request, response);
+                    getServletContext().getRequestDispatcher("/topicos.jsp").forward(request, response);
                 }
             }
         }

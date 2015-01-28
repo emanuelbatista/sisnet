@@ -48,7 +48,7 @@ public class LogicaInicio implements Logica{
              }
              request.setAttribute("grupos", grupos);
              request.setAttribute("mensagens", mensagens);
-             return "/paginas/pagina-inicial.jsp";
+             return "/pagina-inicial.jsp";
              
          }
     }

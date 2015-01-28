@@ -48,7 +48,7 @@ public class LogicaPostagens implements Logica {
         } catch (PersistenciaException ex) {
             Logger.getLogger(com.br.ifpb.servlet.Postagens.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return "/paginas/postagens-usuario.jsp";
+        return "/postagens-usuario.jsp";
     }
 
     private String postagens(HttpServletRequest request, HttpServletResponse response, int idParametro,
@@ -87,7 +87,7 @@ public class LogicaPostagens implements Logica {
         } catch (PersistenciaException ex) {
             Logger.getLogger(com.br.ifpb.servlet.Postagens.class.getName()).log(Level.SEVERE, null, ex);
         }
-         return "/paginas/postagens-amizade.jsp";
+         return "/postagens-amizade.jsp";
     }
 
 }

@@ -37,7 +37,7 @@ public class LogicaSobre implements Logica {
             response.sendRedirect("");
             return null;
         } else if (usuario.getId() == idParametro) {
-            return "/paginas/sobre-usuario.jsp";
+            return "/sobre-usuario.jsp";
         } else {
             return sobre(request, response, idParametro, usuario);
         }
@@ -62,9 +62,9 @@ public class LogicaSobre implements Logica {
                 Logger.getLogger(com.br.ifpb.servlet.Postagens.class.getName()).log(Level.SEVERE, null, ex);
             }
             if (isAmizade) {
-                return "/paginas/sobre-amizade.jsp";
+                return "/sobre-amizade.jsp";
             } else {
-                return "/paginas/sobre.jsp";
+                return "/sobre.jsp";
             }
         } else {
             response.sendRedirect("");

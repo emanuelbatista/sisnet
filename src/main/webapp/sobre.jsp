@@ -6,17 +6,17 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link href="paginas/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-        <link href="paginas/css/barra.css" rel="stylesheet" type="text/css">
-        <link href="paginas/css/cabecalho-amizade.css" rel="stylesheet" type="text/css">
-        <link href="paginas/css/sobre.css" rel="stylesheet" type="text/css">
+        <link href="dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <link href="css/barra.css" rel="stylesheet" type="text/css">
+        <link href="css/cabecalho-amizade.css" rel="stylesheet" type="text/css">
+        <link href="css/sobre.css" rel="stylesheet" type="text/css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>SisNet - ${usuario1.nome}</title>
     </head>
     <body>
         <div class="container-fluid">
             <jsp:include page="barra.jsp"></jsp:include>
-            <jsp:include page="cabecalho-amizade.jsp"></jsp:include>
+            <jsp:include page="cabecalho.jsp"></jsp:include>
                 <article class="article">
                     <div class="noticias-esquerda">
                         <section class="section" id="dados-pessoal">
@@ -96,4 +96,3 @@
     </body>
 
 </html>
-

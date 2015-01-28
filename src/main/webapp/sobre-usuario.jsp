@@ -1,22 +1,23 @@
 
-<%@page import="java.time.format.DateTimeFormatter"%>
+<%@page import="java.time.format.DateTimeFormatter"%> 
 <%@page import="com.br.ifpb.valueObject.Usuario"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%> 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="f" uri="bibliotecas"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <link href="paginas/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-        <link href="paginas/css/barra.css" rel="stylesheet" type="text/css">
-        <link href="paginas/css/cabecalho-amizade.css" rel="stylesheet" type="text/css">
-        <link href="paginas/css/sobre.css" rel="stylesheet" type="text/css">
+        <link href="dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <link href="css/barra.css" rel="stylesheet" type="text/css">
+        <link href="css/cabecalho-usuario.css" rel="stylesheet" type="text/css">
+        <link href="css/sobre.css" rel="stylesheet" type="text/css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>SisNet - ${usuario1.nome}</title>
+        <title>SisNet - ${usuario.nome}</title>
     </head>
     <body>
         <div class="container-fluid">
             <jsp:include page="barra.jsp"></jsp:include>
-            <jsp:include page="cabecalho.jsp"></jsp:include>
+            <jsp:include page="cabecalho-usuario.jsp"></jsp:include>
                 <article class="article">
                     <div class="noticias-esquerda">
                         <section class="section" id="dados-pessoal">
@@ -25,30 +26,29 @@
                             </div>
                             <div class="postagem-corpo">
                                 <p>
-                                <c:if test="${usuario1.nome!=null}">
-                                    <b>Nome: </b>${usuario1.nome}
+                                <c:if test="${usuario.nome!=null}">
+                                    <b>Nome: </b>${usuario.nome} ${usuario.sobrenome}
                                     <br>
                                 </c:if>
-                                <c:if test="${usuario1.apelido!=null}">
-                                    <b>Apelido: </b>${usuario1.apelido}
+                                <c:if test="${usuario.apelido!=null}">
+                                    <b>Apelido: </b>${usuario.apelido}
                                     <br>
                                 </c:if>
-                                <c:if test="${usuario1.data_nascimento!=null}">
+                                <c:if test="${usuario.data_nascimento!=null}">
                                     <b>Data de Nascimento: </b>
-                                    <%DateTimeFormatter formatar = DateTimeFormatter.ofPattern("dd/MM/yyyy");%>
-                                    <%=((Usuario) request.getAttribute("usuario1")).getData_nascimento().toLocalDate().format(formatar)%>
+                                    ${f:formatarDataDois(usuario.data_nascimento)}
                                     <br>
                                 </c:if>
-                                <c:if test="${usuario1.cidade!=null}">
-                                    <b>Cidade: </b>${usuario1.cidade}
+                                <c:if test="${usuario.cidade!=null}">
+                                    <b>Cidade: </b>${usuario.cidade}
                                     <br>
                                 </c:if>
-                                <c:if test="${usuario1.email!=null}">
-                                    <b>E-mail: </b>${usuario1.email}
+                                <c:if test="${usuario.email!=null}">
+                                    <b>E-mail: </b>${usuario.email}
                                     <br>
                                 </c:if>
-                                <c:if test="${usuario1.profissao!=null}">
-                                    <b>Profissão: </b>${usuario1.profissao}
+                                <c:if test="${usuario.profissao!=null}">
+                                    <b>Profissão: </b>${usuario.profissao}
                                     <br>
                                 </c:if>
                             </p>
@@ -60,13 +60,13 @@
                         </div>
                         <div class="postagem-corpo">
                             <ul>
-                            <c:if test="${usuario1.locais_estudou!=null}">
-                                <c:forEach var="i" items="${usuario1.locais_estudou}">
-                                    <li>${i}</li>
-                                    </c:forEach>
-                            </c:if>
+                                <c:if test="${usuario.locais_estudou!=null}">
+                                    <c:forEach var="i" items="${usuario.locais_estudou}">
+                                        <li>${i}</li>
+                                        </c:forEach>
+                                    </c:if>
                             </ul>
-                            <c:if test="${usuario1.locais_estudou==null}">
+                            <c:if test="${usuario.locais_estudou==null}">
                                 Nenhum
                             </c:if>
                         </div>
@@ -79,13 +79,13 @@
                         </div>
                         <div class="postagem-corpo">
                             <ul>
-                                <c:if test="${usuario1.locais_trabalhou!=null}">
-                                <c:forEach var="i" items="${usuario1.locais_trabalhou}">
-                                    <li>${i}</li>
-                                    </c:forEach> 
-                                </c:if>
+                                <c:if test="${usuario.locais_trabalhou!=null}">
+                                    <c:forEach var="i" items="${usuario.locais_trabalhou}">
+                                        <li>${i}</li>
+                                        </c:forEach>
+                                    </c:if>
                             </ul>
-                            <c:if test="${usuario1.locais_trabalhou==null}">
+                            <c:if test="${usuario.locais_trabalhou==null}">
                                 Nenhum
                             </c:if>
                         </div>

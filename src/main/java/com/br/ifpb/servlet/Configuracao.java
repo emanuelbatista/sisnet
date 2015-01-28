@@ -49,7 +49,7 @@ public class Configuracao extends HttpServlet {
                 Logger.getLogger(Configuracao.class.getName()).log(Level.SEVERE, null, ex);
             }
             request.setAttribute("relacao", listaUsuario);
-            getServletContext().getRequestDispatcher("/paginas/configuracao.jsp").forward(request, response);
+            getServletContext().getRequestDispatcher("/configuracao.jsp").forward(request, response);
         }
     }
 

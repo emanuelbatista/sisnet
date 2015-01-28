@@ -19,4 +19,6 @@ public interface UsuarioDaoIF {
   
   public boolean verficarExistenciaEmail(String email) throws PersistenciaException;
   
+  public void atualizarImagemPerfil(String path,int idUsuario) throws PersistenciaException;
+  
 }

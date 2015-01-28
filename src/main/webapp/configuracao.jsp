@@ -11,9 +11,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link href="paginas/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-        <link href="paginas/css/barra.css" rel="stylesheet" type="text/css">
-        <link href="paginas/css/configuracao.css" rel="stylesheet" type="text/css">
+        <link href="dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <link href="css/barra.css" rel="stylesheet" type="text/css">
+        <link href="css/configuracao.css" rel="stylesheet" type="text/css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script type="text/javascript">
             function readURL(input) {

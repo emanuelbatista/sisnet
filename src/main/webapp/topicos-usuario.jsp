@@ -10,27 +10,35 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="paginas/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-        <link href="paginas/css/topicos-usuario.css" rel="stylesheet" type="text/css">
-        <link href="paginas/css/barra.css" rel="stylesheet" type="text/css">
-        <link href="paginas/css/grupo-cabecalho.css" rel="stylesheet" type="text/css">
+        <link href="dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <link href="css/topicos-usuario.css" rel="stylesheet" type="text/css">
+        <link href="css/grupo-cabecalho-usuario.css" rel="stylesheet" type="text/css">
+        <link href="css/barra.css" rel="stylesheet" type="text/css">
         <title>SisNet - ${grupo.nome}</title>
     </head>
     <body>
         <jsp:include page="barra.jsp"/>
-        <jsp:include page="grupo-cabecalho.jsp"/>
+        <jsp:include page="grupo-cabecalho-usuario.jsp"/>
         <%
             GerenciarComentario gerenciarComentario = new GerenciarComentario();
             List<Comentario> comentarios;
         %>
         <article class="article">
             <div class="noticias-esquerda">
-                <c:forEach var="i" begin="0" items="${topicos}" step="2">
+                <section class="section">
+                    <div class="postar">
+                        <ul>
+                            <li><textarea class="novidades" placeholder="Compartilhe suas novidades aqui..."></textarea></li>
+                            <li><input class="btn btn-success" type="submit" value="Compartilhar"></li>
+                        </ul>
+                    </div>
+                </section>
+                <c:forEach var="i" begin="1" items="${topicos}" step="2">
                     <section class="section">
                         <div class="postagem-cabecalho">
                             <img src="${i.usuario.foto}" alt="">
                             <div class="postagem-info">
-                                <div class="postagem-nome-usuario"><a href="#">${i.usuario.nome}</a></div>
+                                <div class="postagem-nome-usuario"><a href="sobre?id=${usuario.id}">${i.usuario.nome}</a></div>
                                 <div class="postagem-data">
                                     ${f:formatarData(i.data)} 
                                 </div>
@@ -58,18 +66,24 @@
                                     </li>
                                 </c:forEach>
                             </ul>
+                            <div class="botoes">
+                                <form action="" method="post">
+                                    <textarea rows="1"></textarea>
+                                    <input type="submit" value="Comentar">
+                                </form>
+                            </div>
 
                         </div>
                     </section>
                 </c:forEach>
             </div>
             <div class="noticias-direita">
-               <c:forEach var="i" begin="1" items="${topicos}" step="2">
+               <c:forEach var="i" begin="0" items="${topicos}" step="2">
                     <section class="section">
                         <div class="postagem-cabecalho">
                             <img src="${i.usuario.foto}" alt="">
                             <div class="postagem-info">
-                                <div class="postagem-nome-usuario"><a href="#">${i.usuario.nome}</a></div>
+                                <div class="postagem-nome-usuario"><a href="sobre?id=${usuario.id}">${i.usuario.nome}</a></div>
                                 <div class="postagem-data">
                                     ${f:formatarData(i.data)} 
                                 </div>
@@ -97,6 +111,13 @@
                                     </li>
                                 </c:forEach>
                             </ul>
+                            <div class="botoes">
+                                <form action="" method="post">
+                                    <textarea rows="1"></textarea>
+                                    <input type="submit" value="Comentar">
+                                </form>
+                            </div>
+
                         </div>
                     </section>
                 </c:forEach>

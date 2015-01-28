@@ -49,7 +49,7 @@ public class SolicitacaoAmizade extends HttpServlet {
                 Logger.getLogger(SolicitacaoAmizade.class.getName()).log(Level.SEVERE, null, ex);
             }
             request.setAttribute("solicitacoes", solicitacoes);
-            getServletContext().getRequestDispatcher("/paginas/solicitacao-amizade.jsp").forward(request, response);
+            getServletContext().getRequestDispatcher("/solicitacao-amizade.jsp").forward(request, response);
         }
     }
 

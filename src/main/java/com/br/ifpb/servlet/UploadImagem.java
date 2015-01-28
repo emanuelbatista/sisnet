@@ -5,6 +5,7 @@
  */
 package com.br.ifpb.servlet;
 
+import com.br.ifpb.valueObject.Usuario;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
@@ -37,11 +38,9 @@ public class UploadImagem extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-      
+
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -53,9 +52,9 @@ public class UploadImagem extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String caminho=getServletContext().getRealPath("/paginas/imagens");
+        String caminho = getServletContext().getRealPath("/imagens");
         response.getWriter().print(caminho);
-    } 
+    }
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -68,35 +67,35 @@ public class UploadImagem extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         boolean isMultipart = ServletFileUpload.isMultipartContent(request);
-        if(isMultipart) {
-            try {
-                FileItemFactory factory = new DiskFileItemFactory();
-                ServletFileUpload upload = new ServletFileUpload(factory);
-                List<FileItem> items = (List<FileItem>) upload.parseRequest(request);
-                for(FileItem item : items) {
-                    if(item.isFormField()) {
-                        //se for um campo normal de form
-                        response.getWriter().println("Form field");
-                        response.getWriter().println("Name:"+item.getFieldName());
-                        response.getWriter().println("Value:"+item.getString());
-                    } else {
-                        //caso seja um campo do tipo file
-                        response.getWriter().println("NOT Form field");
-                        response.getWriter().println("Name:"+item.getFieldName());
-                        response.getWriter().println("FileName:"+item.getName());
-                        response.getWriter().println("Size:"+item.getSize());
-                        response.getWriter().println("ContentType:"+item.getContentType());
+        Usuario usuario = ((Usuario) request.getSession().getAttribute("usuario"));
+        if (usuario == null) {
+            response.sendRedirect("");
+        } else {
+            boolean isMultipart = ServletFileUpload.isMultipartContent(request);
+            if (isMultipart) {
+                try {
+                    FileItemFactory factory = new DiskFileItemFactory();
+                    ServletFileUpload upload = new ServletFileUpload(factory);
+                    List<FileItem> items = (List<FileItem>) upload.parseRequest(request);
+                    for (FileItem item : items) {
+                        String nome_arquivo= new Date().getTime() + "_" + item.getName();
+                        String caminho = getServletContext().getRealPath("/imagens") + "\\"+ usuario.getId()+"\\";
+                        File file=new File(caminho);
+                        if(!file.exists()){
+                            file.mkdirs();
+                        }
+                        File uploadedFile = new File(caminho+nome_arquivo);
+                        item.write(uploadedFile);                   
                     }
-                    String caminho=getServletContext().getRealPath("/paginas/imagens");
-                    File uploadedFile = new File(caminho+"\\"+new Date().getTime()+"_"+item.getName());
-                    item.write(uploadedFile);
+                    
+
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
                 
-            } catch (Exception e) {
-                e.printStackTrace();
+                
+
             }
- 
         }
     }
 

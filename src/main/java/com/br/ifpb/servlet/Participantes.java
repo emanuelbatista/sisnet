@@ -66,9 +66,9 @@ public class Participantes extends HttpServlet {
                     Logger.getLogger(Topicos.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 if (participaGrupo) {
-                    getServletContext().getRequestDispatcher("/paginas/participantes-usuario.jsp").forward(request, response);
+                    getServletContext().getRequestDispatcher("/participantes-usuario.jsp").forward(request, response);
                 } else {
-                    getServletContext().getRequestDispatcher("/paginas/participantes.jsp").forward(request, response);
+                    getServletContext().getRequestDispatcher("/participantes.jsp").forward(request, response);
                 }
             }
         }

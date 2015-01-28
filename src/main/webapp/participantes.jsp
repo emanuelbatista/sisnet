@@ -10,10 +10,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="paginas/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-        <link href="paginas/css/grupo-cabecalho.css" rel="stylesheet" type="text/css">
-        <link href="paginas/css/participantes-usuario.css" rel="stylesheet" type="text/css">
-        <link href="paginas/css/barra.css" rel="stylesheet" type="text/css">
+        <link href="dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <link href="css/grupo-cabecalho.css" rel="stylesheet" type="text/css">
+        <link href="css/participantes-usuario.css" rel="stylesheet" type="text/css">
+        <link href="css/barra.css" rel="stylesheet" type="text/css">
         <title>SisNet - ${grupo.nome}</title>
     </head>
     <body>

@@ -130,47 +130,53 @@ public class UsuarioDAO implements UsuarioDaoIF {
             PreparedStatement stat = connection.prepareStatement(sql);
             stat.setInt(1, id);
             ResultSet set = stat.executeQuery();
-            if(set.next()){
-            Usuario usuario = new Usuario();
-            usuario.setId(set.getInt("id"));
-            usuario.setNome(set.getString("nome"));
-            usuario.setApelido(set.getString("apelido"));
-            usuario.setCidade(set.getString("cidade"));
-            usuario.setEmail(set.getString("email"));
-            usuario.setProfissao(set.getString("profissao"));
-            usuario.setSenha(set.getString("senha"));
-            usuario.setData_nascimento(set.getDate("data_nascimento"));
-            usuario.setStatus(set.getString("status"));
-            usuario.setFoto(set.getString("foto"));
-            usuario.setSobrenome(set.getString("sobrenome"));
-            sql = "SELECT local FROM locais_estudou WHERE usuario=?";
-            stat = connection.prepareStatement(sql);
-            stat.setInt(1, id);
-            set = stat.executeQuery();
-            List<String> locais_estudou = new ArrayList<>();
-            while (set.next()) {
-                locais_estudou.add(set.getString("local"));
+            if (set.next()) {
+                Usuario usuario = new Usuario();
+                usuario.setId(set.getInt("id"));
+                usuario.setNome(set.getString("nome"));
+                usuario.setApelido(set.getString("apelido"));
+                usuario.setCidade(set.getString("cidade"));
+                usuario.setEmail(set.getString("email"));
+                usuario.setProfissao(set.getString("profissao"));
+                usuario.setSenha(set.getString("senha"));
+                usuario.setData_nascimento(set.getDate("data_nascimento"));
+                usuario.setStatus(set.getString("status"));
+                usuario.setFoto(set.getString("foto"));
+                usuario.setSobrenome(set.getString("sobrenome"));
+                sql = "SELECT local FROM locais_estudou WHERE usuario=?";
+                stat = connection.prepareStatement(sql);
+                stat.setInt(1, id);
+                set = stat.executeQuery();
+                List<String> locais_estudou = new ArrayList<>();
+                while (set.next()) {
+                    locais_estudou.add(set.getString("local"));
+                }
+
+                if (locais_estudou.size() > 0) {
+                    usuario.setLocais_estudou(locais_estudou);
+                } else {
+                    usuario.setLocais_estudou(null);
+                }
+
+                sql = "SELECT local FROM locais_trabalhou WHERE usuario=?";
+                stat = connection.prepareStatement(sql);
+                stat.setInt(1, id);
+                set = stat.executeQuery();
+                List<String> locais_trabalhou = new ArrayList<>();
+                while (set.next()) {
+                    locais_trabalhou.add(set.getString("local"));
+                }
+                if (locais_trabalhou.size() > 0) {
+                    usuario.setLocais_trabalhou(locais_trabalhou);
+                } else {
+                    usuario.setLocais_trabalhou(null);
+                }
+                set.close();
+                stat.close();
+                return usuario;
+            } else {
+                return null;
             }
-            
-            if(locais_estudou.size()>0){
-            usuario.setLocais_estudou(locais_estudou);
-            }else usuario.setLocais_estudou(null);
-            
-            sql = "SELECT local FROM locais_trabalhou WHERE usuario=?";
-            stat = connection.prepareStatement(sql);
-            stat.setInt(1, id);
-            set = stat.executeQuery();
-            List<String> locais_trabalhou = new ArrayList<>();
-            while (set.next()) {
-                locais_trabalhou.add(set.getString("local"));
-            }
-            if(locais_trabalhou.size()>0){
-            usuario.setLocais_trabalhou(locais_trabalhou);
-            }else usuario.setLocais_trabalhou(null);
-            set.close();
-            stat.close();
-            return usuario;
-            }else return null;
         } catch (SQLException e) {
             throw new PersistenciaException(e);
         } catch (ClassNotFoundException ex) {
@@ -206,53 +212,74 @@ public class UsuarioDAO implements UsuarioDaoIF {
             PreparedStatement stat = connection.prepareStatement(sql);
             stat.setString(1, email);
             ResultSet set = stat.executeQuery();
-            if(set.next()){
-            Usuario usuario = new Usuario();
-            usuario.setNome(set.getString("nome"));
-            usuario.setId(set.getInt("id"));
-            usuario.setApelido(set.getString("apelido"));
-            usuario.setCidade(set.getString("cidade"));
-            usuario.setEmail(set.getString("email"));
-            usuario.setProfissao(set.getString("profissao"));
-            usuario.setSenha(set.getString("senha"));
-            usuario.setData_nascimento(set.getDate("data_nascimento"));
-            usuario.setStatus(set.getString("status"));
-            usuario.setFoto(set.getString("foto"));
-            usuario.setSobrenome(set.getString("sobrenome"));
-            sql = "SELECT local FROM locais_estudou WHERE usuario=?";
-            stat = connection.prepareStatement(sql);
-            stat.setInt(1, usuario.getId());
-            set = stat.executeQuery();
-            List<String> locais_estudou = new ArrayList<>();
-            while (set.next()) {
-                locais_estudou.add(set.getString("local"));
+            if (set.next()) {
+                Usuario usuario = new Usuario();
+                usuario.setNome(set.getString("nome"));
+                usuario.setId(set.getInt("id"));
+                usuario.setApelido(set.getString("apelido"));
+                usuario.setCidade(set.getString("cidade"));
+                usuario.setEmail(set.getString("email"));
+                usuario.setProfissao(set.getString("profissao"));
+                usuario.setSenha(set.getString("senha"));
+                usuario.setData_nascimento(set.getDate("data_nascimento"));
+                usuario.setStatus(set.getString("status"));
+                usuario.setFoto(set.getString("foto"));
+                usuario.setSobrenome(set.getString("sobrenome"));
+                sql = "SELECT local FROM locais_estudou WHERE usuario=?";
+                stat = connection.prepareStatement(sql);
+                stat.setInt(1, usuario.getId());
+                set = stat.executeQuery();
+                List<String> locais_estudou = new ArrayList<>();
+                while (set.next()) {
+                    locais_estudou.add(set.getString("local"));
+                }
+
+                if (locais_estudou.size() > 0) {
+                    usuario.setLocais_estudou(locais_estudou);
+                } else {
+                    usuario.setLocais_estudou(null);
+                }
+
+                sql = "SELECT local FROM locais_trabalhou WHERE usuario=?";
+                stat = connection.prepareStatement(sql);
+                stat.setInt(1, usuario.getId());
+                set = stat.executeQuery();
+                List<String> locais_trabalhou = new ArrayList<>();
+                while (set.next()) {
+                    locais_trabalhou.add(set.getString("local"));
+                }
+                if (locais_trabalhou.size() > 0) {
+                    usuario.setLocais_trabalhou(locais_trabalhou);
+                } else {
+                    usuario.setLocais_trabalhou(null);
+                }
+                set.close();
+                stat.close();
+                return usuario;
+            } else {
+                return null;
             }
-            
-            if(locais_estudou.size()>0){
-            usuario.setLocais_estudou(locais_estudou);
-            }else usuario.setLocais_estudou(null);
-            
-            sql = "SELECT local FROM locais_trabalhou WHERE usuario=?";
-            stat = connection.prepareStatement(sql);
-            stat.setInt(1, usuario.getId());
-            set = stat.executeQuery();
-            List<String> locais_trabalhou = new ArrayList<>();
-            while (set.next()) {
-                locais_trabalhou.add(set.getString("local"));
-            }
-            if(locais_trabalhou.size()>0){
-            usuario.setLocais_trabalhou(locais_trabalhou);
-            }else usuario.setLocais_trabalhou(null);
-            set.close();
-            stat.close();
-            return usuario;
-            }else return null;
         } catch (SQLException e) {
             throw new PersistenciaException(e);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+
+    @Override
+    public void atualizarImagemPerfil(String path, int idUsuario) throws PersistenciaException {
+        try (Connection con = ConexaoBanco.getInstance()) {
+         String sql="UPDATE Usuario SET foto=? WHERE id=?";
+         PreparedStatement stat=con.prepareStatement(sql);
+         stat.setString(1, path);
+         stat.setInt(2, idUsuario);
+         stat.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }
