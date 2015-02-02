@@ -72,31 +72,31 @@ public class SalvarInformacao extends HttpServlet {
 
             List<String> mensagensErros = new ArrayList<>();
 
-            if (nome != null && !nome.matches("[A-ZÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ][a-záàâãéèêíïóôõöúçñ]+")) {
+            if (nome != null && !nome.matches("[A-ZÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ].*")) {
                 mensagensErros.add("nome formato errado ou vazio!");
             }
             if (sobrenome != null) {
                 if (sobrenome.equals("")) {
                     sobrenome = null;
-                } else if (!sobrenome.matches("[A-ZÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ][a-záàâãéèêíïóôõöúçñ]+")) {
+                } else if (!sobrenome.matches("[A-ZÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ].*")) {
                     mensagensErros.add("sobrenome formato errado!");
                 }
             }
             if (apelido != null) {
                 if (apelido.equals("")) {
                     apelido = null;
-                } else if (!apelido.matches("[A-ZÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ][a-záàâãéèêíïóôõöúçñ]+")) {
+                } else if (!apelido.matches("[A-ZÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ].*")) {
                     mensagensErros.add("apelido formato errado!");
                 }
             }
             Date data = null;
             if (data_nascimento != null) {
                 if (data_nascimento.equals("")) {
-                    data_nascimento = null;
+                    data_nascimento=null;
                 } else {
                     if (data_nascimento.matches("[0-9]{2}/[0-9]{2}/[0-9]{4}")) {
                         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                        LocalDate date = null;
+                        LocalDate date=null;
                         try {
                             date = LocalDate.parse(data_nascimento, dateTimeFormatter);
                             data = Date.valueOf(date);
@@ -116,7 +116,7 @@ public class SalvarInformacao extends HttpServlet {
             if (cidade != null) {
                 if (cidade.equals("")) {
                     cidade = null;
-                } else if (!cidade.matches("[A-ZÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ][a-záàâãéèêíïóôõöúçñ]+")) {
+                } else if (!cidade.matches("[A-ZÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ].*")) {
                     mensagensErros.add("cidade formato errado!");
                 }
             }
@@ -124,14 +124,14 @@ public class SalvarInformacao extends HttpServlet {
             if (profissao != null) {
                 if (profissao.equals("")) {
                     profissao = null;
-                } else if (!profissao.matches("[A-ZÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ][a-záàâãéèêíïóôõöúçñ]+")) {
+                } else if (!profissao.matches("[A-ZÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ].*")) {
                     mensagensErros.add("profissao formato errado!");
                 }
             }
             if (status != null) {
                 if (status.equals("")) {
                     status = null;
-                } else if (!status.matches("[A-ZÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ][a-záàâãéèêíïóôõöúçñ]+")) {
+                } else if (!status.matches("[A-ZÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ].*")) {
                     mensagensErros.add("status formato errado!");
                 }
             }
@@ -154,7 +154,6 @@ public class SalvarInformacao extends HttpServlet {
             }
             if (mensagensErros.isEmpty()) {
                 GerenciarUsuario gerenciarUsuario=new GerenciarUsuario();
-                gerenciarUsuario = new GerenciarUsuario();
                 try {
                     gerenciarUsuario.atualizarConta(usuario.getId(), nome, sobrenome, apelido, cidade, email, profissao, senha, data, status);
                 } catch (PersistenciaException ex) {

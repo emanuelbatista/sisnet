@@ -8,6 +8,7 @@
 <%@page import="com.br.ifpb.valueObject.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib  prefix="ct" tagdir="/WEB-INF/tags/" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -55,7 +56,7 @@
                 <section>
                     <h2>Configuração</h2>
                     <div class="configuracoes">
-                        <form action="upload-imagem" enctype="multipart/form-data" method="post">
+                        <form action="upload-imagem-perfil" enctype="multipart/form-data" method="post">
                             <h3>Informação Pessoal</h3>
                             <b>Foto Perfil: </b>
                             <br>
@@ -66,105 +67,18 @@
                                 <input type="file" required onchange="readURL(this)" accept="image/*" class="foto" name="foto" >
                             </div>
                             <div class="botoes">
-                                <input type="submit" value="Salvar Imagem">
+                                <input type="submit" class="btn btn-success" value="Salvar Imagem">
                             </div>
                             <br> 
                         </form>
                         <c:if test="${mensagensInformacao==null}">
-                            <form action="salvar-informacao" method="post">
-                                <b>Nome: </b>
-                                <input type="text" pattern="[A-ZÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ][a-záàâãéèêíïóôõöúçñ]+" required value="${usuario.nome}" id="nome" class="campo-texto" name="nome" placeholder="Digite seu Nome">
-                                <br>
-                                <b>Sobrenome: </b>
-                                <input type="text" value="${usuario.sobrenome}" pattern="[A-ZÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ][a-záàâãéèêíïóôõöúçñ]+" id="sobrenome" class="campo-texto" name="sobrenome" placeholder="Digite seu Sobrenome">
-                                <br>
-                                <b>Apelido: </b>
-                                <input type="text" value="${usuario.apelido}" pattern="[A-ZÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ][a-záàâãéèêíïóôõöúçñ]+" id="apelido" class="campo-texto" name="apelido" placeholder="Digite seu Apelido">
-                                <br>
-                                <b>Data de Nascimento: </b>
-                                <input type="date" value="${usuario.data_nascimento}"  id="data_nascimento" name="data_nascimento" class="campo-texto">
-                                <br>
-                                <b>Cidade: </b>
-                                <input type="text" value="${usuario.cidade}" pattern="[A-ZÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ][a-záàâãéèêíïóôõöúçñ]+" id="cidade" placeholder="Digite sua Cidade" class="campo-texto" name="cidade">
-                                <br>
-                                <b>E-mail: </b>
-                                <input type="email" value="${usuario.email}" id="email" required placeholder="Digite seu E-mail" class="campo-texto" name="email">
-                                <br>
-                                <b>Senha: </b>
-                                <input type="password" value="${usuario.senha}" id="senha" required placeholder="Digite sua senha" class="campo-texto" name="senha"/>
-                                <br>
-                                <b>Profissão: </b>
-                                <input type="text" value="${usuario.profissao}" pattern="[A-ZÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ][a-záàâãéèêíïóôõöúçñ]+" id="profissao" placeholder="Digite sua Profissão" class="campo-texto" name="profissao">
-                                <br>
-                                <b>Status: </b>
-                                <input type="text" value="${usuario.status}" pattern="[A-ZÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ][a-záàâãéèêíïóôõöúçñ]+" id="status" placeholder="Digite seu Status" class="campo-texto" name="status">
-                                <div class="botoes">
-                                    <input type="submit" value="Salvar Informações">
-                                </div>
-                            </form>
+                            <ct:formulario-usuario-configuracao campo="${usuario}"/>
                         </c:if>
                         <c:if test="${mensagensInformacao!=null}">
-                            <form action="salvar-informacao" method="post">
-                                <b>Nome: </b>
-                                <input type="text" required value="${param.nome}"  pattern="[A-ZÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ][a-záàâãéèêíïóôõöúçñ]+" id="nome" class="campo-texto" name="nome" placeholder="Digite seu Nome">
-                                <br>
-                                <b>Sobrenome: </b>
-                                <input type="text" value="${param.sobrenome}" pattern="[A-ZÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ][a-záàâãéèêíïóôõöúçñ]+" id="sobrenome" class="campo-texto" name="sobrenome" placeholder="Digite seu Sobrenome">
-                                <br>
-                                <b>Apelido: </b>
-                                <input type="text" value="${param.apelido}"  pattern="[A-ZÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ][a-záàâãéèêíïóôõöúçñ]+" id="apelido" class="campo-texto" name="apelido" placeholder="Digite seu Apelido">
-                                <br>
-                                <b>Data de Nascimento: </b>
-                                <input type="date" value="${param.data_nascimento}"  id="data_nascimento" name="data_nascimento" class="campo-texto">
-                                <br>
-                                <b>Cidade: </b>
-                                <input type="text" value="${param.cidade}"  pattern="[A-ZÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ][a-záàâãéèêíïóôõöúçñ]+" id="cidade" placeholder="Digite sua Cidade" class="campo-texto" name="cidade">
-                                <br>
-                                <b>E-mail: </b>
-                                <input type="email" value="${param.email}" id="email" required placeholder="Digite seu E-mail" class="campo-texto" name="email">
-                                <br>
-                                <b>Senha: </b>
-                                <input type="password" value="${param.senha}" id="senha" required placeholder="Digite sua senha" class="campo-texto" name="senha"/>
-                                <br>
-                                <b>Profissão: </b>
-                                <input type="text" value="${param.profissao}"  pattern="[A-ZÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ][a-záàâãéèêíïóôõöúçñ]+" id="profissao" placeholder="Digite sua Profissão" class="campo-texto" name="profissao">
-                                <br>
-                                <b>Status: </b>
-                                <input type="text" value="${param.status}"  pattern="[A-ZÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ][a-záàâãéèêíïóôõöúçñ]+" id="status" placeholder="Digite seu Status" class="campo-texto" name="status">
-                                <div class="botoes">
-                                    <input type="submit" value="Salvar Informações">
-                                </div>
-                            </form>
+                            <ct:formulario-param-configuracao />
                         </c:if>
                         <br>
-                        <b>Locais de Trabalho: </b>
-                        <ul class="lista">
-                            <c:if test="${usuario.locais_trabalhou==null}">
-                                <li>Nenhum</li>
-                                </c:if>
-                                <c:if test="${usuario.locais_trabalhou!=null}">
-                                    <c:forEach var="i" items="${usuario.locais_trabalhou}">
-                                    <li>${i} <a href="#">remover</a></li>
-                                    </c:forEach>
-                                </c:if>
-                            <li><input type="text" placeholder="Digite um local de Trabalho"></li>
-                            <li><input type="button" value="Add"></li>
-                        </ul>
-                        <br>
-                        <b>Locais onde Estudou: </b>
-                        <ul class="lista">
-                            <c:if test="${usuario.locais_trabalhou==null}">
-                                <li>Nenhum</li>
-                                </c:if>
-                                <c:if test="${usuario.locais_trabalhou!=null}">
-                                    <c:forEach var="i" items="${usuario.locais_estudou}">
-                                    <li>oii <a href="#">remover</a></li>
-
-                                </c:forEach>
-                            </c:if>
-                            <li><input type="text" placeholder="Digite onde Estudou"></li>
-                            <li><input type="button" value="Add"></li>
-                        </ul>                          
+                        
 
                     </div>
                     <div class="configuracoes">
@@ -202,9 +116,38 @@
                                 <option selected>Namorado(a)</option>
                             </select>
                             <div class="botoes">
-                                <input type="submit" value="Salvar Relacionamento">
+                                <input type="submit" class="btn btn-success" value="Salvar Relacionamento">
                             </div>
                         </form>
+                        <br>
+                        <b>Locais de Trabalho: </b>
+                        <ul class="lista">
+                            <c:if test="${usuario.locais_trabalhou==null}">
+                                <li>Nenhum</li>
+                                </c:if>
+                                <c:if test="${usuario.locais_trabalhou!=null}">
+                                    <c:forEach var="i" items="${usuario.locais_trabalhou}">
+                                    <li>${i} <a href="#">remover</a></li>
+                                    </c:forEach>
+                                </c:if>
+                            <li><input type="text" placeholder="Digite um local de Trabalho"></li>
+                            <li><input type="button" value="Add"></li>
+                        </ul>
+                        <br>
+                        <b>Locais onde Estudou: </b>
+                        <ul class="lista">
+                            <c:if test="${usuario.locais_trabalhou==null}">
+                                <li>Nenhum</li>
+                                </c:if>
+                                <c:if test="${usuario.locais_trabalhou!=null}">
+                                    <c:forEach var="i" items="${usuario.locais_estudou}">
+                                    <li>oii <a href="#">remover</a></li>
+
+                                </c:forEach>
+                            </c:if>
+                            <li><input type="text" placeholder="Digite onde Estudou"></li>
+                            <li><input type="button" value="Add"></li>
+                        </ul>                          
 
                     </div>
 

@@ -49,11 +49,7 @@
                         </div>
                         <div class="comentarios">
                             <ul>
-                                <%
-                                comentarios=gerenciarComentario.comentarioTopico(((Topico)pageContext.getAttribute("i")).getId());
-                                pageContext.setAttribute("comentarios", comentarios);
-                                %>
-                                <c:forEach var="f" items="${comentarios}">
+                                <c:forEach var="f" items="${i.comentarios}">
                                     <li>
                                         <div class="caixa-comentario">
                                             <img src="${f.usuario.foto}" alt="">
@@ -94,11 +90,7 @@
                         </div>
                         <div class="comentarios">
                             <ul>
-                                <%
-                                comentarios=gerenciarComentario.comentarioTopico(((Topico)pageContext.getAttribute("i")).getId());
-                                pageContext.setAttribute("comentarios", comentarios);
-                                %>
-                                <c:forEach var="f" items="${comentarios}">
+                                <c:forEach var="f" items="${i.comentarios}">
                                     <li>
                                         <div class="caixa-comentario">
                                             <img src="${f.usuario.foto}" alt="">

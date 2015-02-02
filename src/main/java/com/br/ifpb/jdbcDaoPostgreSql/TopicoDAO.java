@@ -39,6 +39,8 @@ public class TopicoDAO implements TopicoDaoIF {
                 topico.setData(rs.getTimestamp("data"));
                 UsuarioDAO usuario=new UsuarioDAO();
                 topico.setUsuario(usuario.getUsuario(rs.getInt("usuario")));
+                ComentarioDAO comentario=new ComentarioDAO();
+                topico.setComentarios(comentario.comentarioTopico(rs.getInt("id")));
                 topico.setGrupo(null);
                 lista.add(topico);
             }

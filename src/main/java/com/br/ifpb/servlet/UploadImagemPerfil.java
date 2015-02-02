@@ -5,11 +5,15 @@
  */
 package com.br.ifpb.servlet;
 
+import com.br.ifpb.businessObject.GerenciarUsuario;
+import com.br.ifpb.execoes.PersistenciaException;
 import com.br.ifpb.valueObject.Usuario;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
+import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
@@ -24,8 +29,8 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
  *
  * @author Emanuel
  */
-@WebServlet(name = "UploadImagem", urlPatterns = {"/upload-imagem"})
-public class UploadImagem extends HttpServlet {
+@WebServlet(name = "UploadImagemPerfil", urlPatterns = {"/upload-imagem-perfil"})
+public class UploadImagemPerfil extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -73,39 +78,56 @@ public class UploadImagem extends HttpServlet {
         } else {
             boolean isMultipart = ServletFileUpload.isMultipartContent(request);
             if (isMultipart) {
+                FileItemFactory factory = new DiskFileItemFactory();
+                ServletFileUpload upload = new ServletFileUpload(factory);
+                List<FileItem> items = null;
                 try {
-                    FileItemFactory factory = new DiskFileItemFactory();
-                    ServletFileUpload upload = new ServletFileUpload(factory);
-                    List<FileItem> items = (List<FileItem>) upload.parseRequest(request);
-                    for (FileItem item : items) {
-                        String nome_arquivo= new Date().getTime() + "_" + item.getName();
-                        String caminho = getServletContext().getRealPath("/imagens") + "\\"+ usuario.getId()+"\\";
-                        File file=new File(caminho);
-                        if(!file.exists()){
-                            file.mkdirs();
-                        }
-                        File uploadedFile = new File(caminho+nome_arquivo);
-                        item.write(uploadedFile);                   
-                    }
-                    
-
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    items = (List<FileItem>) upload.parseRequest(request);
+                } catch (FileUploadException ex) {
+                    Logger.getLogger(UploadImagemPerfil.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
-                
-
+                FileItem item = items.get(0);
+                if (item != null) {
+                    String nome_arquivo = String.valueOf(new Date().getTime());
+                    String caminho = getServletContext().getRealPath("/imagens") + "\\" + usuario.getId() + "\\";
+                    File file = new File(caminho);
+                    if (!file.exists()) {
+                        file.mkdirs();
+                    }
+                    File uploadedFile = new File(caminho + nome_arquivo);
+                    try {
+                        item.write(uploadedFile);
+                    } catch (Exception ex) {
+                        Logger.getLogger(UploadImagemPerfil.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    GerenciarUsuario gerenciarUsuario = new GerenciarUsuario();
+                    try {
+                        gerenciarUsuario.atualizarFotoPerfil("imagens" + "\\" + usuario.getId()+"\\"+ nome_arquivo, usuario.getId());
+                    } catch (PersistenciaException ex) {
+                        Logger.getLogger(UploadImagemPerfil.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    try {
+                        usuario=gerenciarUsuario.getUsuario(usuario.getId());
+                    } catch (PersistenciaException ex) {
+                        Logger.getLogger(UploadImagemPerfil.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    request.getSession().setAttribute("usuario", usuario);
+                    response.sendRedirect("configuracao");
+                }else{
+                    
+                }
             }
+
         }
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
+/**
+ * Returns a short description of the servlet.
+ *
+ * @return a String containing servlet description
+ */
+@Override
+        public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 

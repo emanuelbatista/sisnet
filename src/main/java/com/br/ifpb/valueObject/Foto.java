@@ -13,10 +13,10 @@ public class Foto {
  public void setUrl(String url) {
  	this.url = url;
  }
- public Timestamp getTimestamp() {
+ public Timestamp getData() {
  	return data;
  }
- public void setTimestamp(Timestamp data) {
+ public void setData(Timestamp data) {
  	this.data = data;
  }
  public Usuario getUsuario() {

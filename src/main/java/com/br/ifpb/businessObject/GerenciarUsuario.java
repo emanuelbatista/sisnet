@@ -83,4 +83,10 @@ public class GerenciarUsuario {
         UsuarioDaoIF usuario = fabrica.criarUsuarioDao();
         return usuario.getUsuario(email);
     }
+     
+    public void atualizarFotoPerfil(String caminho,int id) throws PersistenciaException{
+        DaoFactoryIF fabrica = DaoFactory.createFactory();
+        UsuarioDaoIF usuario = fabrica.criarUsuarioDao();
+        usuario.atualizarImagemPerfil(caminho, id); 
+    }
 }
