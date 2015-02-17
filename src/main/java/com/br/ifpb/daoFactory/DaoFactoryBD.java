@@ -3,6 +3,7 @@ package com.br.ifpb.daoFactory;
 import com.br.ifpb.execoes.PersistenciaException;
 import com.br.ifpb.interfaceDao.AmizadeDaoIF;
 import com.br.ifpb.interfaceDao.ComentarioDaoIF;
+import com.br.ifpb.interfaceDao.FotoDaoIF;
 import com.br.ifpb.interfaceDao.GrupoDaoIF;
 import com.br.ifpb.interfaceDao.MensagemDaoIF;
 import com.br.ifpb.interfaceDao.RelacaoDaoIF;
@@ -11,6 +12,7 @@ import com.br.ifpb.jdbcDaoPostgreSql.UsuarioDAO;
 import com.br.ifpb.interfaceDao.UsuarioDaoIF;
 import com.br.ifpb.jdbcDaoPostgreSql.AmizadeDAO;
 import com.br.ifpb.jdbcDaoPostgreSql.ComentarioDAO;
+import com.br.ifpb.jdbcDaoPostgreSql.FotoDAO;
 import com.br.ifpb.jdbcDaoPostgreSql.GrupoDAO;
 import com.br.ifpb.jdbcDaoPostgreSql.MensagemDAO;
 import com.br.ifpb.jdbcDaoPostgreSql.RelacaoDao;
@@ -51,6 +53,11 @@ public class DaoFactoryBD implements DaoFactoryIF {
     @Override
     public ComentarioDaoIF criarComentarioDao() throws PersistenciaException {
         return new ComentarioDAO();
+    }
+
+    @Override
+    public FotoDaoIF criarFotoDao() throws PersistenciaException {
+        return new FotoDAO();
     }
     
     

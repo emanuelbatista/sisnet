@@ -25,46 +25,21 @@
             <article class="article">
                 <div class="publica-foto">
                     <h4>Publicar Foto:</h4>
-                    <form action="a" method="post">
+                    <form action="publica-foto" enctype="multipart/form-data" method="post">
                         <div class="caixa-foto" id="caixa-foto">
-                            <input onchange="fotos()" type="file" id="foto" name="foto">
+                            <input onchange="fotos()" required type="file" id="foto" name="foto">
                         </div>
-                        <input type="submit" value="Enviar">
+                        <input class="btn btn-success" type="submit" value="Enviar">
                     </form>
                 </div>
                 <div class="fotos">
-                    <%--<c:forEach var="i" items="${fotos}">--%>
+                    <c:forEach var="i" items="${fotos}">
                     <section>
                         <a href="#">
-                            <img src="imagens/emanuel.jpg" alt="" class="imagens">
+                            <img src="${i.url}" alt="" class="imagens">
                         </a>
                     </section>
-                    <section>
-                        <a href="#">
-                            <img src="imagens/emanuel.jpg" alt="" class="imagens">
-                        </a>
-                    </section>
-                    <section>
-                        <a href="#">
-                            <img src="imagens/emanuel.jpg" alt="" class="imagens">
-                        </a>
-                    </section>
-                    <section>
-                        <a href="#">
-                            <img src="imagens/emanuel.jpg" alt="" class="imagens">
-                        </a>
-                    </section>
-                    <section>
-                        <a href="#">
-                            <img src="imagens/emanuel.jpg" alt="" class="imagens">
-                        </a>
-                    </section>
-                    <section>
-                        <a href="#">
-                            <img src="imagens/emanuel.jpg" alt="" class="imagens">
-                        </a>
-                    </section>
-                    <%-- </c:forEach> --%>
+                     </c:forEach> 
                 </div>
             </article>
         </div>

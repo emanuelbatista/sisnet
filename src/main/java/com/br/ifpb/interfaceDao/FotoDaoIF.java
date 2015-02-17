@@ -7,6 +7,7 @@ package com.br.ifpb.interfaceDao;
 
 import com.br.ifpb.execoes.PersistenciaException;
 import com.br.ifpb.valueObject.Foto;
+import java.util.List;
 
 /**
  *
@@ -16,5 +17,6 @@ public interface FotoDaoIF {
     
     public void publicarFoto(Foto foto) throws PersistenciaException;
     
+    public List<Foto> listarFotos(Integer id_usuario) throws PersistenciaException;
     
 }

@@ -42,7 +42,6 @@ body{
     background-color: white;
     border-radius: 5px;
     text-align: center;
-    /*    border: solid 2px red;*/
 }
 .fotos{
     position: relative;
@@ -65,14 +64,21 @@ section,.imagens{
     height: 187px;
     opacity: 0.95;
 }
+.publica-foto{
+    margin: 0 auto;
+}
 .publica-foto input[type="file"]{
     opacity: 0;
     font-size:90px;
 }
 .caixa-foto{
-    background-color: blue;
-    background-image: url(../imagens/aynara.jpg);
-    background-size: 187px;
+    background-image: url(../imagens/icone/add-icon.png);
+    background-size: 18px;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 2px dotted #09c150;
+    margin: 0 auto;
+    margin-bottom: 10px;
     position: relative;
     width: 187px;
     height: 187px;

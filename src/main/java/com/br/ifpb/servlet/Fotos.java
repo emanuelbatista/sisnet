@@ -5,7 +5,14 @@
  */
 package com.br.ifpb.servlet;
 
+import com.br.ifpb.businessObject.GerenciarFotos;
+import com.br.ifpb.execoes.PersistenciaException;
+import com.br.ifpb.valueObject.Foto;
+import com.br.ifpb.valueObject.Usuario;
 import java.io.IOException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,11 +37,20 @@ public class Fotos extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
- 
+        Usuario usuario=(Usuario)request.getSession().getAttribute("usuario");
+        if(usuario!=null){
+            GerenciarFotos gerenciarFotos=new GerenciarFotos();
+            List<Foto> fotos=null;
+            try {
+                fotos=gerenciarFotos.listarFotos(usuario.getId());
+            } catch (PersistenciaException ex) {
+                Logger.getLogger(Fotos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            request.setAttribute("fotos", fotos);
+            getServletContext().getRequestDispatcher("/fotos-usuario.jsp").forward(request, response);
+        }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
