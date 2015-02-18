@@ -158,4 +158,17 @@ public class GrupoDAO implements GrupoDaoIF {
         return false;
     }
 
+    @Override
+    public void participarDoGrupo(int idGrupo, int idUsuario) throws PersistenciaException {
+        try(Connection con=ConexaoBanco.getInstance()){
+            String sql="INSERT INTO participa_grupo(id_grupo,usuario) VALUES (?,?)";
+            PreparedStatement stat=con.prepareStatement(sql);
+            stat.setInt(1, idGrupo);
+            stat.setInt(2, idUsuario);
+            stat.executeUpdate();
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(GrupoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 }

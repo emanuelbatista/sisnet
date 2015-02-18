@@ -5,11 +5,14 @@
  */
 package com.br.ifpb.servlet;
 
+import com.br.ifpb.businessObject.GerenciarFotos;
 import com.br.ifpb.businessObject.GerenciarUsuario;
 import com.br.ifpb.execoes.PersistenciaException;
 import com.br.ifpb.valueObject.Usuario;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -103,6 +106,13 @@ public class UploadImagemPerfil extends HttpServlet {
                     GerenciarUsuario gerenciarUsuario = new GerenciarUsuario();
                     try {
                         gerenciarUsuario.atualizarFotoPerfil("imagens" + "\\" + usuario.getId()+"\\"+ nome_arquivo, usuario.getId());
+                    } catch (PersistenciaException ex) {
+                        Logger.getLogger(UploadImagemPerfil.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    GerenciarFotos gerenciarFotos=new GerenciarFotos();
+                    try {
+                        gerenciarFotos.publicarFoto("imagens" + "\\" + usuario.getId()+"\\"+ nome_arquivo,
+                                Timestamp.valueOf(LocalDateTime.now()), usuario);
                     } catch (PersistenciaException ex) {
                         Logger.getLogger(UploadImagemPerfil.class.getName()).log(Level.SEVERE, null, ex);
                     }

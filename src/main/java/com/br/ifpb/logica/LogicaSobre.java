@@ -6,10 +6,13 @@
 package com.br.ifpb.logica;
 
 import com.br.ifpb.businessObject.GerenciarAmizade;
+import com.br.ifpb.businessObject.GerenciarRelacao;
 import com.br.ifpb.businessObject.GerenciarUsuario;
 import com.br.ifpb.execoes.PersistenciaException;
+import com.br.ifpb.valueObject.Relacao;
 import com.br.ifpb.valueObject.Usuario;
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -28,8 +31,8 @@ public class LogicaSobre implements Logica {
         try {
             idParametro = Integer.valueOf(request.getParameter("id"));
         } catch (NumberFormatException e) {
-             response.sendRedirect("");
-             return null;
+            response.sendRedirect("");
+            return null;
         }
         Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 
@@ -37,6 +40,14 @@ public class LogicaSobre implements Logica {
             response.sendRedirect("");
             return null;
         } else if (usuario.getId() == idParametro) {
+            GerenciarRelacao gerenciarRelacao = new GerenciarRelacao();
+            List<Relacao> relacoes = null;
+            try {
+                relacoes = gerenciarRelacao.getRelacao(usuario.getId());
+            } catch (PersistenciaException ex) {
+                Logger.getLogger(LogicaSobre.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            request.setAttribute("relacoes", relacoes);
             return "/sobre-usuario.jsp";
         } else {
             return sobre(request, response, idParametro, usuario);
@@ -62,6 +73,14 @@ public class LogicaSobre implements Logica {
                 Logger.getLogger(com.br.ifpb.servlet.Postagens.class.getName()).log(Level.SEVERE, null, ex);
             }
             if (isAmizade) {
+                GerenciarRelacao gerenciarRelacao = new GerenciarRelacao();
+                List<Relacao> relacoes = null;
+                try {
+                    relacoes = gerenciarRelacao.getRelacao(usuario1.getId());
+                } catch (PersistenciaException ex) {
+                    Logger.getLogger(LogicaSobre.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                request.setAttribute("relacoes", relacoes);
                 return "/sobre-amizade.jsp";
             } else {
                 return "/sobre.jsp";

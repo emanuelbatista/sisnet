@@ -23,8 +23,8 @@
                                     <img src="${i.foto}" alt="">
                                     <a class="usuario" href="sobre?id=${i.id}">${i.nome}</a>
                                     <br>
-                                    <a href="" class="btn btn-success botoes">Aceitar</a>
-                                    <a href="" class="btn btn-success botoes">Cancelar</a>
+                                    <a href="aceitar-amizade?id=${i.id}" class="btn btn-success botoes">Aceitar</a>
+                                    <a href="desfazer-amizade?id=${i.id}" class="btn btn-success botoes">Cancelar</a>
                                 </div>
                             </li>
                             </c:forEach>

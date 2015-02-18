@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <header>
     <div class="row cabecalho">
-        <div class="info-basica">
+        <div class="info-basica-relacionamento">
             <div class="imagem-perfil">
                 <img src="${usuario1.foto}" alt=""> 
             </div>
@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="desfazer-amizade">
-            <a href="#">Convidar Amizade</a>
+            <a href="convidar-amizade?id=${usuario1.id}">Convidar Amizade</a>
         </div>
     </div>
     <nav>

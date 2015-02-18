@@ -28,7 +28,7 @@
                 <a href="postagens?id=${usuario.id}">Postagens</a>
             </li>
             <li id="fotos">
-                <a href="#">Fotos</a>
+                <a href="fotos?id=${usuario.id}">Fotos</a>
             </li>
         </ul>
     </nav>

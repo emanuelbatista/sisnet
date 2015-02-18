@@ -84,14 +84,14 @@
                     <div class="configuracoes">
                         <h3>Relacionamento</h3>
                         <b>Relacionamentos: </b>
-                        <ul class="relcionamentos">
+                        <ul class="relacionamentos">
                             <c:forEach var="i" items="${relacao}">
                                 <li>
                                     <div class="info-relacionamento">
                                         <div class="imagem">
                                             <img src="${i.usuario_2.foto}" alt="">
                                         </div>
-                                        <div class="info-basica">
+                                        <div class="info-basica-relacionamento">
                                             <div class="nome">${i.usuario_2.nome}</div>
                                             <div class="tipo">${i.tipo}</div>
                                         </div>

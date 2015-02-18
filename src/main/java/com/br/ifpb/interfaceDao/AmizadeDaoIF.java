@@ -27,7 +27,7 @@ public interface AmizadeDaoIF {
    */
   public boolean aceitarSolicitacao(int remetente,int destinatario) throws PersistenciaException;
   
-  public boolean rejeitarSolicitacao(int remetente,int destinatario) throws PersistenciaException;
+  public boolean desfazerAmizade(int remetente,int destinatario) throws PersistenciaException;
   
   public List<Usuario> listaDeSolicitacoes(int id) throws PersistenciaException;
  

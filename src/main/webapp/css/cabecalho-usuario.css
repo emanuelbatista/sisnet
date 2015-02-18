@@ -91,7 +91,7 @@ header{
     color: black;
 }
 @media all and (max-width: 900px){
-    .info-basica{
+    .info-basica-relacionamento{
         margin: auto;
     }
     .configuracoes{

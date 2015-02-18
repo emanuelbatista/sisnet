@@ -24,5 +24,6 @@ public interface GrupoDaoIF {
   
   public boolean participaGrupo(int idUsuario) throws PersistenciaException;
   
+  public void participarDoGrupo(int idGrupo,int idUsuario) throws PersistenciaException;
   
 }

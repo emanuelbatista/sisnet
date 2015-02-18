@@ -54,23 +54,34 @@
                             </p>
                         </div>
                     </section>
-                    <section class="section" id="locais-estudou">
+                    <section class="section" id="relacionamentos">
                         <div class="postagem-titulo">
-                            <h3>Locais onde Estudou</h3>
+                            <h3>Relacionamentos</h3>
                         </div>
                         <div class="postagem-corpo">
-                            <ul>
-                                <c:if test="${usuario.locais_estudou!=null}">
-                                    <c:forEach var="i" items="${usuario.locais_estudou}">
-                                        <li>${i}</li>
-                                        </c:forEach>
-                                    </c:if>
+                            <ul class="relacionamentos">
+                                <c:if test="${relacoes!=null}">
+                                    <c:forEach var="i" items="${relacoes}">
+                                        <li>
+                                            <div class="info-relacionamento">
+                                                <div class="imagem">
+                                                    <img src="${i.usuario_2.foto}" alt="">
+                                                </div>
+                                                <div class="info-basica-relacionamento">
+                                                    <div class="nome">${i.usuario_2.nome}</div>
+                                                    <div class="tipo">${i.tipo}</div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </c:forEach>
+                                </c:if>
                             </ul>
-                            <c:if test="${usuario.locais_estudou==null}">
+                            <c:if test="${relacoes==null}">
                                 Nenhum
                             </c:if>
                         </div>
                     </section>
+
                 </div>
                 <div class="noticias-direita">
                     <section class="section" id="locais-trabalho">
@@ -90,6 +101,24 @@
                             </c:if>
                         </div>
                     </section>
+                    <section class="section" id="locais-estudou">
+                        <div class="postagem-titulo">
+                            <h3>Locais onde Estudou</h3>
+                        </div>
+                        <div class="postagem-corpo">
+                            <ul>
+                                <c:if test="${usuario.locais_estudou!=null}">
+                                    <c:forEach var="i" items="${usuario.locais_estudou}">
+                                        <li>${i}</li>
+                                        </c:forEach>
+                                    </c:if>
+                            </ul>
+                            <c:if test="${usuario.locais_estudou==null}">
+                                Nenhum
+                            </c:if>
+                        </div>
+                    </section>
+
                 </div>
             </article>
         </div>

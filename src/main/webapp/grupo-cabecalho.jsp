@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <header>
     <div class="row cabecalho">
-        <div class="info-basica">
+        <div class="info-basica-relacionamento">
             <div class="nome-perfil">
                 ${grupo.nome}
             </div>
@@ -26,7 +26,7 @@
             </div>
         </div>
         <div class="configuracoes">
-            <a href="atualizar">Participar</a>
+            <a href="participar-grupo?id=${grupo.id}">Participar</a>
         </div>
     </div>
     <nav>

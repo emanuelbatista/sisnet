@@ -5,7 +5,9 @@
  */
 package com.br.ifpb.servlet;
 
+import com.br.ifpb.businessObject.GerenciarAmizade;
 import com.br.ifpb.businessObject.GerenciarFotos;
+import com.br.ifpb.businessObject.GerenciarUsuario;
 import com.br.ifpb.execoes.PersistenciaException;
 import com.br.ifpb.valueObject.Foto;
 import com.br.ifpb.valueObject.Usuario;
@@ -37,18 +39,56 @@ public class Fotos extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Usuario usuario=(Usuario)request.getSession().getAttribute("usuario");
-        if(usuario!=null){
-            GerenciarFotos gerenciarFotos=new GerenciarFotos();
-            List<Foto> fotos=null;
-            try {
-                fotos=gerenciarFotos.listarFotos(usuario.getId());
-            } catch (PersistenciaException ex) {
-                Logger.getLogger(Fotos.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            request.setAttribute("fotos", fotos);
-            getServletContext().getRequestDispatcher("/fotos-usuario.jsp").forward(request, response);
+        Integer idParametro = null;
+        try {
+            idParametro = Integer.valueOf(request.getParameter("id"));
+        } catch (NumberFormatException ex) {
+          
         }
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+        if (usuario != null && idParametro != null) {
+            if (usuario.getId() == idParametro) {
+                GerenciarFotos gerenciarFotos = new GerenciarFotos();
+                List<Foto> fotos = null;
+                try {
+                    fotos = gerenciarFotos.listarFotos(usuario.getId());
+                } catch (PersistenciaException ex) {
+                    Logger.getLogger(Fotos.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                request.setAttribute("fotos", fotos);
+                getServletContext().getRequestDispatcher("/fotos-usuario.jsp").forward(request, response);
+            } else {
+                GerenciarUsuario gerenciarUsuario = new GerenciarUsuario();
+                Usuario usuario1 = null;
+                try {
+                    usuario1 = gerenciarUsuario.getUsuario(idParametro);
+                } catch (PersistenciaException ex) {
+                    Logger.getLogger(Fotos.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                if (usuario1 != null) {
+                    GerenciarAmizade gerenciarAmizade = new GerenciarAmizade();
+                    boolean possuiAmizade = false;
+                    try {
+                        possuiAmizade = gerenciarAmizade.verificarAmizade(usuario.getId(), idParametro);
+                    } catch (PersistenciaException ex) {
+                        Logger.getLogger(Fotos.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    if (possuiAmizade) {
+                        GerenciarFotos gerenciarFotos = new GerenciarFotos();
+                        List<Foto> fotos = null;
+                        try {
+                            fotos = gerenciarFotos.listarFotos(usuario1.getId());
+                        } catch (PersistenciaException ex) {
+                            Logger.getLogger(Fotos.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        request.setAttribute("usuario1", usuario1);
+                        request.setAttribute("fotos", fotos);
+                        getServletContext().getRequestDispatcher("/fotos-amizade.jsp").forward(request, response);
+                    }
+                }
+            }
+
+        }else{response.sendRedirect("");}
     }
 
     /**

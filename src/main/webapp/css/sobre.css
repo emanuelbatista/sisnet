@@ -20,6 +20,46 @@ body{
     margin: 0px;
     padding: 0px;
 }
+.relacionamentos{
+    list-style: none;
+    padding-left: 2%;
+}
+.relacionamentos li{
+    display: block;
+    margin: 8px 0px;
+}
+.relacionamentos img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    display: block;
+}
+.info-relacionamento{
+    display: inline-table;
+    position: relative;
+}
+.imagem{
+    top: 0px;
+    float: left;
+    position: relative;
+    display: inline-block;
+}
+.nome{
+    display: block;
+    position: relative;
+    font-size: medium;
+    font-weight: bold;
+}
+.tipo{
+    display: block;
+    color: #999999;
+}
+.info-basica-relacionamento{
+    top: 0px;
+    display: inline-block;
+    position: relative;
+    margin: 3px;
+}
 .container-fluid{
     margin: 0px;
     padding: 0px;
@@ -79,6 +119,7 @@ body{
 #sobre>a{
     color: black;
 }
+
 @media all and (max-width:900px){
     .noticias-esquerda,.noticias-direita{
         width: 100%;

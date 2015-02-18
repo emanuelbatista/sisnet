@@ -41,7 +41,7 @@ public class FotoDAO implements FotoDaoIF {
     @Override
     public List<Foto> listarFotos(Integer id_usuario) throws PersistenciaException {
         try(Connection con=ConexaoBanco.getInstance()){
-            String sql="SELECT * FROM Foto WHERE usuario=?";
+            String sql="SELECT * FROM Foto WHERE usuario=? ORDER BY data DESC";
             PreparedStatement stat=con.prepareStatement(sql);
             stat.setInt(1, id_usuario);
             ResultSet rs=stat.executeQuery();

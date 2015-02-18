@@ -26,7 +26,7 @@ public class AmizadeDAO implements AmizadeDaoIF {
     public void solicitarAmizade(int remetente, int destinatario)
             throws PersistenciaException {
         try (Connection connection = ConexaoBanco.getInstance()) {
-            String sql = "INSERT INTO amizade(usuario_1,pedencia,usuario_2) VALUES (?,?,?)";
+            String sql = "INSERT INTO amizade(usuario_1,pendencia,usuario_2) VALUES (?,?,?)";
             PreparedStatement stat = connection.prepareStatement(sql);
             stat.setInt(1, remetente);
             stat.setBoolean(2, true);
@@ -44,7 +44,7 @@ public class AmizadeDAO implements AmizadeDaoIF {
     public boolean aceitarSolicitacao(int remetente, int destinatario)
             throws PersistenciaException {
         try (Connection connection = ConexaoBanco.getInstance()) {
-            String sql = "UPDATE amizade SET pedencia=false WHERE usuario_1=? AND usuario_2=?";
+            String sql = "UPDATE amizade SET pendencia=false WHERE usuario_2=? AND usuario_1=?";
             PreparedStatement stat = connection.prepareStatement(sql);
             stat.setInt(1, remetente);
             stat.setInt(2, destinatario);
@@ -68,13 +68,15 @@ public class AmizadeDAO implements AmizadeDaoIF {
      * @throws PersistenciaException
      */
     @Override
-    public boolean rejeitarSolicitacao(int remetente, int destinatario)
+    public boolean desfazerAmizade(int remetente, int destinatario)
             throws PersistenciaException {
         try (Connection connection = ConexaoBanco.getInstance()) {
-            String sql = "DELETE FROM Amizade WHERE usuario_1=? AND usuario_2=?";
+            String sql = "DELETE FROM Amizade WHERE usuario_1=? AND usuario_2=? OR usuario_2=? AND usuario_1=?";
             PreparedStatement stat = connection.prepareStatement(sql);
             stat.setInt(1, remetente);
             stat.setInt(2, destinatario);
+            stat.setInt(3, remetente);
+            stat.setInt(4, destinatario);
             stat.executeUpdate();
             return true;
         } catch (ClassNotFoundException e) {
@@ -98,13 +100,9 @@ public class AmizadeDAO implements AmizadeDaoIF {
             throws PersistenciaException {
         try (Connection con = ConexaoBanco.getInstance()) {
             String sql = "(SELECT * FROM Usuario usuario_1 NATURAL JOIN (SELECT usuario_1 as id FROM Amizade \n"
-                    + "WHERE usuario_2=? AND pendencia=TRUE) amigos_1)\n"
-                    + "UNION \n"
-                    + "(SELECT * FROM Usuario usuario_2 NATURAL JOIN (SELECT usuario_2 as id FROM Amizade\n"
-                    + "WHERE usuario_1=? AND pendencia=TRUE) amigos_2)";
+                    + "WHERE usuario_2=? AND pendencia=TRUE) amigos_1)\n";
             PreparedStatement stat = con.prepareStatement(sql);
             stat.setInt(1, id);
-            stat.setInt(2, id);
             ResultSet rs = stat.executeQuery();
             List<Usuario> lista = new ArrayList<>();
             while (rs.next()) {
@@ -166,7 +164,7 @@ public class AmizadeDAO implements AmizadeDaoIF {
         try (Connection con = ConexaoBanco.getInstance()) {
            String sql="SELECT * FROM Amizade WHERE usuario_1=? AND usuario_2=? AND pendencia=FALSE OR"
                    +" usuario_1=? AND usuario_2=? AND pendencia=FALSE";
-           PreparedStatement stat=con.prepareCall(sql);
+           PreparedStatement stat=con.prepareStatement(sql);
            stat.setInt(1, remetente);
            stat.setInt(2, destinatario);
            stat.setInt(3, destinatario);

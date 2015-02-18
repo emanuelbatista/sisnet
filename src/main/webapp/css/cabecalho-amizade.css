@@ -29,7 +29,7 @@ header{
     font-size: 180%;
     clear: right;
 }
-.info-basica{
+.info-basica-relacionamento{
     width: 200px;
     margin-left: 3%;
 }
@@ -86,7 +86,7 @@ header{
     color: black;
 }
 @media all and (max-width: 900px){
-    .info-basica{
+    .info-basica-relacionamento{
         margin: auto;
     }
     .desfazer-amizade{

@@ -29,4 +29,22 @@ public class GerenciarAmizade {
         AmizadeDaoIF amizadeDao = daoFactory.criarAmizadeDao();
         return amizadeDao.listaDeSolicitacoes(id);
     }
+
+    public void convidarAmizade(int remetente, int destinatario) throws PersistenciaException {
+        DaoFactoryIF daoFactory = DaoFactory.createFactory();
+        AmizadeDaoIF amizadeDao = daoFactory.criarAmizadeDao();
+        amizadeDao.solicitarAmizade(remetente, destinatario);
+    }
+
+    public void aceitarSolicitacao(int remetente, int destinatario) throws PersistenciaException {
+        DaoFactoryIF daoFactory = DaoFactory.createFactory();
+        AmizadeDaoIF amizadeDao = daoFactory.criarAmizadeDao();
+        amizadeDao.aceitarSolicitacao(remetente, destinatario);
+    }
+
+    public void desfazerAmizade(int remetente, int destinatario) throws PersistenciaException {
+        DaoFactoryIF daoFactory = DaoFactory.createFactory();
+        AmizadeDaoIF amizadeDao = daoFactory.criarAmizadeDao();
+        amizadeDao.desfazerAmizade(remetente, destinatario);
+    }
 }

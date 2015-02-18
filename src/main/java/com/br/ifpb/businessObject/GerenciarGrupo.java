@@ -48,4 +48,10 @@ public class GerenciarGrupo {
         GrupoDaoIF grupoDao = daoFactory.criarGrupoDao();
         return grupoDao.listarGrupos(idUsuario);
     }
+    
+    public void participarDoGrupo(int idGrupo,int idUsuario) throws PersistenciaException{
+        DaoFactoryIF daoFactory = DaoFactory.createFactory();
+        GrupoDaoIF grupoDao = daoFactory.criarGrupoDao();
+        grupoDao.participarDoGrupo(idGrupo, idUsuario);
+    }
 }
