@@ -13,6 +13,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -53,6 +54,21 @@ public class TopicoDAO implements TopicoDaoIF {
             Logger.getLogger(TopicoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+
+    @Override
+    public void criarTopico(int idUsuario,int idGrupo,String texto,Timestamp data) throws PersistenciaException {
+        try(Connection con=ConexaoBanco.getInstance()){
+            String sql="INSERT INTO Topico(texto,data,usuario,id_grupo) VALUES (?,?,?,?)";
+            PreparedStatement stat=con.prepareStatement(sql);
+            stat.setString(1, texto);
+            stat.setTimestamp(2, data);
+            stat.setInt(3, idUsuario);
+            stat.setInt(4, idGrupo);
+            stat.executeUpdate();
+        } catch (SQLException | ClassNotFoundException ex) {
+           throw new PersistenciaException(ex);
+        }
     }
 
 }

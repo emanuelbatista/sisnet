@@ -21,4 +21,12 @@ public interface UsuarioDaoIF {
   
   public void atualizarImagemPerfil(String path,int idUsuario) throws PersistenciaException;
   
+  public void adicionarLocalTrabalho(String local,int idUsuario) throws PersistenciaException;
+  
+  public void adicionarLocalEstudou(String local,int idUsuario) throws PersistenciaException;
+  
+  public void removerLocalTrabalho(String local,int idUsuario) throws PersistenciaException;
+  
+  public void removerLocalEstudou(String local,int idUsuario) throws PersistenciaException;
+  
 }

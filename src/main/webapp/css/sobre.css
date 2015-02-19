@@ -60,6 +60,9 @@ body{
     position: relative;
     margin: 3px;
 }
+.info-basica-relacionamento a{
+    color: black;
+}
 .container-fluid{
     margin: 0px;
     padding: 0px;

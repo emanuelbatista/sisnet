@@ -2,7 +2,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <header>
     <div class="row cabecalho">
-        <div class="info-basica-relacionamento">
+        <div class="info-basica">
             <div class="imagem-perfil">
                 <img src="${usuario1.foto}" alt=""> 
             </div>

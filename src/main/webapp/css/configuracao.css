@@ -71,13 +71,13 @@ h2{
     border-radius: 3px;
     border: solid black 1px;
 }
-.lista input[type="button"]{
+.lista input[type="submit"]{
     background-color: #09c150;
     border: none;
     border-radius: 3px;
     padding: 3px 7px;
 }
-.lista input[type="button"]:hover{
+.lista input[type="submit"]:hover{
     background-color: #09c150;
     color: blue;
 }
@@ -148,6 +148,9 @@ b{
     display: inline-block;
     position: relative;
     margin: 3px;
+}
+.info-basica-relacionamento a{
+    color: black;
 }
 .imagem{
     top: 0px;

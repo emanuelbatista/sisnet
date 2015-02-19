@@ -1,16 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.br.ifpb.servlet;
 
-import com.br.ifpb.businessObject.GerenciarTopico;
+import com.br.ifpb.businessObject.GerenciarUsuario;
 import com.br.ifpb.execoes.PersistenciaException;
 import com.br.ifpb.valueObject.Usuario;
 import java.io.IOException;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -21,10 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Emanuel
+ * @author Emanuel Batista da Silva Filho <emanuelbatista2011@gmail.com>
  */
-@WebServlet(name = "PublicarTopico", urlPatterns = {"/publicar-topico"})
-public class PublicarTopico extends HttpServlet {
+@WebServlet(name = "ExcluirConta", urlPatterns = {"/excluir-conta"})
+public class ExcluirConta extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,23 +30,17 @@ public class PublicarTopico extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Integer idGrupo = null;
-        try {
-            idGrupo = Integer.valueOf(request.getParameter("id"));
-        } catch (NumberFormatException ex) {
-
-        }
-        String texto = request.getParameter("texto");
+        request.setCharacterEncoding("UTF-8");
         Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
-        if (usuario != null && idGrupo != null) {
-            GerenciarTopico gerenciarTopico = new GerenciarTopico();
+        if (usuario != null) {
+            GerenciarUsuario gerenciarUsuario = new GerenciarUsuario();
             try {
-                gerenciarTopico.criarTopico(usuario.getId(), idGrupo, texto, Timestamp.valueOf(LocalDateTime.now()));
+                gerenciarUsuario.excluirConta(usuario.getId());
             } catch (PersistenciaException ex) {
-                Logger.getLogger(PublicarTopico.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ExcluirConta.class.getName()).log(Level.SEVERE, null, ex);
             }
+            response.sendRedirect("");
         }
-        response.sendRedirect(request.getHeader("referer"));
 
     }
 

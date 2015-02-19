@@ -1,16 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.br.ifpb.servlet;
 
-import com.br.ifpb.businessObject.GerenciarTopico;
+import com.br.ifpb.businessObject.GerenciarRelacao;
+import com.br.ifpb.businessObject.GerenciarUsuario;
 import com.br.ifpb.execoes.PersistenciaException;
 import com.br.ifpb.valueObject.Usuario;
 import java.io.IOException;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
+import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -21,10 +16,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Emanuel
+ * @author Emanuel Batista da Silva Filho <emanuelbatista2011@gmail.com>
  */
-@WebServlet(name = "PublicarTopico", urlPatterns = {"/publicar-topico"})
-public class PublicarTopico extends HttpServlet {
+@WebServlet(name = "AdicionarRelacao", urlPatterns = {"/adicionar-relacao"})
+public class AdicionarRelacao extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,20 +32,24 @@ public class PublicarTopico extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Integer idGrupo = null;
-        try {
-            idGrupo = Integer.valueOf(request.getParameter("id"));
-        } catch (NumberFormatException ex) {
-
-        }
-        String texto = request.getParameter("texto");
+        request.setCharacterEncoding("UTF-8");
+        String tipoRelacao = request.getParameter("tipo");
+        String email = request.getParameter("email");
         Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
-        if (usuario != null && idGrupo != null) {
-            GerenciarTopico gerenciarTopico = new GerenciarTopico();
+        GerenciarUsuario gerenciarUsuario = new GerenciarUsuario();
+        Usuario destinatario = null;
+        try {
+            destinatario = gerenciarUsuario.getUsuario(email);
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(AdicionarRelacao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println(tipoRelacao+"\n"+destinatario);
+        if (usuario != null && destinatario != null && tipoRelacao != null) {
+            GerenciarRelacao gerenciarRelacao = new GerenciarRelacao();
             try {
-                gerenciarTopico.criarTopico(usuario.getId(), idGrupo, texto, Timestamp.valueOf(LocalDateTime.now()));
+                gerenciarRelacao.adicionarRelacao(usuario, tipoRelacao, destinatario);
             } catch (PersistenciaException ex) {
-                Logger.getLogger(PublicarTopico.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(AdicionarRelacao.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         response.sendRedirect(request.getHeader("referer"));

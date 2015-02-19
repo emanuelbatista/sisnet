@@ -13,6 +13,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -50,6 +51,21 @@ public class ComentarioDAO implements ComentarioDaoIF {
             Logger.getLogger(ComentarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+
+    @Override
+    public void criarComentario(String texto, Timestamp data, int idTopico, int idUsuario) throws PersistenciaException {
+      try(Connection con=ConexaoBanco.getInstance()){
+          String sql="INSERT INTO comentario(texto,data,id_topico,usuario) VALUES (?,?,?,?)";
+          PreparedStatement stat=con.prepareStatement(sql);
+          stat.setString(1, texto);
+          stat.setTimestamp(2, data);
+          stat.setInt(3, idTopico);
+          stat.setInt(4, idUsuario);
+          stat.executeUpdate();
+      } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ComentarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

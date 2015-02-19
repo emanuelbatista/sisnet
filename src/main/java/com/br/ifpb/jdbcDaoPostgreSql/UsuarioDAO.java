@@ -270,15 +270,65 @@ public class UsuarioDAO implements UsuarioDaoIF {
     @Override
     public void atualizarImagemPerfil(String path, int idUsuario) throws PersistenciaException {
         try (Connection con = ConexaoBanco.getInstance()) {
-         String sql="UPDATE Usuario SET foto=? WHERE id=?";
-         PreparedStatement stat=con.prepareStatement(sql);
-         stat.setString(1, path);
-         stat.setInt(2, idUsuario);
-         stat.executeUpdate();
-        } catch (SQLException ex) {
+            String sql = "UPDATE Usuario SET foto=? WHERE id=?";
+            PreparedStatement stat = con.prepareStatement(sql);
+            stat.setString(1, path);
+            stat.setInt(2, idUsuario);
+            stat.executeUpdate();
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public void adicionarLocalTrabalho(String local, int idUsuario) throws PersistenciaException {
+        try (Connection con = ConexaoBanco.getInstance()) {
+            String sql = "INSERT INTO locais_trabalhou(local,usuario) VALUES (?,?)";
+            PreparedStatement stat = con.prepareStatement(sql);
+            stat.setString(1, local);
+            stat.setInt(2, idUsuario);
+            stat.executeUpdate();
+        } catch (SQLException | ClassNotFoundException ex) {
+            throw new PersistenciaException(ex);
+        }
+    }
+
+    @Override
+    public void adicionarLocalEstudou(String local, int idUsuario) throws PersistenciaException {
+        try (Connection con = ConexaoBanco.getInstance()) {
+            String sql = "INSERT INTO locais_estudou(local,usuario) VALUES (?,?)";
+            PreparedStatement stat = con.prepareStatement(sql);
+            stat.setString(1, local);
+            stat.setInt(2, idUsuario);
+            stat.executeUpdate();
+        } catch (SQLException | ClassNotFoundException ex) {
+            throw new PersistenciaException(ex);
+        }
+    }
+
+    @Override
+    public void removerLocalTrabalho(String local, int idUsuario) throws PersistenciaException {
+        try (Connection con = ConexaoBanco.getInstance()) {
+            String sql = "DELETE FROM locais_trabalhou WHERE local=? AND usuario=?";
+            PreparedStatement stat = con.prepareStatement(sql);
+            stat.setString(1, local);
+            stat.setInt(2, idUsuario);
+            stat.executeUpdate();
+        } catch (SQLException | ClassNotFoundException ex) {
+            throw new PersistenciaException(ex);
+        }
+    }
+
+    @Override
+    public void removerLocalEstudou(String local, int idUsuario) throws PersistenciaException {
+        try (Connection con = ConexaoBanco.getInstance()) {
+            String sql = "DELETE FROM locais_estudou WHERE local=? AND usuario=?";
+            PreparedStatement stat = con.prepareStatement(sql);
+            stat.setString(1, local);
+            stat.setInt(2, idUsuario);
+            stat.executeUpdate();
+        } catch (SQLException | ClassNotFoundException ex) {
+            throw new PersistenciaException(ex);
         }
     }
 

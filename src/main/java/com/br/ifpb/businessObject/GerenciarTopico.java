@@ -10,6 +10,7 @@ import com.br.ifpb.daoFactory.DaoFactoryIF;
 import com.br.ifpb.execoes.PersistenciaException;
 import com.br.ifpb.interfaceDao.TopicoDaoIF;
 import com.br.ifpb.valueObject.Topico;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -21,5 +22,11 @@ public class GerenciarTopico {
         DaoFactoryIF daoFactory=DaoFactory.createFactory();
         TopicoDaoIF topicoDao=daoFactory.criarTopicoDao();
         return topicoDao.topicoGrupo(idGrupo);
+    }
+    
+    public void criarTopico(int idUsuario,int idGrupo,String texto,Timestamp data) throws PersistenciaException{
+        DaoFactoryIF daoFactory=DaoFactory.createFactory();
+        TopicoDaoIF topicoDao=daoFactory.criarTopicoDao();
+        topicoDao.criarTopico(idUsuario, idGrupo, texto, data);
     }
 }

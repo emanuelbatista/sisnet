@@ -7,6 +7,7 @@ package com.br.ifpb.interfaceDao;
 
 import com.br.ifpb.execoes.PersistenciaException;
 import com.br.ifpb.valueObject.Comentario;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -16,5 +17,7 @@ import java.util.List;
 public interface ComentarioDaoIF {
     
     public List<Comentario> comentarioTopico(int idTopico) throws PersistenciaException;
+    
+    public void criarComentario(String texto,Timestamp data,int idTopico,int idUsuario) throws PersistenciaException;
             
 }

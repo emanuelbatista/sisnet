@@ -27,10 +27,13 @@
             <div class="noticias-esquerda">
                 <section class="section">
                     <div class="postar">
-                        <ul>
-                            <li><textarea class="novidades" placeholder="Compartilhe suas novidades aqui..."></textarea></li>
-                            <li><input class="btn btn-success" type="submit" value="Compartilhar"></li>
-                        </ul>
+                        <form action="publicar-topico" method="post">
+                            <ul>
+                                <li><textarea name="texto" required class="novidades" placeholder="Compartilhe suas novidades aqui..."></textarea></li>
+                                <li><input type="hidden" name="id" value="${grupo.id}"></li>
+                                <li><input class="btn btn-success" type="submit" value="Compartilhar"></li>
+                            </ul>
+                        </form>
                     </div>
                 </section>
                 <c:forEach var="i" begin="1" items="${topicos}" step="2">
@@ -63,8 +66,9 @@
                                 </c:forEach>
                             </ul>
                             <div class="botoes">
-                                <form action="" method="post">
-                                    <textarea rows="1"></textarea>
+                                <form action="publicar-comentario" method="post">
+                                    <textarea rows="1" name="texto"></textarea>
+                                    <input type="hidden" value="${i.id}" name="id">
                                     <input type="submit" value="Comentar">
                                 </form>
                             </div>
@@ -74,7 +78,7 @@
                 </c:forEach>
             </div>
             <div class="noticias-direita">
-               <c:forEach var="i" begin="0" items="${topicos}" step="2">
+                <c:forEach var="i" begin="0" items="${topicos}" step="2">
                     <section class="section">
                         <div class="postagem-cabecalho">
                             <img src="${i.usuario.foto}" alt="">
@@ -104,8 +108,9 @@
                                 </c:forEach>
                             </ul>
                             <div class="botoes">
-                                <form action="" method="post">
-                                    <textarea rows="1"></textarea>
+                                <form action="publicar-comentario" method="post">
+                                    <textarea rows="1" name="texto"></textarea>
+                                    <input type="hidden" value="${i.id}" name="id">
                                     <input type="submit" value="Comentar">
                                 </form>
                             </div>

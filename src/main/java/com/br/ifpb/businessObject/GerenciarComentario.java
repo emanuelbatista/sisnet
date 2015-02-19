@@ -10,6 +10,7 @@ import com.br.ifpb.daoFactory.DaoFactoryIF;
 import com.br.ifpb.execoes.PersistenciaException;
 import com.br.ifpb.interfaceDao.ComentarioDaoIF;
 import com.br.ifpb.valueObject.Comentario;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -22,5 +23,11 @@ public class GerenciarComentario {
         DaoFactoryIF daoFactory=DaoFactory.createFactory();
         ComentarioDaoIF comentarioDao=daoFactory.criarComentarioDao();
         return comentarioDao.comentarioTopico(idTopico);
+    }
+    
+    public void criarComentario(String texto,Timestamp data,int idTopico,int idUsuario) throws PersistenciaException{
+        DaoFactoryIF daoFactory=DaoFactory.createFactory();
+        ComentarioDaoIF comentarioDao=daoFactory.criarComentarioDao();
+        comentarioDao.criarComentario(texto, data, idTopico, idUsuario);
     }
 }

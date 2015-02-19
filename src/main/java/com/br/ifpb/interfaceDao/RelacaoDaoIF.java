@@ -28,4 +28,6 @@ public interface RelacaoDaoIF {
   public String tipoRelacao(int remetente,int destinatario) throws PersistenciaException;
   
   public List<Usuario> solicitacaoRelacao(int id) throws PersistenciaException;
+  
+  public void adicionarRelacao(Relacao relacao) throws PersistenciaException;
 }

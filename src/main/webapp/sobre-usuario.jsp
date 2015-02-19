@@ -68,7 +68,7 @@
                                                     <img src="${i.usuario_2.foto}" alt="">
                                                 </div>
                                                 <div class="info-basica-relacionamento">
-                                                    <div class="nome">${i.usuario_2.nome}</div>
+                                                    <div class="nome"><a href="sobre?id=${i.usuario_2.id}">${i.usuario_2.nome}</a></div>
                                                     <div class="tipo">${i.tipo}</div>
                                                 </div>
                                             </div>

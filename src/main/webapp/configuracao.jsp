@@ -42,7 +42,7 @@
             </c:forEach>
             <c:if test="${mensagensInformacao!=null}">
                 alert(imprimir);
-            </c:if> 
+            </c:if>
 
             }
             window.addEventListener('load', load);
@@ -78,7 +78,7 @@
                             <ct:formulario-param-configuracao />
                         </c:if>
                         <br>
-                        
+
 
                     </div>
                     <div class="configuracoes">
@@ -92,28 +92,31 @@
                                             <img src="${i.usuario_2.foto}" alt="">
                                         </div>
                                         <div class="info-basica-relacionamento">
-                                            <div class="nome">${i.usuario_2.nome}</div>
+                                            <div class="nome"><a href="sobre?id=${i.usuario_2.id}">${i.usuario_2.nome}</a></div>
                                             <div class="tipo">${i.tipo}</div>
                                         </div>
                                     </div>
                                     <div class="remove-relacionamento">
-                                        <a href="#">remove</a>
+                                        <a href="#">remover</a>
                                     </div>
                                 </li>
                             </c:forEach>
                         </ul>
+                        <br>
                         <b>Adicionar Relacionamento: </b>
-                        <form action="" method="post">
-                            <br>
+                        <form action="adicionar-relacao" method="post">
                             <b>E-mail da pessoa do relacionamento: </b>
                             <br>
-                            <input type="email" class="campo-texto" placeholder="Digite o email">
+                            <input type="email" name="email" class="campo-texto" placeholder="Digite o email">
                             <br>
                             <b>Tipo do relacionamento: </b>
                             <br>
-                            <select>
-                                <option>Casado(a)</option>
-                                <option selected>Namorado(a)</option>
+                            <select name="tipo">
+                                <option value="Casado(a)">Casado(a)</option>
+                                <option value="Namorado(a)" selected>Namorado(a)</option>
+                                <option value="Primo(a)">Primo(a)</option>
+                                <option value="Mãe">Mãe</option>
+                                <option value="Pai">Pai</option>
                             </select>
                             <div class="botoes">
                                 <input type="submit" class="btn btn-success" value="Salvar Relacionamento">
@@ -127,27 +130,49 @@
                                 </c:if>
                                 <c:if test="${usuario.locais_trabalhou!=null}">
                                     <c:forEach var="i" items="${usuario.locais_trabalhou}">
-                                    <li>${i} <a href="#">remover</a></li>
-                                    </c:forEach>
-                                </c:if>
-                            <li><input type="text" placeholder="Digite um local de Trabalho"></li>
-                            <li><input type="button" value="Add"></li>
+                                    <li>
+                                        ${i} <a href="remover-local-trabalho?local-trabalho=${i}">remover</a>
+                                    </li>
+                                </c:forEach>
+                            </c:if>        
+                            <li>
+                                <form action="adicionar-local-trabalho" method="post">
+                                    <input type="text" name="local-trabalho" placeholder="Digite um local de Trabalho">
+                                    <br>
+                                    <br>
+                                    <input type="submit" value="Add"> 
+                                </form>
+                            </li>
                         </ul>
+
                         <br>
                         <b>Locais onde Estudou: </b>
                         <ul class="lista">
-                            <c:if test="${usuario.locais_trabalhou==null}">
+                            <c:if test="${usuario.locais_estudou==null}">
                                 <li>Nenhum</li>
                                 </c:if>
-                                <c:if test="${usuario.locais_trabalhou!=null}">
+                                <c:if test="${usuario.locais_estudou!=null}">
                                     <c:forEach var="i" items="${usuario.locais_estudou}">
-                                    <li>oii <a href="#">remover</a></li>
-
+                                    <li>
+                                        ${i} <a href="remover-local-estudou?local-estudou=${i}">remover</a>
+                                    </li>
                                 </c:forEach>
                             </c:if>
-                            <li><input type="text" placeholder="Digite onde Estudou"></li>
-                            <li><input type="button" value="Add"></li>
-                        </ul>                          
+                            <li>
+                                <form action="adicionar-local-estudou" method="post">
+                                    <input type="text" name="local-estudou" placeholder="Digite onde Estudou">
+                                    <br>
+                                    <br>
+                                    <input type="submit" value="Add">
+                                </form>
+                            </li>
+                        </ul>
+                        <div class="botoes">
+                            <b>Excluir Conta:</b>
+                            <form action="excluir-conta" method="post">
+                                <input type="submit" class="btn btn-success" value="Excluir Conta">
+                            </form>
+                        </div>
 
                     </div>
 

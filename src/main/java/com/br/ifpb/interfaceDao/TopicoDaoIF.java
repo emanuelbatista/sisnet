@@ -7,6 +7,7 @@ package com.br.ifpb.interfaceDao;
 
 import com.br.ifpb.execoes.PersistenciaException;
 import com.br.ifpb.valueObject.Topico;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -16,5 +17,7 @@ import java.util.List;
 public interface TopicoDaoIF {
     
     public List<Topico> topicoGrupo(int idGrupo) throws PersistenciaException;
+    
+    public void criarTopico(int idUsuario,int idGrupo,String texto,Timestamp data) throws PersistenciaException;
     
 }
