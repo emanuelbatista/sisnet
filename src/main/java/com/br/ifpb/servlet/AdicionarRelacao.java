@@ -6,6 +6,8 @@ import com.br.ifpb.execoes.PersistenciaException;
 import com.br.ifpb.valueObject.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -21,42 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "AdicionarRelacao", urlPatterns = {"/adicionar-relacao"})
 public class AdicionarRelacao extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        String tipoRelacao = request.getParameter("tipo");
-        String email = request.getParameter("email");
-        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
-        GerenciarUsuario gerenciarUsuario = new GerenciarUsuario();
-        Usuario destinatario = null;
-        try {
-            destinatario = gerenciarUsuario.getUsuario(email);
-        } catch (PersistenciaException ex) {
-            Logger.getLogger(AdicionarRelacao.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        System.out.println(tipoRelacao+"\n"+destinatario);
-        if (usuario != null && destinatario != null && tipoRelacao != null) {
-            GerenciarRelacao gerenciarRelacao = new GerenciarRelacao();
-            try {
-                gerenciarRelacao.adicionarRelacao(usuario, tipoRelacao, destinatario);
-            } catch (PersistenciaException ex) {
-                Logger.getLogger(AdicionarRelacao.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        response.sendRedirect(request.getHeader("referer"));
 
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -68,7 +35,7 @@ public class AdicionarRelacao extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.sendRedirect("configuracao");
     }
 
     /**
@@ -82,7 +49,31 @@ public class AdicionarRelacao extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        request.setCharacterEncoding("UTF-8");
+        String tipoRelacao = request.getParameter("tipo");
+        String email = request.getParameter("email_relacao");
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+        GerenciarUsuario gerenciarUsuario = new GerenciarUsuario();
+        Usuario destinatario = null;
+        try {
+            destinatario = gerenciarUsuario.getUsuario(email);
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(AdicionarRelacao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (usuario != null && destinatario != null && tipoRelacao != null) {
+            GerenciarRelacao gerenciarRelacao = new GerenciarRelacao();
+            try {
+                gerenciarRelacao.adicionarRelacao(usuario, tipoRelacao, destinatario);
+            } catch (PersistenciaException ex) {
+                Logger.getLogger(AdicionarRelacao.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            response.sendRedirect(request.getHeader("referer"));
+        } else if (usuario != null && destinatario == null) {
+            List<String> mensagensErros = new ArrayList<>();
+            mensagensErros.add("email incorreto");
+            request.setAttribute("mensagensRelacao", mensagensErros);
+            getServletContext().getRequestDispatcher("/configuracao").forward(request, response);
+        }
     }
 
     /**

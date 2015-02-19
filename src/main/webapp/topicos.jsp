@@ -30,7 +30,7 @@
                         <div class="postagem-cabecalho">
                             <img src="${i.usuario.foto}" alt="">
                             <div class="postagem-info">
-                                <div class="postagem-nome-usuario"><a href="#">${i.usuario.nome}</a></div>
+                                <div class="postagem-nome-usuario"><a href="sobre?id=${i.usuario.id}">${i.usuario.nome}</a></div>
                                 <div class="postagem-data">
                                     ${f:formatarData(i.data)} 
                                 </div>
@@ -69,7 +69,7 @@
                         <div class="postagem-cabecalho">
                             <img src="${i.usuario.foto}" alt="">
                             <div class="postagem-info">
-                                <div class="postagem-nome-usuario"><a href="#">${i.usuario.nome}</a></div>
+                                <div class="postagem-nome-usuario"><a href="sobre?id=${i.usuario.id}">${i.usuario.nome}</a></div>
                                 <div class="postagem-data">
                                     ${f:formatarData(i.data)} 
                                 </div>

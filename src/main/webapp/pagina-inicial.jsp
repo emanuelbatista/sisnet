@@ -16,7 +16,7 @@
             <header>
                 <div class="info-usuario">
                     <div class="cabecalho-info">
-                        <img src="${usuario.foto}" alt="">
+                        <img src="${usuario.foto}" alt="teste">
                         <div class="cabecalho-info-nome">
                             ${usuario.nome}
                         </div>

@@ -33,17 +33,18 @@
                 var imprimir = "";
             <c:forEach var="i" items="${mensagensInformacao}">
                 texto = String("${i}");
-                switch (texto) {
-                    case "nome formato errado ou vazio!":
-                        document.getElementById('nome').style.backgroundColor = "#ff6666";
-                        break;
-                }
                 imprimir += texto + "\n";
             </c:forEach>
             <c:if test="${mensagensInformacao!=null}">
                 alert(imprimir);
             </c:if>
-
+            <c:forEach var="i" items="${mensagensRelacao}">
+                texto = String("${i}");
+                imprimir += texto + "\n";
+            </c:forEach>
+            <c:if test="${mensagensRelacao!=null}">
+                alert(imprimir);
+            </c:if>
             }
             window.addEventListener('load', load);
         </script>
@@ -78,8 +79,6 @@
                             <ct:formulario-param-configuracao />
                         </c:if>
                         <br>
-
-
                     </div>
                     <div class="configuracoes">
                         <h3>Relacionamento</h3>
@@ -107,7 +106,7 @@
                         <form action="adicionar-relacao" method="post">
                             <b>E-mail da pessoa do relacionamento: </b>
                             <br>
-                            <input type="email" name="email" class="campo-texto" placeholder="Digite o email">
+                            <input type="email"<c:if test="${param.email_relacao!=null}">value="${param.email_relacao}"</c:if> name="email_relacao" class="campo-texto" placeholder="Digite o email">
                             <br>
                             <b>Tipo do relacionamento: </b>
                             <br>

@@ -23,7 +23,7 @@ public class UsuarioDAO implements UsuarioDaoIF {
     @Override
     public void criar(Usuario usuario) throws PersistenciaException {
         try (Connection connection = ConexaoBanco.getInstance()) {
-            String sql = "INSERT INTO Usuario(nome,apelido,cidade,email,profissao,senha,data_nascimento,status,foto,sobrenome) VALUES (?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO Usuario(nome,apelido,cidade,email,profissao,senha,data_nascimento,status,foto,sobrenome) VALUES (?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement statUsuario = connection.prepareStatement(sql);
             statUsuario.setString(1, usuario.getNome());
             statUsuario.setString(2, usuario.getApelido());

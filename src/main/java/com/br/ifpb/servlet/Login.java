@@ -9,6 +9,8 @@ import com.br.ifpb.businessObject.GerenciarUsuario;
 import com.br.ifpb.execoes.PersistenciaException;
 import com.br.ifpb.valueObject.Usuario;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -36,12 +38,21 @@ public class Login extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String email = request.getParameter("email");
-        String senha = request.getParameter("senha");
+        String email = request.getParameter("email_login");
+        String senha = request.getParameter("senha_login");
         GerenciarUsuario usuario = new GerenciarUsuario();
         try {
             if (!usuario.logar(email, senha)) {
- 
+                List<String> loginErros=new ArrayList<>();
+                boolean existeEmail=usuario.verificarExistenciaEmail(email);
+                if(existeEmail){
+                    loginErros.add("A senha está incorreta");
+                }else{
+                    loginErros.add("O seu login está incorreto");
+                }
+                request.setAttribute("loginErros", loginErros);
+                getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+                
             } else {
                 Usuario us = usuario.getUsuario(email);
                 HttpSession session = request.getSession();

@@ -1,0 +1,38 @@
+/* 
+    Created on : 19/02/2015, 14:43:25
+    Author     : Emanuel Batista da Silva Filho <emanuelbatista2011@gmail.com>
+*/
+body{
+    background-color: #dbdbdb;
+    font-family: 'Roboto',sans-serif;
+    margin: 0px;
+    padding: 0px;
+}
+article{
+    position: relative;
+    padding: 2%;
+    border-radius: 3px;
+    background-color: white;
+    margin: 0% 10%;
+    top: 80px;
+        text-align: center;
+    border: solid 1px #cccccc;
+    border-bottom: solid 2px #cccccc;
+}
+.container-grupo{
+    display: inline-table;
+    text-align: center;
+    top: 0px;
+    position: relative;
+    padding: 10px;
+    width: 49%;
+}
+.campo-texto{
+    margin: 5px 0px;
+    width: 200px;
+    text-indent: 2px;
+    height: 25px;
+    border-radius: 3px;
+    border: solid black 1px;
+}
+

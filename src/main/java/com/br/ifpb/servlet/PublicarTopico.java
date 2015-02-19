@@ -37,6 +37,7 @@ public class PublicarTopico extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         Integer idGrupo = null;
         try {
             idGrupo = Integer.valueOf(request.getParameter("id"));

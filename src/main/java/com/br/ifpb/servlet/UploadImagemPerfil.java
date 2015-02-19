@@ -91,7 +91,7 @@ public class UploadImagemPerfil extends HttpServlet {
                 }
                 FileItem item = items.get(0);
                 if (item != null) {
-                    String nome_arquivo = String.valueOf(new Date().getTime());
+                    String nome_arquivo = String.valueOf(new Date().getTime())+item.getName();
                     String caminho = getServletContext().getRealPath("/imagens") + "\\" + usuario.getId() + "\\";
                     File file = new File(caminho);
                     if (!file.exists()) {
@@ -105,13 +105,13 @@ public class UploadImagemPerfil extends HttpServlet {
                     }
                     GerenciarUsuario gerenciarUsuario = new GerenciarUsuario();
                     try {
-                        gerenciarUsuario.atualizarFotoPerfil("imagens" + "\\" + usuario.getId()+"\\"+ nome_arquivo, usuario.getId());
+                        gerenciarUsuario.atualizarFotoPerfil("imagens" + "/" + usuario.getId()+"/"+ nome_arquivo, usuario.getId());
                     } catch (PersistenciaException ex) {
                         Logger.getLogger(UploadImagemPerfil.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     GerenciarFotos gerenciarFotos=new GerenciarFotos();
                     try {
-                        gerenciarFotos.publicarFoto("imagens" + "\\" + usuario.getId()+"\\"+ nome_arquivo,
+                        gerenciarFotos.publicarFoto("imagens" + "/" + usuario.getId()+"/"+ nome_arquivo,
                                 Timestamp.valueOf(LocalDateTime.now()), usuario);
                     } catch (PersistenciaException ex) {
                         Logger.getLogger(UploadImagemPerfil.class.getName()).log(Level.SEVERE, null, ex);
