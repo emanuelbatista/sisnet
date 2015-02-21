@@ -22,7 +22,16 @@ public class GrupoDAO implements GrupoDaoIF {
 
     @Override
     public void criar(Grupo grupo) throws PersistenciaException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try (Connection con = ConexaoBanco.getInstance()) {
+           String sql="INSERT INTO Grupo(nome,descricao,usuario) VALUES (?,?,?)";
+           PreparedStatement stat=con.prepareStatement(sql);
+           stat.setString(1, grupo.getNome());
+           stat.setString(2, grupo.getDescricao());
+           stat.setInt(3, grupo.getFundador().getId());
+           stat.executeUpdate();
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(GrupoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
@@ -32,15 +41,15 @@ public class GrupoDAO implements GrupoDaoIF {
             PreparedStatement stat = con.prepareStatement(sql);
             stat.setInt(1, idGrupo);
             ResultSet rs = stat.executeQuery();
-            List<Usuario> lista=new ArrayList<>();
-            while(rs.next()){
-                Usuario usuario=new Usuario();
+            List<Usuario> lista = new ArrayList<>();
+            while (rs.next()) {
+                Usuario usuario = new Usuario();
                 usuario.setFoto(rs.getString("foto"));
                 usuario.setId(rs.getInt("id"));
                 usuario.setNome(rs.getString("nome"));
                 lista.add(usuario);
             }
-            if(lista.size()>0){
+            if (lista.size() > 0) {
                 return lista;
             }
         } catch (SQLException ex) {
@@ -88,20 +97,20 @@ public class GrupoDAO implements GrupoDaoIF {
 
     @Override
     public List<Grupo> listarGrupos(int idUsuario) throws PersistenciaException {
-        try(Connection con=ConexaoBanco.getInstance()){
-            String sql="SELECT G.nome,G.id,G.descricao FROM Grupo G JOIN participa_grupo P ON G.id=P.id_grupo WHERE P.usuario=?";
-            PreparedStatement stat=con.prepareStatement(sql);
+        try (Connection con = ConexaoBanco.getInstance()) {
+            String sql = "SELECT G.nome,G.id,G.descricao FROM Grupo G JOIN participa_grupo P ON G.id=P.id_grupo WHERE P.usuario=?";
+            PreparedStatement stat = con.prepareStatement(sql);
             stat.setInt(1, idUsuario);
-            ResultSet rs=stat.executeQuery();
-            List<Grupo> lista=new ArrayList<>();
-            while(rs.next()){
-                Grupo grupo=new Grupo();
+            ResultSet rs = stat.executeQuery();
+            List<Grupo> lista = new ArrayList<>();
+            while (rs.next()) {
+                Grupo grupo = new Grupo();
                 grupo.setDescricao(rs.getString("descricao"));
                 grupo.setId(rs.getInt("id"));
                 grupo.setNome(rs.getString("nome"));
                 lista.add(grupo);
             }
-            if(lista.size()>0){
+            if (lista.size() > 0) {
                 return lista;
             }
         } catch (SQLException ex) {
@@ -160,15 +169,32 @@ public class GrupoDAO implements GrupoDaoIF {
 
     @Override
     public void participarDoGrupo(int idGrupo, int idUsuario) throws PersistenciaException {
-        try(Connection con=ConexaoBanco.getInstance()){
-            String sql="INSERT INTO participa_grupo(id_grupo,usuario) VALUES (?,?)";
-            PreparedStatement stat=con.prepareStatement(sql);
+        try (Connection con = ConexaoBanco.getInstance()) {
+            String sql = "INSERT INTO participa_grupo(id_grupo,usuario) VALUES (?,?)";
+            PreparedStatement stat = con.prepareStatement(sql);
             stat.setInt(1, idGrupo);
             stat.setInt(2, idUsuario);
             stat.executeUpdate();
         } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(GrupoDAO.class.getName()).log(Level.SEVERE, null, ex);
+           throw new PersistenciaException(ex);
         }
+    }
+
+    @Override
+    public Grupo ultimoGrupo() throws PersistenciaException {
+        try(Connection con=ConexaoBanco.getInstance()){
+           String sql="SELECT MAX(id) id FROM Grupo";
+           PreparedStatement stat=con.prepareStatement(sql);
+           ResultSet rs=stat.executeQuery();
+           if(rs.next()){
+               Grupo grupo=new Grupo();
+               grupo.setId(rs.getInt("id"));
+               return grupo;
+           }
+        } catch (SQLException | ClassNotFoundException ex) {
+            throw new PersistenciaException(ex);
+        }
+        return null;
     }
 
 }

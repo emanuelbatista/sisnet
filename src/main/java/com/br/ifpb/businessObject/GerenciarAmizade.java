@@ -47,4 +47,10 @@ public class GerenciarAmizade {
         AmizadeDaoIF amizadeDao = daoFactory.criarAmizadeDao();
         amizadeDao.desfazerAmizade(remetente, destinatario);
     }
+
+    public List<Usuario> getAmigos(int idUsuario) throws PersistenciaException {
+        DaoFactoryIF daoFactory = DaoFactory.createFactory();
+        AmizadeDaoIF amizadeDao = daoFactory.criarAmizadeDao();
+        return amizadeDao.getAmigos(idUsuario);
+    }
 }

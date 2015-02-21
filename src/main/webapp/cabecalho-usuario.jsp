@@ -27,6 +27,9 @@
             <li id="topicos">
                 <a href="postagens?id=${usuario.id}">Postagens</a>
             </li>
+            <li id="amigos">
+                <a href="amigos">Amigos</a>
+            </li>
             <li id="fotos">
                 <a href="fotos?id=${usuario.id}">Fotos</a>
             </li>

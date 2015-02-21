@@ -11,14 +11,11 @@ import com.br.ifpb.conexaoBanco.ConexaoBanco;
 import com.br.ifpb.execoes.PersistenciaException;
 import com.br.ifpb.valueObject.Usuario;
 import com.br.ifpb.interfaceDao.UsuarioDaoIF;
+import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class UsuarioDAO implements UsuarioDaoIF {
-
-    public UsuarioDAO() throws PersistenciaException {
-
-    }
 
     @Override
     public void criar(Usuario usuario) throws PersistenciaException {
@@ -330,6 +327,29 @@ public class UsuarioDAO implements UsuarioDaoIF {
         } catch (SQLException | ClassNotFoundException ex) {
             throw new PersistenciaException(ex);
         }
+    }
+
+    @Override
+    public List<Usuario> pesquisarUsuario(String pesquisa) throws PersistenciaException {
+        try (Connection con = ConexaoBanco.getInstance()) {
+            String sql = "SELECT id,nome,foto FROM Usuario WHERE nome=? OR sobrenome=?";
+            PreparedStatement stat = con.prepareStatement(sql);
+            stat.setString(1, "%"+pesquisa+"%");
+            stat.setString(2, "%"+pesquisa+"%");
+            ResultSet rs = stat.executeQuery();
+            List<Usuario> usuarios = new LinkedList<>();
+            while (rs.next()) {
+                Usuario usuario = new Usuario();
+                usuario.setNome(rs.getString("nome"));
+                usuario.setId(rs.getInt("id"));
+                usuario.setFoto(rs.getString("foto"));
+                usuarios.add(usuario);
+            }
+            return usuarios.isEmpty() ? null : usuarios;
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
 }

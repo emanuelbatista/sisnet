@@ -26,4 +26,6 @@ public interface GrupoDaoIF {
   
   public void participarDoGrupo(int idGrupo,int idUsuario) throws PersistenciaException;
   
+  public Grupo ultimoGrupo() throws PersistenciaException;
+  
 }

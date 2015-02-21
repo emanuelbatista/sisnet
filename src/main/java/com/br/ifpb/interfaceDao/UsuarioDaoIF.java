@@ -2,6 +2,7 @@ package com.br.ifpb.interfaceDao;
 
 import com.br.ifpb.execoes.PersistenciaException;
 import com.br.ifpb.valueObject.Usuario;
+import java.util.List;
 
 public interface UsuarioDaoIF {
 
@@ -28,5 +29,7 @@ public interface UsuarioDaoIF {
   public void removerLocalTrabalho(String local,int idUsuario) throws PersistenciaException;
   
   public void removerLocalEstudou(String local,int idUsuario) throws PersistenciaException;
+  
+  public List<Usuario> pesquisarUsuario(String pesquisa) throws PersistenciaException;
   
 }

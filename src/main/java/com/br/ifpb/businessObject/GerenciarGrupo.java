@@ -48,10 +48,28 @@ public class GerenciarGrupo {
         GrupoDaoIF grupoDao = daoFactory.criarGrupoDao();
         return grupoDao.listarGrupos(idUsuario);
     }
-    
-    public void participarDoGrupo(int idGrupo,int idUsuario) throws PersistenciaException{
+
+    public void participarDoGrupo(int idGrupo, int idUsuario) throws PersistenciaException {
         DaoFactoryIF daoFactory = DaoFactory.createFactory();
         GrupoDaoIF grupoDao = daoFactory.criarGrupoDao();
         grupoDao.participarDoGrupo(idGrupo, idUsuario);
+    }
+
+    public void criar(String nome, String descricao, Usuario usuario) throws PersistenciaException {
+        Grupo grupo = new Grupo();
+        grupo.setNome(nome);
+        grupo.setDescricao(descricao);
+        grupo.setFundador(usuario);
+
+        DaoFactoryIF daoFactory = DaoFactory.createFactory();
+        GrupoDaoIF grupoDao = daoFactory.criarGrupoDao();
+        grupoDao.criar(grupo);
+
+    }
+    
+    public Grupo ultimoGrupo() throws PersistenciaException{
+        DaoFactoryIF daoFactory = DaoFactory.createFactory();
+        GrupoDaoIF grupoDao = daoFactory.criarGrupoDao();
+        return grupoDao.ultimoGrupo();
     }
 }

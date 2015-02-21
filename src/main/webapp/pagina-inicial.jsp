@@ -23,6 +23,19 @@
                     </div>
                     <nav>
                         <div class="opcao">
+                            <h6>PESQUISA</h6>
+                            <ul>
+                                <li>
+                                    <form action="pesquisa" method="post">
+                                        <div class="form-inline">
+                                            <input type="text" name="pesquisa" required class="campo-pesquisa" id="nome" placeholder="Pessoas e Grupos">
+                                            <input type="image" alt="submit" src="imagens/icone/pesquisa.png" class="pesquisar" >
+                                        </div> 
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="opcao">
                             <h6>SOLICITAÇÕES</h6>
                             <ul>
                                 <li>

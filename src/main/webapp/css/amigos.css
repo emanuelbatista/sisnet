@@ -1,0 +1,67 @@
+/* 
+    Created on : 20/02/2015, 11:16:19
+    Author     : Emanuel Batista da Silva Filho <emanuelbatista2011@gmail.com>
+*/
+article{
+    margin: 30px 10%;
+    padding: 20px;
+    background-color: white;
+    border-radius: 5px;
+    overflow: hidden;
+    text-align: center;
+
+}
+body{
+    background-color: #dbdbdb;
+    font-family: 'Roboto',sans-serif;
+    margin: 0px;
+    padding: 0px;
+}
+.amigos{
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+}
+.amigos li{
+    padding: 0px;
+    margin: 0px;
+    display: inline;
+    width: 800px;
+}
+.caixa{
+    border: 1px #cccccc solid;
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    overflow: hidden; 
+    width:280px;
+    vertical-align: central;
+    padding: 5px;
+}
+.imagem{
+    display: block;
+    float: left;
+    width: 80px;
+}
+.imagem img{
+    width: 80px;
+    height: 80px;
+    border-radius: 50px;
+}
+.nome{
+    position: relative;
+    text-align: left;
+    font-size: 20px;
+    font-weight: bold;
+    text-indent: 10px;
+    margin-top: 24px;
+    display: block;
+}
+#amigos{
+    border-bottom: solid 3px;
+    border-color: #999999;
+    padding-bottom: 5px;
+}
+#amigos>a{
+     color: black;
+}
