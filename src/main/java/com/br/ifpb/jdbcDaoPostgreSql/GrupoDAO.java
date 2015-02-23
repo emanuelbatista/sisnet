@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,12 +24,12 @@ public class GrupoDAO implements GrupoDaoIF {
     @Override
     public void criar(Grupo grupo) throws PersistenciaException {
         try (Connection con = ConexaoBanco.getInstance()) {
-           String sql="INSERT INTO Grupo(nome,descricao,usuario) VALUES (?,?,?)";
-           PreparedStatement stat=con.prepareStatement(sql);
-           stat.setString(1, grupo.getNome());
-           stat.setString(2, grupo.getDescricao());
-           stat.setInt(3, grupo.getFundador().getId());
-           stat.executeUpdate();
+            String sql = "INSERT INTO Grupo(nome,descricao,usuario) VALUES (?,?,?)";
+            PreparedStatement stat = con.prepareStatement(sql);
+            stat.setString(1, grupo.getNome());
+            stat.setString(2, grupo.getDescricao());
+            stat.setInt(3, grupo.getFundador().getId());
+            stat.executeUpdate();
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(GrupoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -176,25 +177,46 @@ public class GrupoDAO implements GrupoDaoIF {
             stat.setInt(2, idUsuario);
             stat.executeUpdate();
         } catch (SQLException | ClassNotFoundException ex) {
-           throw new PersistenciaException(ex);
+            throw new PersistenciaException(ex);
         }
     }
 
     @Override
     public Grupo ultimoGrupo() throws PersistenciaException {
-        try(Connection con=ConexaoBanco.getInstance()){
-           String sql="SELECT MAX(id) id FROM Grupo";
-           PreparedStatement stat=con.prepareStatement(sql);
-           ResultSet rs=stat.executeQuery();
-           if(rs.next()){
-               Grupo grupo=new Grupo();
-               grupo.setId(rs.getInt("id"));
-               return grupo;
-           }
+        try (Connection con = ConexaoBanco.getInstance()) {
+            String sql = "SELECT MAX(id) id FROM Grupo";
+            PreparedStatement stat = con.prepareStatement(sql);
+            ResultSet rs = stat.executeQuery();
+            if (rs.next()) {
+                Grupo grupo = new Grupo();
+                grupo.setId(rs.getInt("id"));
+                return grupo;
+            }
         } catch (SQLException | ClassNotFoundException ex) {
             throw new PersistenciaException(ex);
         }
         return null;
+    }
+
+    @Override
+    public List<Grupo> pesquisarGrupo(String pesquisa) throws PersistenciaException {
+        try (Connection con = ConexaoBanco.getInstance()) {
+           String sql="SELECT id,nome FROM Grupo WHERE nome ilike ? OR descricao ilike ?";
+           PreparedStatement stat=con.prepareStatement(sql);
+           stat.setString(1, "%"+pesquisa+"%");
+           stat.setString(2, "%"+pesquisa+"%");
+           ResultSet rs=stat.executeQuery();
+           List<Grupo> grupos=new LinkedList<>();
+           while(rs.next()){
+               Grupo grupo=new Grupo();
+               grupo.setNome(rs.getString("nome"));
+               grupo.setId(rs.getInt("id"));
+               grupos.add(grupo);
+           }
+           return grupos.isEmpty()?null:grupos;
+        } catch (SQLException | ClassNotFoundException ex) {
+            throw new PersistenciaException(ex);
+        }
     }
 
 }

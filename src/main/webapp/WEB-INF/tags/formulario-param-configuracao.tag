@@ -1,5 +1,6 @@
 
 <%@tag description="put the tag description here" pageEncoding="UTF-8"%>
+<%@taglib prefix="f" uri="/WEB-INF/bibliotecas.tld"%>
 
 <%-- The list of normal or fragment attributes can be specified here: --%>
 
@@ -18,7 +19,7 @@
     <br>
     <b>Data de Nascimento: </b>
     <br>
-    <input type="date" value="${param.data_nascimento}"  id="data_nascimento" name="data_nascimento" class="campo-texto">
+    <input type="date" value="${f:formatarDataDois(param.data_nascimento)}"  id="data_nascimento" name="data_nascimento" class="campo-texto">
     <br>
     <b>Cidade: </b>
     <br>

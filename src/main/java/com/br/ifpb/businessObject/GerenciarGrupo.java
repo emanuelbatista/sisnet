@@ -66,10 +66,16 @@ public class GerenciarGrupo {
         grupoDao.criar(grupo);
 
     }
-    
-    public Grupo ultimoGrupo() throws PersistenciaException{
+
+    public Grupo ultimoGrupo() throws PersistenciaException {
         DaoFactoryIF daoFactory = DaoFactory.createFactory();
         GrupoDaoIF grupoDao = daoFactory.criarGrupoDao();
         return grupoDao.ultimoGrupo();
+    }
+
+    public List<Grupo> pesquisarGrupo(String pesquisa) throws PersistenciaException {
+        DaoFactoryIF daoFactory = DaoFactory.createFactory();
+        GrupoDaoIF grupoDao = daoFactory.criarGrupoDao();
+        return grupoDao.pesquisarGrupo(pesquisa);
     }
 }

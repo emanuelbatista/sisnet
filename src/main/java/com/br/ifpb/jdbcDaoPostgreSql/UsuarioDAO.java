@@ -332,7 +332,7 @@ public class UsuarioDAO implements UsuarioDaoIF {
     @Override
     public List<Usuario> pesquisarUsuario(String pesquisa) throws PersistenciaException {
         try (Connection con = ConexaoBanco.getInstance()) {
-            String sql = "SELECT id,nome,foto FROM Usuario WHERE nome=? OR sobrenome=?";
+            String sql = "SELECT id,nome,foto FROM Usuario WHERE nome ilike ? OR sobrenome ilike ?";
             PreparedStatement stat = con.prepareStatement(sql);
             stat.setString(1, "%"+pesquisa+"%");
             stat.setString(2, "%"+pesquisa+"%");
@@ -347,9 +347,8 @@ public class UsuarioDAO implements UsuarioDaoIF {
             }
             return usuarios.isEmpty() ? null : usuarios;
         } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new PersistenciaException(ex);
         }
-        return null;
     }
 
 }

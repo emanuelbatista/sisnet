@@ -37,15 +37,15 @@
                 </ul>
                 <h5>Grupos</h5>
                 <ul class="amigos">
-                    <%--<c:forEach var="amigo" items="${usuario}">--%>
+                    <c:forEach var="grupo" items="${grupos}">
                         <li>
                             <div class="caixa-grupo">
                                 <div class="grupo">
-                                    <a href="sobre?id=${amigo.id}">emanuel</a>
+                                    <a href="topicos?id=${grupo.id}">${grupo.nome}</a>
                                 </div>
                             </div>
                         </li>
-                    <%--</c:forEach>--%>
+                    </c:forEach>
                 </ul>
 
             </section>

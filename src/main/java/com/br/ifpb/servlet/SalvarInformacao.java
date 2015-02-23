@@ -67,7 +67,7 @@ public class SalvarInformacao extends HttpServlet {
             String cidade = request.getParameter("cidade");
             String email = request.getParameter("email");
             String profissao = request.getParameter("profissao");
-            String senha=request.getParameter("senha");
+            String senha = request.getParameter("senha");
             String status = request.getParameter("status");
 
             List<String> mensagensErros = new ArrayList<>();
@@ -92,11 +92,11 @@ public class SalvarInformacao extends HttpServlet {
             Date data = null;
             if (data_nascimento != null) {
                 if (data_nascimento.equals("")) {
-                    data_nascimento=null;
+                    data_nascimento = null;
                 } else {
                     if (data_nascimento.matches("[0-9]{2}/[0-9]{2}/[0-9]{4}")) {
                         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                        LocalDate date=null;
+                        LocalDate date = null;
                         try {
                             date = LocalDate.parse(data_nascimento, dateTimeFormatter);
                             data = Date.valueOf(date);
@@ -135,31 +135,28 @@ public class SalvarInformacao extends HttpServlet {
                     mensagensErros.add("status formato errado!");
                 }
             }
-            if(senha==null || !senha.matches("\\w+")){
+            if (senha == null || !senha.matches("\\w+")) {
                 mensagensErros.add("senha contém caracteres especiais ou esta vazia!");
             }
-            if(email==null || !email.matches("\\w+@\\w+\\.\\w{2,3}")){
+            if (email == null || !email.matches("\\w+@\\w+\\.\\w{2,3}")) {
                 mensagensErros.add("e-mail formato errado ou vazio!");
-            }else{
-                GerenciarUsuario gerenciarUsuario=new GerenciarUsuario();
-                 boolean emailExistente=false;
+            } else {
+                GerenciarUsuario gerenciarUsuario = new GerenciarUsuario();
+                boolean emailExistente = false;
                 try {
-                    emailExistente=gerenciarUsuario.verificarExistenciaEmail(email);
+                    emailExistente = gerenciarUsuario.verificarExistenciaEmail(email);
                 } catch (PersistenciaException ex) {
                     Logger.getLogger(SalvarInformacao.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                if(!usuario.getEmail().equals(email) && emailExistente){
+                if (!usuario.getEmail().equals(email) && emailExistente) {
                     mensagensErros.add("e-mail existente!");
                 }
             }
             if (mensagensErros.isEmpty()) {
-                GerenciarUsuario gerenciarUsuario=new GerenciarUsuario();
                 try {
+                    GerenciarUsuario gerenciarUsuario = new GerenciarUsuario();
                     gerenciarUsuario.atualizarConta(usuario.getId(), nome, sobrenome, apelido, cidade, email, profissao, senha, data, status);
-                } catch (PersistenciaException ex) {
-                    Logger.getLogger(SalvarInformacao.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                try {
+
                     usuario = gerenciarUsuario.getUsuario(usuario.getId());
                 } catch (PersistenciaException ex) {
                     Logger.getLogger(SalvarInformacao.class.getName()).log(Level.SEVERE, null, ex);

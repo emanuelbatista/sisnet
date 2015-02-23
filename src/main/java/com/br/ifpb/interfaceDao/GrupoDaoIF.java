@@ -28,4 +28,6 @@ public interface GrupoDaoIF {
   
   public Grupo ultimoGrupo() throws PersistenciaException;
   
+  public List<Grupo> pesquisarGrupo(String pesquisa) throws PersistenciaException;
+  
 }

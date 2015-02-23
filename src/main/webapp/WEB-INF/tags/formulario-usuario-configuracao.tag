@@ -3,6 +3,7 @@
 
 <%-- The list of normal or fragment attributes can be specified here: --%>
 <%@attribute name="campo" required="true" type="com.br.ifpb.valueObject.Usuario"  rtexprvalue="true"%>
+<%@taglib prefix="f" uri="/WEB-INF/bibliotecas.tld" %>
 
 <form action="salvar-informacao" method="post">
     <b>Nome: </b>
@@ -19,7 +20,7 @@
     <br>
     <b>Data de Nascimento: </b>
     <br>
-    <input type="date" value="${campo.data_nascimento}"  id="data_nascimento" name="data_nascimento" class="campo-texto">
+    <input type="date" value="${f:formatarDataDois(campo.data_nascimento)}"  id="data_nascimento" name="data_nascimento" class="campo-texto">
     <br>
     <b>Cidade: </b>
     <br>
