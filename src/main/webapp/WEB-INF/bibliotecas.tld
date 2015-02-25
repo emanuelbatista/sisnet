@@ -3,17 +3,34 @@
   <tlib-version>1.0</tlib-version>
   <short-name>bibliotecas</short-name>
   <uri>bibliotecas</uri>
+  <tag>
+    <name>tipo-relacionamento</name>
+    <tag-class>com.br.ifpb.tag.handlers.TipoRelacionamento</tag-class>
+    <body-content>scriptless</body-content>
+    <attribute>
+      <name>remetente</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>int</type>
+    </attribute>
+    <attribute>
+      <name>destinatario</name>
+      <rtexprvalue>true</rtexprvalue>
+      <required>true</required>
+      <type>int</type>
+    </attribute>
+  </tag>
   <function>
-      <name>formatarData</name>
-      <function-class>com.br.ifpb.funcao.DataFormatada</function-class>
-      <function-signature>
+    <name>formatarData</name>
+    <function-class>com.br.ifpb.funcao.DataFormatada</function-class>
+    <function-signature>
           java.lang.String formatarData(java.sql.Timestamp)
       </function-signature>
   </function>
   <function>
-      <name>formatarDataDois</name>
-      <function-class>com.br.ifpb.funcao.DataFormatada</function-class>
-      <function-signature>
+    <name>formatarDataDois</name>
+    <function-class>com.br.ifpb.funcao.DataFormatada</function-class>
+    <function-signature>
           java.lang.String formatarData(java.sql.Date);
       </function-signature>
   </function>

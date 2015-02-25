@@ -18,28 +18,47 @@ import java.util.List;
  * @author Emanuel
  */
 public class GerenciarRelacao {
-
-    public List<Relacao> getRelacao(int id) throws PersistenciaException {
+    
+    public List<Usuario> getRelacao(int id) throws PersistenciaException {
         DaoFactoryIF daoFactory = DaoFactory.createFactory();
         RelacaoDaoIF relacaoDao = daoFactory.criarRelacaoDao();
         return relacaoDao.getRelacao(id);
     }
-
+    
     public String tipoRelacao(int remetente, int destinatario) throws PersistenciaException {
         DaoFactoryIF daoFactory = DaoFactory.createFactory();
         RelacaoDaoIF relacaoDao = daoFactory.criarRelacaoDao();
         return relacaoDao.tipoRelacao(remetente, destinatario);
     }
-
-    public void adicionarRelacao(Usuario remetente,String tipo,Usuario destinatario) throws PersistenciaException{
-        Relacao relacao=new Relacao();
-        relacao.setUsuario_1(remetente);
-        relacao.setTipo(tipo);
-        relacao.setUsuario_2(destinatario);
-        
+    
+    public void adicionarRelacao(int remetente, String tipo, int destinatario) throws PersistenciaException {
         DaoFactoryIF daoFactory = DaoFactory.createFactory();
         RelacaoDaoIF relacaoDao = daoFactory.criarRelacaoDao();
-        relacaoDao.adicionarRelacao(relacao);
+        relacaoDao.adicionarRelacao(remetente, destinatario, tipo);
         
+    }
+    
+    public boolean existeRelacao(int remetente, int destinatario) throws PersistenciaException {
+        DaoFactoryIF daoFactory = DaoFactory.createFactory();
+        RelacaoDaoIF relacaoDao = daoFactory.criarRelacaoDao();
+        return relacaoDao.existeRelacao(remetente, destinatario);
+    }
+    
+    public List<Usuario> solicitacaoRelacao(int id) throws PersistenciaException {
+        DaoFactoryIF daoFactory = DaoFactory.createFactory();
+        RelacaoDaoIF relacaoDao = daoFactory.criarRelacaoDao();
+        return relacaoDao.solicitacaoRelacao(id);
+    }
+    
+    public void aceitarRelacao(int remetente, int destinatario) throws PersistenciaException {
+        DaoFactoryIF daoFactory = DaoFactory.createFactory();
+        RelacaoDaoIF relacaoDao = daoFactory.criarRelacaoDao();
+        relacaoDao.aceitarRelacao(remetente, destinatario);
+    }
+    
+    public void desfazerRelacao(int remetente, int destinatario) throws PersistenciaException {
+        DaoFactoryIF daoFactory = DaoFactory.createFactory();
+        RelacaoDaoIF relacaoDao = daoFactory.criarRelacaoDao();
+        relacaoDao.desfazerRelacao(remetente, destinatario);
     }
 }

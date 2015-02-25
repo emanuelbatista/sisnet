@@ -60,21 +60,19 @@
                         </div>
                         <div class="postagem-corpo">
                             <ul class="relacionamentos">
-                                <c:if test="${relacoes!=null}">
-                                    <c:forEach var="i" items="${relacoes}">
-                                        <li>
-                                            <div class="info-relacionamento">
-                                                <div class="imagem">
-                                                    <img src="${i.usuario_2.foto}" alt="">
-                                                </div>
-                                                <div class="info-basica-relacionamento">
-                                                    <div class="nome"><a href="sobre?id=${i.usuario_2.id}">${i.usuario_2.nome}</a></div>
-                                                    <div class="tipo">${i.tipo}</div>
+                                <c:forEach var="i" items="${relacoes}">
+                                    <li>
+                                        <div class="info-relacionamento">
+                                            <div class="imagem">
+                                                <img src="${i.foto}" alt="">
+                                            </div>
+                                            <div class="info-basica-relacionamento">
+                                                <div class="nome"><a href="sobre?id=${i.id}">${i.nome}</a></div>
+                                                <div class="tipo"><f:tipo-relacionamento remetente="${usuario.id}" destinatario="${i.id}"></f:tipo-relacionamento></div>
                                                 </div>
                                             </div>
                                         </li>
-                                    </c:forEach>
-                                </c:if>
+                                </c:forEach>
                             </ul>
                             <c:if test="${relacoes==null}">
                                 Nenhum

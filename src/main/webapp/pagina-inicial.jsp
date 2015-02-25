@@ -43,11 +43,17 @@
                                         Amizades
                                     </a>
                                 </li>
+                                <li>
+                                    <a href="solicitacao-relacao">
+                                        Relações
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                         <div class="opcao">
                             <h6>GRUPOS</h6>
                             <ul>
+                                <li><a href="criar-grupo.jsp" class="bg-info">Criar Grupo</a></li>
                                 <c:forEach var="i" items="${grupos}">
                                     <li>
                                         <a href="topicos?id=${i.id}">

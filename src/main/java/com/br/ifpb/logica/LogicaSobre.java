@@ -41,7 +41,7 @@ public class LogicaSobre implements Logica {
             return null;
         } else if (usuario.getId() == idParametro) {
             GerenciarRelacao gerenciarRelacao = new GerenciarRelacao();
-            List<Relacao> relacoes = null;
+            List<Usuario> relacoes = null;
             try {
                 relacoes = gerenciarRelacao.getRelacao(usuario.getId());
             } catch (PersistenciaException ex) {
@@ -74,7 +74,7 @@ public class LogicaSobre implements Logica {
             }
             if (isAmizade) {
                 GerenciarRelacao gerenciarRelacao = new GerenciarRelacao();
-                List<Relacao> relacoes = null;
+                List<Usuario> relacoes = null;
                 try {
                     relacoes = gerenciarRelacao.getRelacao(usuario1.getId());
                 } catch (PersistenciaException ex) {

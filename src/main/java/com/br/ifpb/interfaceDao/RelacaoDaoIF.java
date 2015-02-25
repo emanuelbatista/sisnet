@@ -6,7 +6,6 @@
 package com.br.ifpb.interfaceDao;
 
 import com.br.ifpb.execoes.PersistenciaException;
-import com.br.ifpb.valueObject.Relacao;
 import java.util.List;
 import com.br.ifpb.valueObject.Usuario;
 
@@ -23,11 +22,18 @@ public interface RelacaoDaoIF {
    */
   public Usuario relacaoNamoro(int id) throws PersistenciaException;
   
-  public List<Relacao> getRelacao(int idUsuario) throws PersistenciaException;
+  public List<Usuario> getRelacao(int idUsuario) throws PersistenciaException;
   
   public String tipoRelacao(int remetente,int destinatario) throws PersistenciaException;
   
   public List<Usuario> solicitacaoRelacao(int id) throws PersistenciaException;
   
-  public void adicionarRelacao(Relacao relacao) throws PersistenciaException;
+  public void adicionarRelacao(int remetente,int destinatario,String tipoRelacao) throws PersistenciaException;
+  
+  public boolean existeRelacao(int remetente,int destinatario) throws PersistenciaException;
+  
+  public void aceitarRelacao(int remetente,int destinatario) throws PersistenciaException;
+  
+  public void desfazerRelacao(int remetente,int destinatario) throws PersistenciaException;
+  
 }

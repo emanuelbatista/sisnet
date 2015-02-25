@@ -1,17 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.br.ifpb.servlet;
 
-import com.br.ifpb.businessObject.GerenciarGrupo;
-import com.br.ifpb.businessObject.GerenciarTopico;
+import com.br.ifpb.businessObject.GerenciarRelacao;
 import com.br.ifpb.execoes.PersistenciaException;
-import com.br.ifpb.valueObject.Topico;
 import com.br.ifpb.valueObject.Usuario;
 import java.io.IOException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -22,10 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Emanuel
+ * @author Emanuel Batista da Silva Filho <emanuelbatista2011@gmail.com>
  */
-@WebServlet(name = "Topicos", urlPatterns = {"/topicos"})
-public class Topicos extends HttpServlet {
+@WebServlet(name = "AceitarRelacao", urlPatterns = {"/aceitar-relacao"})
+public class AceitarRelacao extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,51 +30,23 @@ public class Topicos extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Integer idGrupo = null;
+        request.setCharacterEncoding("UTF-8");
+        Integer idParametro = null;
         try {
-            idGrupo = Integer.valueOf(request.getParameter("id"));
+            idParametro = Integer.valueOf(request.getParameter("id"));
         } catch (NumberFormatException ex) {
 
         }
-        Usuario usuario = ((Usuario) request.getSession().getAttribute("usuario"));
-
-        if (usuario == null) {
-            response.sendRedirect("");
-        } else if (idGrupo == null) {
-             response.sendError(404);
-        } else {
-            GerenciarGrupo gerenciarGrupo = new GerenciarGrupo();
-            com.br.ifpb.valueObject.Grupo grupo = null;
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+        if (usuario != null && idParametro != null) {
+            GerenciarRelacao gerenciarRelacao = new GerenciarRelacao();
             try {
-                grupo = gerenciarGrupo.getGrupo(idGrupo);
+                gerenciarRelacao.aceitarRelacao(usuario.getId(), idParametro);
             } catch (PersistenciaException ex) {
-                Logger.getLogger(Topicos.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            if (grupo == null) {
-               response.sendError(404);
-            } else {
-                request.setAttribute("grupo", grupo);
-                GerenciarTopico gerenciarTopico = new GerenciarTopico();
-                List<Topico> topicos = null;
-                try {
-                    topicos = gerenciarTopico.topicoGrupo(grupo.getId());
-                } catch (PersistenciaException ex) {
-                    Logger.getLogger(Topicos.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                request.setAttribute("topicos", topicos);
-                boolean participaGrupo = false;
-                try {
-                    participaGrupo = gerenciarGrupo.participaGrupo(usuario.getId());
-                } catch (PersistenciaException ex) {
-                    Logger.getLogger(Topicos.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                if (participaGrupo) {
-                    getServletContext().getRequestDispatcher("/topicos-usuario.jsp").forward(request, response);
-                } else {
-                    getServletContext().getRequestDispatcher("/topicos.jsp").forward(request, response);
-                }
+                 Logger.getLogger(AceitarRelacao.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        response.sendRedirect(request.getHeader("referer"));
 
     }
 

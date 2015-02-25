@@ -7,7 +7,7 @@ package com.br.ifpb.funcao;
 
 import java.sql.Date;
 import java.sql.Timestamp;
-import java.time.LocalDate; 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -25,9 +25,13 @@ public class DataFormatada {
     }
 
     public static String formatarData(Date data) {
-        LocalDate localDateTime = data.toLocalDate();
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        return localDateTime.format(dateTimeFormatter);
+        if (data != null) {
+            LocalDate localDateTime = data.toLocalDate();
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            return localDateTime.format(dateTimeFormatter);
+        } else {
+            return null;
+        }
     }
 
 }

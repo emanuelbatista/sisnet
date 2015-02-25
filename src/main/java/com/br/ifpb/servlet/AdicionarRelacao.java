@@ -23,7 +23,6 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "AdicionarRelacao", urlPatterns = {"/adicionar-relacao"})
 public class AdicionarRelacao extends HttpServlet {
 
-
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -53,26 +52,32 @@ public class AdicionarRelacao extends HttpServlet {
         String tipoRelacao = request.getParameter("tipo");
         String email = request.getParameter("email_relacao");
         Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
-        GerenciarUsuario gerenciarUsuario = new GerenciarUsuario();
-        Usuario destinatario = null;
         try {
-            destinatario = gerenciarUsuario.getUsuario(email);
+            if (usuario != null) {
+                GerenciarUsuario gerenciarUsuario = new GerenciarUsuario();
+                GerenciarRelacao gerenciarRelacao = new GerenciarRelacao();
+                Usuario destinatario = gerenciarUsuario.getUsuario(email);
+                List<String> mensagensErros = new ArrayList<>();
+                if (usuario.getEmail().equals(email) || destinatario == null) {
+                    mensagensErros.add("email incorreto");
+
+                } else {
+                    if (gerenciarRelacao.existeRelacao(usuario.getId(), destinatario.getId())) {
+                        mensagensErros.add("relacionamento já existe");
+                    }
+
+                }
+
+                if (mensagensErros.isEmpty()) {
+                    gerenciarRelacao.adicionarRelacao(usuario.getId(), tipoRelacao, destinatario.getId());
+                    response.sendRedirect(request.getHeader("referer"));
+                } else {
+                    request.setAttribute("mensagensRelacao", mensagensErros);
+                    getServletContext().getRequestDispatcher("/configuracao").forward(request, response);
+                }
+            }
         } catch (PersistenciaException ex) {
             Logger.getLogger(AdicionarRelacao.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        if (usuario != null && destinatario != null && tipoRelacao != null) {
-            GerenciarRelacao gerenciarRelacao = new GerenciarRelacao();
-            try {
-                gerenciarRelacao.adicionarRelacao(usuario, tipoRelacao, destinatario);
-            } catch (PersistenciaException ex) {
-                Logger.getLogger(AdicionarRelacao.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            response.sendRedirect(request.getHeader("referer"));
-        } else if (usuario != null && destinatario == null) {
-            List<String> mensagensErros = new ArrayList<>();
-            mensagensErros.add("email incorreto");
-            request.setAttribute("mensagensRelacao", mensagensErros);
-            getServletContext().getRequestDispatcher("/configuracao").forward(request, response);
         }
     }
 

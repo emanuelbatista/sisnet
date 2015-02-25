@@ -7,6 +7,7 @@
 <%@page import="com.br.ifpb.businessObject.GerenciarRelacao"%>
 <%@page import="com.br.ifpb.valueObject.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib  prefix="f" uri="bibliotecas" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib  prefix="ct" tagdir="/WEB-INF/tags/" %>
 <!DOCTYPE html>
@@ -88,15 +89,15 @@
                                 <li>
                                     <div class="info-relacionamento">
                                         <div class="imagem">
-                                            <img src="${i.usuario_2.foto}" alt="">
+                                            <img src="${i.foto}" alt="">
                                         </div>
                                         <div class="info-basica-relacionamento">
-                                            <div class="nome"><a href="sobre?id=${i.usuario_2.id}">${i.usuario_2.nome}</a></div>
-                                            <div class="tipo">${i.tipo}</div>
+                                            <div class="nome"><a href="sobre?id=${i.id}">${i.nome}</a></div>
+                                            <div class="tipo"><f:tipo-relacionamento remetente="${usuario.id}" destinatario="${i.id}"></f:tipo-relacionamento></div>
                                         </div>
                                     </div>
                                     <div class="remove-relacionamento">
-                                        <a href="#">remover</a>
+                                        <a href="desfazer-relacao?id=${i.id}">remover</a>
                                     </div>
                                 </li>
                             </c:forEach>

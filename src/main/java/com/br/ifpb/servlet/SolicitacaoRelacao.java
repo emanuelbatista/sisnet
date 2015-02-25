@@ -1,15 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.br.ifpb.servlet;
 
 import com.br.ifpb.businessObject.GerenciarRelacao;
 import com.br.ifpb.execoes.PersistenciaException;
-import com.br.ifpb.valueObject.Relacao;
 import com.br.ifpb.valueObject.Usuario;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,10 +16,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Emanuel
+ * @author Emanuel Batista da Silva Filho <emanuelbatista2011@gmail.com>
  */
-@WebServlet(name = "Configuracao", urlPatterns = {"/configuracao"})
-public class Configuracao extends HttpServlet {
+@WebServlet(name = "SolicitacaoRelacao", urlPatterns = {"/solicitacao-relacao"})
+public class SolicitacaoRelacao extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,23 +32,21 @@ public class Configuracao extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Usuario usuario = ((Usuario) request.getSession().getAttribute("usuario"));
-        if (usuario == null) {
-            response.sendRedirect("");
-        } else {
-            GerenciarRelacao gerenciarRelacao = new GerenciarRelacao();
-            List<Usuario> listaUsuario = null;
+        request.setCharacterEncoding("UTF-8");
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+        if (usuario != null) {
             try {
-                listaUsuario = gerenciarRelacao.getRelacao(usuario.getId());
+                GerenciarRelacao gerenciarRelacao = new GerenciarRelacao();
+                List<Usuario> usuarios=gerenciarRelacao.solicitacaoRelacao(usuario.getId());
+                request.setAttribute("relacoes", usuarios);
+                getServletContext().getRequestDispatcher("/solicitacao-relacao.jsp").forward(request, response);
             } catch (PersistenciaException ex) {
-                Logger.getLogger(Configuracao.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(SolicitacaoRelacao.class.getName()).log(Level.SEVERE, null, ex);
             }
-            request.setAttribute("relacao", listaUsuario);
-            getServletContext().getRequestDispatcher("/configuracao.jsp").forward(request, response);
         }
+
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -81,15 +74,5 @@ public class Configuracao extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
 
 }

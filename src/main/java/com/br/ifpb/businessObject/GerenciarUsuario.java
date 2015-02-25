@@ -14,10 +14,11 @@ public class GerenciarUsuario {
 
     }
 
-    public void cadastrarConta(String nome, String apelido, String cidade, String email, String profissao,
+    public void cadastrarConta(String nome, String sobrenome, String apelido, String cidade, String email, String profissao,
             String senha, Date data_nascimento, String status, String foto, List<String> locais_estudou, List<String> locais_trabalhou) throws PersistenciaException {
         Usuario usuario = new Usuario();
         usuario.setNome(nome);
+        usuario.setSobrenome(sobrenome);
         usuario.setApelido(apelido);
         usuario.setCidade(cidade);
         usuario.setEmail(email);

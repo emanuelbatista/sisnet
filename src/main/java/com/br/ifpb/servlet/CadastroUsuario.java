@@ -1,14 +1,12 @@
 package com.br.ifpb.servlet;
 
 import com.br.ifpb.businessObject.GerenciarUsuario;
+import com.br.ifpb.converter.ConverterInformacao;
 import com.br.ifpb.execoes.PersistenciaException;
+import com.br.ifpb.validacao.UsuarioInforValidacao;
 import com.br.ifpb.valueObject.Usuario;
 import java.io.IOException;
-import java.sql.Date;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -43,48 +41,11 @@ public class CadastroUsuario extends HttpServlet {
         String senha = request.getParameter("senha");
         String data_nascimento = request.getParameter("data_nascimento");
 
-        List<String> cadastroErros = new ArrayList<>();
+        UsuarioInforValidacao usuarioInforValidaca = new UsuarioInforValidacao();
+        List<String> cadastroErros = usuarioInforValidaca.validar(nome, sobrenome, null, data_nascimento,
+                null, email, null, senha, null);
 
-        if (nome != null && !nome.matches("[A-ZÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ].*")) {
-            cadastroErros.add("nome formato errado ou vazio!");
-        }
-        if (sobrenome != null) {
-            if (sobrenome.equals("")) {
-                sobrenome = null;
-            } else if (!sobrenome.matches("[A-ZÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ].*")) {
-                cadastroErros.add("sobrenome formato errado!");
-            }
-        }
-        Date data = null;
-        if (data_nascimento != null) {
-            if (data_nascimento.equals("")) {
-                data_nascimento = null;
-            } else {
-                if (data_nascimento.matches("[0-9]{2}/[0-9]{2}/[0-9]{4}")) {
-                    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                    LocalDate date = null;
-                    try {
-                        date = LocalDate.parse(data_nascimento, dateTimeFormatter);
-                        data = Date.valueOf(date);
-                    } catch (DateTimeParseException ex) {
-                        cadastroErros.add("data de nascimento formato errado!");
-                    }
-
-                } else {
-                    try {
-                        data = Date.valueOf(data_nascimento);
-                    } catch (IllegalArgumentException ex) {
-                        cadastroErros.add("data de nascimento formato errado!");
-                    }
-                }
-            }
-        }
-        if (senha == null || !senha.matches("\\w+")) {
-            cadastroErros.add("senha contém caracteres especiais ou esta vazia!");
-        }
-        if (email == null || !email.matches("\\w+@\\w+\\.\\w{2,3}")) {
-            cadastroErros.add("e-mail formato errado ou vazio!");
-        } else {
+        if (cadastroErros == null) {
             GerenciarUsuario gerenciarUsuario = new GerenciarUsuario();
             boolean emailExistente = false;
             try {
@@ -93,25 +54,26 @@ public class CadastroUsuario extends HttpServlet {
                 Logger.getLogger(SalvarInformacao.class.getName()).log(Level.SEVERE, null, ex);
             }
             if (emailExistente) {
+                cadastroErros=new LinkedList<>();
                 cadastroErros.add("e-mail existente!");
             }
         }
-        if(cadastroErros.isEmpty()){
-            GerenciarUsuario gerenciarUsuario=new GerenciarUsuario();
+        if (cadastroErros==null || cadastroErros.isEmpty()) {
+            GerenciarUsuario gerenciarUsuario = new GerenciarUsuario();
             try {
-                gerenciarUsuario.cadastrarConta(nome,null,null,email,null,senha,data,null,null,null,null);
+                gerenciarUsuario.cadastrarConta(nome, sobrenome,null, null, email, null, senha, ConverterInformacao.converteDate(data_nascimento), null, "imagens/icone/perfil.png", null, null);
             } catch (PersistenciaException ex) {
                 Logger.getLogger(CadastroUsuario.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Usuario usuario=null;
+            Usuario usuario = null;
             try {
-                usuario=gerenciarUsuario.getUsuario(email);
+                usuario = gerenciarUsuario.getUsuario(email);
             } catch (PersistenciaException ex) {
                 Logger.getLogger(CadastroUsuario.class.getName()).log(Level.SEVERE, null, ex);
             }
             request.getSession().setAttribute("usuario", usuario);
             response.sendRedirect("inicio");
-        }else{
+        } else {
             request.setAttribute("cadastroErros", cadastroErros);
             getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
         }
