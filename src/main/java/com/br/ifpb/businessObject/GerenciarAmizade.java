@@ -53,4 +53,10 @@ public class GerenciarAmizade {
         AmizadeDaoIF amizadeDao = daoFactory.criarAmizadeDao();
         return amizadeDao.getAmigos(idUsuario);
     }
+
+    public boolean existeSolicitacao(int remetente, int destinatario) throws PersistenciaException {
+        DaoFactoryIF daoFactory = DaoFactory.createFactory();
+        AmizadeDaoIF amizadeDao = daoFactory.criarAmizadeDao();
+        return amizadeDao.existeSolicitacao(remetente, destinatario);
+    }
 }

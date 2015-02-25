@@ -22,7 +22,6 @@ public class UsuarioInforValidacao {
             validarTextoObrigatorio(nome, "Nome");
         } catch (FormatadoException ex) {
             mensagensErros.add(ex.getMessage());
-           
         }
         try {
             validarTextoNaoObrigatorio(sobrenome, "Sobrenome");
@@ -59,13 +58,13 @@ public class UsuarioInforValidacao {
         } catch (FormatadoException ex) {
             mensagensErros.add(ex.getMessage());
         }
-         try {
-             validarTextoNaoObrigatorio(status, "Status");
+        try {
+            validarTextoNaoObrigatorio(status, "Status");
         } catch (FormatadoException ex) {
             mensagensErros.add(ex.getMessage());
         }
-        
-         return mensagensErros.isEmpty()?null:mensagensErros;
+
+        return mensagensErros.isEmpty() ? null : mensagensErros;
 
     }
 
@@ -76,13 +75,13 @@ public class UsuarioInforValidacao {
     }
 
     private void validarTextoNaoObrigatorio(String texto, String campo) throws FormatadoException {
-        if (texto != null) {
-            if (texto.equals("")) {
-                texto = null;
-            } else if (!texto.matches("[A-ZÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ].*")) {
-                throw new FormatadoException(campo + " formato errado!");
-            }
+
+        if (texto != null && texto.isEmpty()) {
+            texto = null;
+        } else if (!texto.matches("[A-ZÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ].*")) {
+            throw new FormatadoException(campo + " formato errado!");
         }
+
     }
 
     private void validarTextoSemCaracteresEspecial(String texto, String campo) throws FormatadoException {

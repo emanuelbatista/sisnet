@@ -117,8 +117,8 @@ public class AmizadeDAO implements AmizadeDaoIF {
             throw new PersistenciaException(ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AmizadeDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } 
-            return null;
+        }
+        return null;
     }
 
     /**
@@ -154,28 +154,45 @@ public class AmizadeDAO implements AmizadeDaoIF {
             throw new PersistenciaException(ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AmizadeDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } 
-            return null;
+        }
+        return null;
 
     }
 
     @Override
     public boolean verificarAmizade(int remetente, int destinatario) throws PersistenciaException {
         try (Connection con = ConexaoBanco.getInstance()) {
-           String sql="SELECT * FROM Amizade WHERE usuario_1=? AND usuario_2=? AND pendencia=FALSE OR"
-                   +" usuario_1=? AND usuario_2=? AND pendencia=FALSE";
-           PreparedStatement stat=con.prepareStatement(sql);
-           stat.setInt(1, remetente);
-           stat.setInt(2, destinatario);
-           stat.setInt(3, destinatario);
-           stat.setInt(4, remetente);
-           ResultSet rs=stat.executeQuery();
-           return rs.next();
+            String sql = "SELECT * FROM Amizade WHERE usuario_1=? AND usuario_2=? AND pendencia=FALSE OR"
+                    + " usuario_1=? AND usuario_2=? AND pendencia=FALSE";
+            PreparedStatement stat = con.prepareStatement(sql);
+            stat.setInt(1, remetente);
+            stat.setInt(2, destinatario);
+            stat.setInt(3, destinatario);
+            stat.setInt(4, remetente);
+            ResultSet rs = stat.executeQuery();
+            return rs.next();
         } catch (SQLException ex) {
             throw new PersistenciaException(ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AmizadeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
+    }
+
+    @Override
+    public boolean existeSolicitacao(int remetente, int destinatario) throws PersistenciaException {
+        try (Connection con = ConexaoBanco.getInstance()) {
+            String sql = "SELECT * FROM Amizade WHERE usuario_1=? AND usuario_2=? AND pendencia=TRUE OR"
+                    + " usuario_1=? AND usuario_2=? AND pendencia=TRUE";
+            PreparedStatement stat = con.prepareStatement(sql);
+            stat.setInt(1, remetente);
+            stat.setInt(2, destinatario);
+            stat.setInt(3, destinatario);
+            stat.setInt(4, remetente);
+            ResultSet rs = stat.executeQuery();
+            return rs.next();
+        } catch (SQLException | ClassNotFoundException ex) {
+            throw new PersistenciaException(ex);
+        }
     }
 }

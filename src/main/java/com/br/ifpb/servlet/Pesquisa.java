@@ -42,7 +42,6 @@ public class Pesquisa extends HttpServlet {
                 List<Usuario> pessoas = gerenciarUsuario.pesquisarUsuario(pesquisa);
                 GerenciarGrupo gerenciarGrupo = new GerenciarGrupo();
                 List<Grupo> grupos = gerenciarGrupo.pesquisarGrupo(pesquisa);
-                System.out.println(grupos);
                 request.setAttribute("pessoas", pessoas);
                 request.setAttribute("grupos", grupos);
             } catch (PersistenciaException ex) {

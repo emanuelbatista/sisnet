@@ -51,6 +51,10 @@
                                     <b>Profissão: </b>${usuario.profissao}
                                     <br>
                                 </c:if>
+                                    <c:if test="${usuario.status!=null}">
+                                    <b>Status: </b>${usuario.status}
+                                    <br>
+                                </c:if>
                             </p>
                         </div>
                     </section>

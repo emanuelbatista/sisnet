@@ -50,11 +50,11 @@ public class LogicaSobre implements Logica {
             request.setAttribute("relacoes", relacoes);
             return "/sobre-usuario.jsp";
         } else {
-            return sobre(request, response, idParametro, usuario);
+            return sobreRelacao(request, response, idParametro, usuario);
         }
     }
 
-    public String sobre(HttpServletRequest request, HttpServletResponse response,
+    public String sobreRelacao(HttpServletRequest request, HttpServletResponse response,
             int idParametro, Usuario usuario) throws IOException, ServletException {
         GerenciarUsuario gerUsuario = new GerenciarUsuario();
         Usuario usuario1 = null;
@@ -83,6 +83,13 @@ public class LogicaSobre implements Logica {
                 request.setAttribute("relacoes", relacoes);
                 return "/sobre-amizade.jsp";
             } else {
+                try {
+                    boolean convite=amizade.existeSolicitacao(usuario.getId(), idParametro);
+                    request.setAttribute("convite", convite);
+                } catch (PersistenciaException ex) {
+                    Logger.getLogger(LogicaSobre.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
                 return "/sobre.jsp";
             }
         } else {

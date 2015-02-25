@@ -35,4 +35,6 @@ public interface AmizadeDaoIF {
   
   public boolean verificarAmizade(int remetente,int destinatario) throws PersistenciaException;
   
+  public boolean existeSolicitacao(int remetente,int destinatario) throws PersistenciaException;
+  
 }

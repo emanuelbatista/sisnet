@@ -80,15 +80,15 @@ public class UsuarioDAO implements UsuarioDaoIF {
             String sql = "UPDATE Usuario SET nome=?,sobrenome=?,apelido=?,data_nascimento=?,"
                     + "cidade=?,email=?,profissao=?,status=?,senha=? WHERE id=?";
             PreparedStatement stat = connection.prepareStatement(sql);
-            stat.setString(1, usuario.getNome());
-            stat.setString(2, usuario.getSobrenome());
-            stat.setString(3, usuario.getApelido());
+            stat.setString(1, usuario.getNome().isEmpty()?null:usuario.getNome());
+            stat.setString(2, usuario.getSobrenome().isEmpty()?null:usuario.getSobrenome());
+            stat.setString(3, usuario.getApelido().isEmpty()?null:usuario.getApelido());
             stat.setDate(4, usuario.getData_nascimento());
-            stat.setString(5, usuario.getCidade());
-            stat.setString(6, usuario.getEmail());
-            stat.setString(7, usuario.getProfissao());
-            stat.setString(8, usuario.getStatus());
-            stat.setString(9, usuario.getSenha());
+            stat.setString(5, usuario.getCidade().isEmpty()?null:usuario.getCidade());
+            stat.setString(6, usuario.getEmail().isEmpty()?null:usuario.getEmail());
+            stat.setString(7, usuario.getProfissao().isEmpty()?null:usuario.getProfissao());
+            stat.setString(8, usuario.getStatus().isEmpty()?null:usuario.getStatus());
+            stat.setString(9, usuario.getSenha().isEmpty()?null:usuario.getSenha());
             stat.setInt(10, usuario.getId());
             stat.executeUpdate();
         } catch (SQLException e) {

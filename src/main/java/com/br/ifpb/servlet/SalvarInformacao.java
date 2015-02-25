@@ -76,7 +76,6 @@ public class SalvarInformacao extends HttpServlet {
             UsuarioInforValidacao usuarioInforValidacao = new UsuarioInforValidacao();
             List<String> mensagensErros = usuarioInforValidacao.validar(nome, sobrenome, apelido,
                     data_nascimento, cidade, email, profissao, senha, status);
-            
             if (mensagensErros == null) {
                 GerenciarUsuario gerenciarUsuario = new GerenciarUsuario();
                 boolean emailExistente = false;
@@ -90,7 +89,7 @@ public class SalvarInformacao extends HttpServlet {
                     mensagensErros.add("Email Existente");
                 }
             }
-            if (mensagensErros != null && mensagensErros.isEmpty() || mensagensErros==null) {
+            if ( mensagensErros==null || mensagensErros.isEmpty()) {
                 try {
                     GerenciarUsuario gerenciarUsuario = new GerenciarUsuario();
                     gerenciarUsuario.atualizarConta(usuario.getId(), nome, sobrenome, apelido, cidade, email,

@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <header>
     <div class="row cabecalho">
         <div class="info-basica">
@@ -16,7 +17,9 @@
             </div>
         </div>
         <div class="desfazer-amizade">
-            <a href="convidar-amizade?id=${usuario1.id}">Convidar Amizade</a>
+            <c:if test="${!convite}">
+                <a href="convidar-amizade?id=${usuario1.id}">Convidar Amizade</a>
+            </c:if>
         </div>
     </div>
     <nav>
