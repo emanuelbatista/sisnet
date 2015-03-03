@@ -114,9 +114,7 @@
                             <select name="tipo">
                                 <option value="Casado(a)">Casado(a)</option>
                                 <option value="Namorado(a)" selected>Namorado(a)</option>
-                                <option value="Primo(a)">Primo(a)</option>
-                                <option value="Mãe">Mãe</option>
-                                <option value="Pai">Pai</option>
+                                <option value="Familiar">Familiar</option>
                             </select>
                             <div class="botoes">
                                 <input type="submit" class="btn btn-success" value="Salvar Relacionamento">

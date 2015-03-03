@@ -1,6 +1,5 @@
 package com.br.ifpb.converter;
 
-import com.br.ifpb.execoes.FormatadoException;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDate;
