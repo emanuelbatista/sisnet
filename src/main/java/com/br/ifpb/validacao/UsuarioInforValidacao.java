@@ -78,7 +78,7 @@ public class UsuarioInforValidacao {
 
         if (texto != null && texto.isEmpty()) {
             texto = null;
-        } else if (!texto.matches("[A-ZÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ].*")) {
+        } else if (texto != null && !texto.matches("[A-ZÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ].*")) {
             throw new FormatadoException(campo + " formato errado!");
         }
 
