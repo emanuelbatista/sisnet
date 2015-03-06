@@ -20,7 +20,7 @@
     <br>
     <b>Data de Nascimento: </b>
     <br>
-    <input type="date" value="${f:formatarDataDois(campo.data_nascimento)}"  id="data_nascimento" name="data_nascimento" class="campo-texto">
+    <input type="text" value="${f:formatarDataDois(campo.data_nascimento)}"  id="data_nascimento" name="data_nascimento" class="campo-texto">
     <br>
     <b>Cidade: </b>
     <br>
