@@ -135,7 +135,7 @@
                             </c:if>        
                             <li>
                                 <form action="adicionar-local-trabalho" method="post">
-                                    <input type="text" name="local-trabalho" placeholder="Digite um local de Trabalho">
+                                    <input type="text" required name="local-trabalho" placeholder="Digite um local de Trabalho">
                                     <br>
                                     <br>
                                     <input type="submit" value="Add"> 
@@ -158,7 +158,7 @@
                             </c:if>
                             <li>
                                 <form action="adicionar-local-estudou" method="post">
-                                    <input type="text" name="local-estudou" placeholder="Digite onde Estudou">
+                                    <input type="text" required name="local-estudou" placeholder="Digite onde Estudou">
                                     <br>
                                     <br>
                                     <input type="submit" value="Add">

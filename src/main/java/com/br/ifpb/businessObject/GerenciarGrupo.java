@@ -31,10 +31,10 @@ public class GerenciarGrupo {
         return grupoDao.getGrupo(id);
     }
 
-    public boolean participaGrupo(int idUsuario) throws PersistenciaException {
+    public boolean participaGrupo(int idGrupo,int idUsuario) throws PersistenciaException {
         DaoFactoryIF daoFactory = DaoFactory.createFactory();
         GrupoDaoIF grupoDao = daoFactory.criarGrupoDao();
-        return grupoDao.participaGrupo(idUsuario);
+        return grupoDao.participaGrupo(idGrupo,idUsuario);
     }
 
     public List<Usuario> listaDeParticipantes(int idGrupo) throws PersistenciaException {

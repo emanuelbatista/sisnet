@@ -150,15 +150,16 @@ public class GrupoDAO implements GrupoDaoIF {
     }
 
     @Override
-    public boolean participaGrupo(int idUsuario) throws PersistenciaException {
+    public boolean participaGrupo(int idGrupo,int idUsuario) throws PersistenciaException {
         try (Connection con = ConexaoBanco.getInstance()) {
-            String sql = "SELECT COUNT(*) quantidade FROM participa_grupo WHERE usuario=?";
+            String sql = "SELECT COUNT(*) quantidade FROM participa_grupo WHERE usuario=? and id_grupo=?";
             PreparedStatement stat = con.prepareStatement(sql);
             stat.setInt(1, idUsuario);
+            stat.setInt(2, idGrupo);
             ResultSet rs = stat.executeQuery();
             rs.next();
             if (rs.getInt("quantidade") > 0) {
-                return true;
+                return true;   
             }
         } catch (SQLException ex) {
             Logger.getLogger(GrupoDAO.class.getName()).log(Level.SEVERE, null, ex);

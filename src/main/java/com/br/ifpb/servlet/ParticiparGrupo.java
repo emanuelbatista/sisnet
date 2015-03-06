@@ -36,7 +36,7 @@ public class ParticiparGrupo extends HttpServlet {
         GerenciarGrupo gerenciarGrupo = new GerenciarGrupo();
         boolean participaGrupo = true;
         try {
-            participaGrupo = gerenciarGrupo.participaGrupo(usuario.getId());
+            participaGrupo = gerenciarGrupo.participaGrupo(idParametro,usuario.getId());
         } catch (PersistenciaException ex) {
             Logger.getLogger(ParticiparGrupo.class.getName()).log(Level.SEVERE, null, ex);
         }

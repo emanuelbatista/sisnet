@@ -61,7 +61,7 @@ public class Participantes extends HttpServlet {
                 request.setAttribute("participantes", participantes);
                 boolean participaGrupo=false;
                 try {
-                    participaGrupo=gerenciarGrupo.participaGrupo(usuario.getId());
+                    participaGrupo=gerenciarGrupo.participaGrupo(grupo.getId(),usuario.getId());
                 } catch (PersistenciaException ex) {
                     Logger.getLogger(Topicos.class.getName()).log(Level.SEVERE, null, ex);
                 }

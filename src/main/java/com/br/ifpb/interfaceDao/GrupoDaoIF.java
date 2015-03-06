@@ -22,7 +22,7 @@ public interface GrupoDaoIF {
   
   public List<Grupo> listarGrupos(int idUsuario) throws PersistenciaException;
   
-  public boolean participaGrupo(int idUsuario) throws PersistenciaException;
+  public boolean participaGrupo(int idGrupo,int idUsuario) throws PersistenciaException;
   
   public void participarDoGrupo(int idGrupo,int idUsuario) throws PersistenciaException;
   
